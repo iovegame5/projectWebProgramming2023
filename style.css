@@ -1,0 +1,19 @@
+.cart-logo-container{
+    position:relative;
+}
+.cart-logo-count{
+    position:absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 50px;
+    left:15;
+    right:0;
+    top:-5;
+    background-color: red;
+    text-align: center;
+    justify-content: center;
+
+}
+.cart-count{
+    font-size: 10px;
+}
