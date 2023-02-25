@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation" id='nav'>
         <!-- logo -->
         <div class="navbar-brand">
             <a class="navbar-item" href="Home.html">
@@ -25,7 +25,7 @@
                 <a class="navbar-link">text</a>
                 <div class="navbar-dropdown">
                     <div class="navbar-item">
-                        <a href="#">text</a>
+                        <a href="#">{{message}}</a>
                     </div>
                     <div class="navbar-item">
                         <a href="#">text</a>
@@ -85,8 +85,9 @@
 
         <!-- ขอบขวา nav -->
         <div class="navbar-end">
-            <a class="navbar-item" href="#">register</a>
-            <a class="navbar-item" href="#">login</a>
+            <a class="navbar-item" href="#" v-if="login == false">ยังไม่ล็อคอิน</a>
+            <a class="navbar-item" href="#" v-else-if="login == true">ล็อกอินแล้ว</a>
+            <a class="navbar-item" href="#" @click="login=!login">login</a>
             <a class="navbar-item" href="#">
                 <div class="cart-logo-container">
                     <i class="fa-regular fa-cart-shopping"></i>
@@ -96,15 +97,26 @@
                 </div>
                 
             </a>
+            <a class="navbar-item" href="#">ลงขาย</a>
         </div>
 
     </nav>
   
-        <div class="hero is-large" style="background-color:red">
+        <div class="hero is-large">
             <div class="hero-body"></div>
         </div>
 
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var home = new Vue({
+        el:'#nav',
+        data:{
+            login:false,
+            message:"hello world",
+        }
+    })
+</script>
 
 </html>
