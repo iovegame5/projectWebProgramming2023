@@ -70,8 +70,8 @@
 
         <!-- ขอบขวา nav -->
         <div class="navbar-end">
-            <a class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</a>
-            <a class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</a>
+            <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
+            <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
             <a class="navbar-item" href="#">
                 <i class="fa-regular fa-heart"></i>
             </a>
@@ -101,6 +101,12 @@
             <input type="text" placeholder="Username">
             <input type="password" placeholder="Password">
             <a @click="login()" class="btn" href="#">LOGIN</a>
+            <div class="noacc">
+            <a  href="register.html">
+                <span>ยังไม่มีบัญชี? สมัครเลย</span> 
+            </a>
+            </div>
+
         </div>
     </div>
     

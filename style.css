@@ -12,9 +12,12 @@
 
 .navbar{
     background-color: var(--primary-color);
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .navbar-dropdown{
-    background-color: var(--primary-color)
+    background-color: var(--primary-color);
+    color:white;
 }
 
 .btn{
@@ -26,7 +29,7 @@
     /* box-shadow:6px 6px 20px -4px rgba(0,0,0, 0.7); */
     text-decoration: none;
     transition: 0.4s;
-    margin-top:20px;
+  
 
 }
 .btn:hover{
@@ -72,4 +75,24 @@
    cursor: pointer;
     
 }
-
+/* register.html */
+.register{
+    width:30%;
+    padding: 20px;
+    position: relative;
+    margin: auto;
+  
+    
+}
+.register-container{
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    margin:auto;
+    padding:30px;
+ 
+}
+.noacc{
+    color:white;
+    margin-top: 20px;
+}

@@ -1,5 +1,5 @@
 
-// navbar
+// index
 var home = new Vue({
         el:'#app',
         data:{
@@ -37,4 +37,17 @@ var home = new Vue({
             }
         }
     });
+    var regis = new Vue({
+        el:'.register',
+        data:{
+            username:'',
+            password:"",
+            confirmpassword:"",
+            email:"",
+            phone:'',
+        },
+        watch:{
+        }  
+    })
+    
 

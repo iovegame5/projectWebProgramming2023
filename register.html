@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body >
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <!-- logo -->
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-white" href="index.html">
+                    LOGO
+                </a>
+            </div>
+            <div class="navbar-end">
+               <p class="navbar-item has-text-white-bis">register form</p>
+            </div>
+        </nav>
+        <div class="register-container">
+        <div class="register">
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input" type="text" placeholder="Username" value="bulma" v-model="username">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                 
+                </div>
+                <!-- <p class="help is-success">This username is available</p> -->
+              </div>
+              
+              <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input" type="password" placeholder="Password" v-model="password">
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-key"></i>
+                  </span>
+                  
+                </div>
+                
+               
+              </div>
+              <div class="field">
+                <label class="label">Confirm Password</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input" type="password" placeholder="ConfirmPassword" v-model="confirmpassword">
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-key"></i>
+                  </span>
+                  
+                </div>
+                
+               
+              </div>
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input" type="email" placeholder="Email" v-model="email">
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-envelope"></i>
+                  </span>
+                </div>
+                
+                <div class="field-group">
+                    <div class="field is-inline-block-desktop">
+                     <label class="label">First Name</label>
+                     <div class="control">
+                     <input class="input" type="text" placeholder="Firstname">
+                     </div>
+                    </div>
+                   
+                   <div class="field is-inline-block-desktop">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                     <input class="input" type="text" placeholder="Lastname">
+                    </div>
+                    </div>
+                   </div>
+              </div>
+              <div class="field">
+                <label class="label">Phone Number</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" maxlength="10" v-model="phone">
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-phone"></i>
+                  </span>
+                </div>
+                
+               
+              </div>
+              
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <a href="index.html">
+                        <button class="button is-link is-light" >Cancel</button>
+                    </a>
+                 
+                </div>
+              </div>
+              
+              
+        </div>
+        </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="./script.js"></script>
+
+</html>
