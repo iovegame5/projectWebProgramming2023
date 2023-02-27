@@ -5,13 +5,16 @@ var home = new Vue({
         data:{
             login_state:false,
             message:"hello world",
-            username:"iovegame5",
+            login_username:"",
+            login_password:"",
+            username:"",
             images:[
                 "./img/guitarfirst.jpg",
                 "./img/guitarsecond.jpg",
                 "./img/guitarthird.jpg"
             ],
-            index:0
+            index:0,
+            n:1,
         },
         created () {
 
@@ -25,7 +28,11 @@ var home = new Vue({
                 document.querySelector(".popup").style.display="none";
             },
             login(){
+                this.username = this.login_username;
+                this.login_username="";
+                this.login_password="";
                 document.querySelector(".popup").style.display="none";
+               
                 this.login_state = true;
                 // window.location.href ="index.html";
             },
@@ -34,6 +41,9 @@ var home = new Vue({
                 if(this.index > this.images.length - 1){
                     this.index = 0
                 }
+            },
+            log(){
+                console.log('eiei')
             }
         }
     });

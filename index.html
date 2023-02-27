@@ -15,7 +15,7 @@
 
 <body class="has-background-grey-light">
     <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <!-- logo -->
         <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
@@ -72,13 +72,19 @@
         <div class="navbar-end">
             <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
             <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="./favorite.html">
                 <i class="fa-regular fa-heart"></i>
             </a>
             <a class="navbar-item" href="#">ลงขาย</a>
             <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
                 <a class="navbar-link">{{username}}</a>
                 <div class="navbar-dropdown">
+                    <div class="navbar-item">
+                        <a href="#">ข้อมูลส่วนตัว</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="./favorite.html">รายการโปรด</a>
+                    </div>
                     <div class="navbar-item">
                         <a @click="login_state=false">ออกจากระบบ</a>
                     </div>
@@ -98,8 +104,8 @@
                 <i class="fa-sharp fa-solid fa-circle-xmark close" @click="closelogin()"></i>
 
             <h1>LOG IN</h1>
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+            <input type="text" placeholder="Username" v-model="login_username">
+            <input type="password" placeholder="Password" v-model="login_password">
             <a @click="login()" class="btn" href="#">LOGIN</a>
             <div class="noacc">
             <a  href="register.html">
@@ -110,61 +116,15 @@
         </div>
     </div>
     
-    <div style="display: flex; justify-content:center; align-items:center; background-size: cover; justify-content: center; height: 1000px; width: 100%; background-image: url('./img/guitarsecond.jpg'); font-size: 200px; color:blue;">
-        <h3>Kaigatee</h3>
-        
-        
-    </div>
-    <br><br>
-    <div class="container is-widescreen ">
-    <div class="columns">
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    กีต้าโปร่ง
-                    
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    กีต้าไฟ้ฟ้า
-                    
-                  </div>
-                </div>
-              </div>
-        </div>
-    </div>
-    <br><br>
-    <div class="columns">
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    
-                    มัลติ
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                   
-                   <p >amp</p>
-                   
-                  </div>
-                  
-                </div>
-              </div>
-        </div>
-    </div>
+    <div class="hero">
+       <div></div>
+        <img class="slideimg"   style="height:100%"  @click="next()":src="images[index]">
+       
+            
+
     
+
+    </div>
 </div>
 
 

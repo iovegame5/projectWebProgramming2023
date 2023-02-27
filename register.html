@@ -20,9 +20,12 @@
             <div class="navbar-end">
                <p class="navbar-item has-text-white-bis">register form</p>
             </div>
-        </nav>
+            <a class="navbar-item" href="#"  @click="showlogin()" v-if="login_state==false">login</a>
+        </div>
+
+    </nav>
         <div class="register-container">
-        <div class="register">
+        <div class="register" >
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control has-icons-left has-icons-right">
