@@ -11,19 +11,87 @@
     <title>Document</title>
 </head>
 <body >
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <!-- logo -->
-            <div class="navbar-brand">
-                <a class="navbar-item has-text-white" href="index.html">
-                    LOGO
-                </a>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <!-- logo -->
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                LOGO
+            </a>
+        </div>
+
+        <!-- เมนู nav -->
+        <div class="navbar-start">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">text</a>
+                <div class="navbar-dropdown">
+                    <div class="navbar-item">
+                        <a href="#">{{message}}</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-end">
-               <p class="navbar-item has-text-white-bis">register form</p>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">text</a>
+                <div class="navbar-dropdown">
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">text</a>
+                    </div>
+                </div>
             </div>
-        </nav>
+        </div>
+
+        <!-- ขอบขวา nav -->
+        <div class="navbar-end">
+            <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
+            <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
+            <a class="navbar-item" href="#">
+                <i class="fa-regular fa-heart"></i>
+            </a>
+            <a class="navbar-item" href="#">ลงขาย</a>
+            <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
+                <a class="navbar-link">{{username}}</a>
+                <div class="navbar-dropdown">
+                    <div class="navbar-item">
+                        <a href="#">ข้อมูลส่วนตัว</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#">รายการโปรด</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a @click="login_state=false">ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+            <a class="navbar-item" href="#"  @click="showlogin()" v-if="login_state==false">login</a>
+        </div>
+
+    </nav>
         <div class="register-container">
-        <div class="register">
+        <div class="register" >
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control has-icons-left has-icons-right">

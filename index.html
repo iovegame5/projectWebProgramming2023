@@ -15,7 +15,7 @@
 
 <body>
     <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <!-- logo -->
         <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
@@ -72,13 +72,19 @@
         <div class="navbar-end">
             <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
             <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="./favorite.html">
                 <i class="fa-regular fa-heart"></i>
             </a>
             <a class="navbar-item" href="#">ลงขาย</a>
             <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
                 <a class="navbar-link">{{username}}</a>
                 <div class="navbar-dropdown">
+                    <div class="navbar-item">
+                        <a href="#">ข้อมูลส่วนตัว</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="./favorite.html">รายการโปรด</a>
+                    </div>
                     <div class="navbar-item">
                         <a @click="login_state=false">ออกจากระบบ</a>
                     </div>
@@ -98,8 +104,8 @@
                 <i class="fa-sharp fa-solid fa-circle-xmark close" @click="closelogin()"></i>
 
             <h1>LOG IN</h1>
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+            <input type="text" placeholder="Username" v-model="login_username">
+            <input type="password" placeholder="Password" v-model="login_password">
             <a @click="login()" class="btn" href="#">LOGIN</a>
             <div class="noacc">
             <a  href="register.html">
@@ -110,9 +116,9 @@
         </div>
     </div>
     
-    <div class="container is-fullhd">
-       
-        <img style=" display:block; margin-left: auto; margin-right:auto; width: 100%; height: 100%; object-fit: cover; align-items: center;"      @click="next()":src="images[index]">
+    <div class="hero">
+       <div></div>
+        <img class="slideimg"     @click="next()":src="images[index]">
        
             
 

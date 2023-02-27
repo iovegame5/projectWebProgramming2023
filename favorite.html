@@ -1,0 +1,152 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+            <!-- logo -->
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    LOGO
+                </a>
+            </div>
+    
+            <!-- เมนู nav -->
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">text</a>
+                    <div class="navbar-dropdown">
+                        <div class="navbar-item">
+                            <a href="#">{{message}}</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">text</a>
+                    <div class="navbar-dropdown">
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- ขอบขวา nav -->
+            <div class="navbar-end">
+                <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
+                <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
+                <a class="navbar-item" href="#">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
+                <a class="navbar-item" href="#">ลงขาย</a>
+                <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
+                    <a class="navbar-link">{{username}}</a>
+                    <div class="navbar-dropdown">
+                        <div class="navbar-item">
+                            <a href="#">ข้อมูลส่วนตัว</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="./favorite.html">รายการโปรด</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a @click="login_state=false">ออกจากระบบ</a>
+                        </div>
+                    </div>
+                </div>
+                <a class="navbar-item" href="#"  @click="showlogin()" v-if="login_state==false">login</a>
+            </div>
+            
+    
+        </nav>
+        <h1 class="is-size-4 mb-4 mt-4">รายการโปรด(0)</h1>
+        <div class="container is-fullhd ">
+        <div class="is-multiline columns ">
+
+            <!-- card column -->
+            <div v-for="n in 10" class="column is-one-quarter">
+                <div class="card is-hoverable" @click="log()">
+                    <div class="card-image">
+                        <figure class="image is-1by1">
+                            <img src="./img/guitarfirst.jpg" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div clas="media">
+                          
+                            <div class="media-content">
+                                <p class="title is-4">สินค้า</p>
+                                <p class="subtitle is-7">@username</p>
+                                <p class="subtitle is-5 has-text-success">75,000 บาท</p>
+                            </div>
+                           
+                        </div>
+                        <div class="content">
+                            รุ่นนี้เสียงดีสุดยอด Top Solid งามๆเด้อ
+                        </div>
+                        <div style="display:flex; justify-content: space-between;">
+                            <button class="button">รายละเอียด</button>
+                            <div class="icon is-size-4" @click="log()">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </div>
+        <footer class="footer is-fixed-bottom">
+            <div class="columns">
+                <div class="column is-one-quarter">test</div>
+                <div class="column is-one-quarter">test</div>
+                <div class="column is-one-quarter">test</div>
+                <div class="column is-one-quarter">test</div>
+            </div>
+        </footer>
+    
+    
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="./script.js"></script>
+
+</html>
