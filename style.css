@@ -49,7 +49,7 @@ body{
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     display: none;
     justify-content: center;
@@ -61,7 +61,7 @@ body{
 .popup-content{
     height:250px;
     width:500px;
-    background-color: var(--seconddary-color);
+    background-color:rgb(143, 143, 143);
     position: relative;
     padding-top: 20px;
     border-radius: 5px;
@@ -115,13 +115,17 @@ body{
       object-fit: cover;
        align-items: center;
 }
-footer{
-    /* position: sticky; */
+/* footer{
+   
     bottom: 0;
-    /* z-index: -1; */
+
     background: black;
     
     padding: 2em;
     height:300px;
     margin-top:2em;
+} */
+
+footer{
+    border-top: 2px solid rgb(99, 99, 99);
 }
