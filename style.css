@@ -13,7 +13,7 @@ body{
     padding:20px;
     margin:0;
     padding-top:90px;
-    background-color: #14274E;
+    background-color: var(--seconddary-color);
 
   
 }
@@ -101,7 +101,7 @@ body{
     /* text-align: center; */
     margin:auto;
     padding:30px;
-    background-color: red;
+    background-color: var(--grey);
  
 }
 .noacc{
@@ -131,7 +131,7 @@ body{
 footer{
     border-top: 2px solid rgb(99, 99, 99);
 }
-.content{
+/* .content{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,4 +141,5 @@ footer{
     background-size: cover;
     color: white;
     font-size: 100px;
-}
+} */
+
