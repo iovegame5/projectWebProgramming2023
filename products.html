@@ -95,12 +95,59 @@
             
     
         </nav>
-        <h1 class="is-size-4 mb-4 mt-4">รายการโปรด(0)</h1>
+        <div class="columns">
+            <div class="column is-2 pt-6">
+                <aside class="menu">
+                    <p class="menu-label has-text-black">
+                        ประเถทสินค้า
+                    </p>
+                    <ul class="menu-list">
+                     <li>
+                        <div class="select">
+                            <select>
+                              <option>ทั้งหมด</option>
+                              <option>กีตาร์โปร่ง</option>
+                              <option>กีตาร์ไฟฟ้า</option>
+                              <option>เอฟเฟค</option>
+                              <option>แอมป์</option>
+                            </select>
+                          </div>
+                     </li>
+                    </ul>
+                    <p class="menu-label">
+                      Administration
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Team Settings</a></li>
+                      <li>
+                        <a class="is-active">Manage Your Team</a>
+                        <ul>
+                          <li><a>Members</a></li>
+                          <li><a>Plugins</a></li>
+                          <li><a>Add a member</a></li>
+                        </ul>
+                      </li>
+                      <li><a>Invitations</a></li>
+                      <li><a>Cloud Storage Environment Settings</a></li>
+                      <li><a>Authentication</a></li>
+                    </ul>
+                    <p class="menu-label">
+                      Transactions
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Payments</a></li>
+                      <li><a>Transfers</a></li>
+                      <li><a>Balance</a></li>
+                    </ul>
+                  </aside>
+            </div>
+            <div class="column is-10 pt-5">
+                <h1 class="is-size-4 mb-4 mt-4">ทั้งหมด(0)</h1>
         <div class="container is-fullhd mb-6">
         <div class="is-multiline columns ">
 
             <!-- card column -->
-            <div v-for="n in 10" class="column is-one-quarter">
+            <div v-for="n in 10" class="column is-one-third">
                 <div class="card" @click="log()">
                     <div class="card-image">
                         <figure class="image is-1by1">
@@ -133,6 +180,9 @@
 
             </div>
             </div>
+            </div>
+        </div>
+        
         </div>
         <!-- <footer class="footer is-fixed-bottom">
             <div class="columns">
@@ -142,7 +192,8 @@
                 <div class="column is-one-quarter">test</div>
             </div>
         </footer> -->
-        <footer class="footer pt-5">
+        <div style="border-top: 1px solid rgb(120, 120, 120);;margin:2rem 2rem 2rem 2rem"></div>
+        <footer class="footer">
             <div class="content has-text-centered">
               <p>
                 Web Programming Project <strong>Kageetai</strong> By <a href="">Thanakorn Amatrawet </a> 
