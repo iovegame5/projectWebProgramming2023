@@ -38,371 +38,11 @@ var home = new Vue({
                 }
             ],
             selected_pt:0,
-            tmp_producted:[
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                }, {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                }
+            tmp_producted:null,
 
-            ],
-             products:[
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                }, {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:1,
-                    name:"Guitar1",
-                    type_id:1,
-                    product_price:7900,
-                    product_detail:"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:2,
-                    name:"Eguitar",
-                    type_id:2,
-                    product_price:7900,
-                    product_detail:"กีตาร์สุดเฟี้ยวฟ้าว",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:3,
-                    name:"Effect",
-                    type_id:3,
-                    product_price:7900,
-                    product_detail:"อะไรวะ",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                },
-                {
-                    product_id:4,
-                    name:"Amp",
-                    type_id:4,
-                    product_price:7900,
-                    product_detail:"เกินไปน้องชาย",
-                    user_id:12,
-                    product_img:"./img/guitarthird.jpg"
-                }
-             ]
-                
+            products:null
             ,
+           
         },
         created () {
 
@@ -416,12 +56,17 @@ var home = new Vue({
                 document.querySelector(".popup").style.display="none";
             },
             login(){
-                this.username = this.login_username;
-                this.login_username="";
-                this.login_password="";
-                document.querySelector(".popup").style.display="none";
-               
-                this.login_state = true;
+                    if(this.login_username == "test" && this.login_password =="1234"){
+                        this.username = this.login_username;
+                        this.login_username="";
+                        this.login_password="";
+                        this.login_state = true;
+                        document.querySelector(".popup").style.display="none";
+                    }
+                    else{
+                        alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!!");
+                    }
+        
                 // window.location.href ="index.html";
             },
             next(){
@@ -448,7 +93,7 @@ var home = new Vue({
             selected_pt(newval){
                 if(newval != 0){
                     this.products = this.tmp_producted.filter(value => {
-                        return  value.product_id === newval;
+                        return  value.type_id === newval;
              
              })
                 }
@@ -457,6 +102,18 @@ var home = new Vue({
                 }
               
             }
+        },
+        created() {
+            console.log("eiei");
+            axios
+                .get('./data/items.json')
+                .then(response => {
+                    this.tmp_producted = response.data;
+                    this.products = response.data;
+                })
+                .catch((e) => {
+                    console.error(e)
+                })
         }
     });
     var regis = new Vue({

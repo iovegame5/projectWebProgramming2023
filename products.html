@@ -141,8 +141,8 @@
             <div class="column is-8 pt-5">
                 <h1 class="is-size-4 mb-4 mt-4 has-text-white">ทั้งหมด({{products.length}})</h1>
         <div class="container is-fullhd mb-6">
-        <div class="is-multiline columns ">
-
+            <h1 class="title mb-6 mt-6 has-text-white" v-if="products.length==0">ยังไม่มีสินค้า</h1>
+        <div class="is-multiline columns" v-if="products.length!=0">
             <!-- card column -->
             <div v-for="item in products" class="column is-one-third">
                 <div class="card" @click="log()">
@@ -203,6 +203,7 @@
     
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="./script.js"></script>
 
