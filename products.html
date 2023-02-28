@@ -121,12 +121,9 @@
                     <ul class="menu-list">
                      <li>
                         <div class="select">
-                            <select>
-                              <option>ทั้งหมด</option>
-                              <option>กีตาร์โปร่ง</option>
-                              <option>กีตาร์ไฟฟ้า</option>
-                              <option>เอฟเฟค</option>
-                              <option>แอมป์</option>
+                            <select v-model="selected_pt">
+                              <option value="0" selected="selected">ทั้งหมด</option>
+                              <option v-for="item in product_type" :key="item.id" :value="item.id">{{item.name}}</option>
                             </select>
                           </div>
                      </li>
@@ -142,30 +139,30 @@
             </div>
             <div class="column is-1"></div>
             <div class="column is-8 pt-5">
-                <h1 class="is-size-4 mb-4 mt-4 has-text-white">ทั้งหมด(0)</h1>
+                <h1 class="is-size-4 mb-4 mt-4 has-text-white">ทั้งหมด({{products.length}})</h1>
         <div class="container is-fullhd mb-6">
         <div class="is-multiline columns ">
 
             <!-- card column -->
-            <div v-for="n in 10" class="column is-one-third">
+            <div v-for="item in products" class="column is-one-third">
                 <div class="card" @click="log()">
                     <div class="card-image">
                         <figure class="image is-1by1">
-                            <img src="./img/guitarfirst.jpg" alt="Placeholder image">
+                            <img :src="item.product_img" alt="Placeholder image">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div clas="media">
                           
                             <div class="media-content">
-                                <p class="title is-4">สินค้า</p>
+                                <p class="title is-4">{{item.name}}</p>
                                 <p class="subtitle is-7">@username</p>
-                                <p class="subtitle is-5 has-text-success">75,000 บาท</p>
+                                <p class="subtitle is-5 has-text-success">{{item.product_price}} บาท</p>
                             </div>
                            
                         </div>
                         <div class="content">
-                            รุ่นนี้เสียงดีสุดยอด Top Solid งามๆเด้อ
+                            {{item.product_detail}}
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                             <button class="button">รายละเอียด</button>
