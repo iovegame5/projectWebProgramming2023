@@ -43,8 +43,18 @@ var home = new Vue({
                 }
             },
             log(){
+                // test
                 console.log('eiei')
+            },
+            gofavorite(){
+                if(this.login_state){
+                    window.location.href="favorite.html";
+                }
+                else{
+                    this.showlogin()
+                }
             }
+
         }
     });
     var regis = new Vue({

@@ -15,153 +15,157 @@
 
 <body class="has-background-grey-light">
     <div id="app">
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-        <!-- logo -->
-        <div class="navbar-brand">
-            <a class="navbar-item" href="index.html">
-                <img style="width: 100%;" src="./img/logo.png">
-            </a>
-        </div>
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+            <!-- logo -->
+            <div class="navbar-brand ml-6">
+                <a class="navbar-item" href="index.html">
+                    <img src="./img/logo.png">
+                </a>
+            </div>
 
-        <!-- เมนู nav -->
-        <div class="navbar-start">
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">text</a>
-                <div class="navbar-dropdown">
-                    <div class="navbar-item">
-                        <a href="#">{{message}}</a>
+            <!-- เมนู nav -->
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">text</a>
+                    <div class="navbar-dropdown">
+                        <div class="navbar-item">
+                            <a href="#">{{message}}</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#">text</a>
+                        </div>
                     </div>
-                    <div class="navbar-item">
-                        <a href="#">text</a>
-                    </div>
-                    <div class="navbar-item">
-                        <a href="#">text</a>
-                    </div>
-                    <div class="navbar-item">
-                        <a href="#">text</a>
-                    </div>
-                    <div class="navbar-item">
-                        <a href="#">text</a>
-                    </div>
+                </div>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">text</a>
+
                 </div>
             </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">text</a>
-               
-            </div>
-        </div>
-
-        <!-- ขอบขวา nav -->
-        <div class="navbar-end">
-            <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
-            <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
-            <a class="navbar-item" href="./favorite.html">
-                <i class="fa-regular fa-heart"></i>
-            </a>
-            <a class="navbar-item" href="#">ลงขาย</a>
-            <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
-                <a class="navbar-link">{{username}}</a>
-                <div class="navbar-dropdown">
-                    <div class="navbar-item">
-                        <a href="#">ข้อมูลส่วนตัว</a>
-                    </div>
-                    <div class="navbar-item">
-                        <a href="./favorite.html">รายการโปรด</a>
-                    </div>
-                    <div class="navbar-item">
-                        <a @click="login_state=false">ออกจากระบบ</a>
+            <!-- ขอบขวา nav -->
+            <div class="navbar-end mr-6">
+                <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
+                <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
+                <a class="navbar-item" href="#" @click="gofavorite()">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
+                <a class="navbar-item" href="#">ลงขาย</a>
+                <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
+                    <a class="navbar-link">{{username}}</a>
+                    <div class="navbar-dropdown">
+                        <div class="navbar-item">
+                            <a href="#">ข้อมูลส่วนตัว</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="./favorite.html">รายการโปรด</a>
+                        </div>
+                        <div class="navbar-item">
+                            <a @click="login_state=false">ออกจากระบบ</a>
+                        </div>
                     </div>
                 </div>
+                <a class="navbar-item" href="#" @click="showlogin()" v-if="login_state==false">login</a>
             </div>
-            <a class="navbar-item" href="#"  @click="showlogin()" v-if="login_state==false">login</a>
-        </div>
 
-    </nav>
+        </nav>
 
-    
 
-    
-    <div class="popup">
-        <div class="popup-content">
-            
+
+
+        <div class="popup">
+            <div class="box popup-content">
+
                 <i class="fa-sharp fa-solid fa-circle-xmark close" @click="closelogin()"></i>
 
-            <h1>LOG IN</h1>
-            <input type="text" placeholder="Username" v-model="login_username">
-            <input type="password" placeholder="Password" v-model="login_password">
-            <a @click="login()" class="btn" href="#">LOGIN</a>
-            <div class="noacc">
-            <a  href="register.html">
-                <span>ยังไม่มีบัญชี? สมัครเลย</span> 
-            </a>
+                <h1>LOG IN</h1>
+                <input type="text" placeholder="Username" v-model="login_username">
+                <input type="password" placeholder="Password" v-model="login_password">
+                <a @click="login()" class="btn" href="#">LOGIN</a>
+                <div class="noacc">
+                    <!-- <a  href="register.html">
+                <span>ยังไม่มีบัญชี? </span> 
+            </a> -->
+                    <span>ยังไม่มีบัญชี? <a href="register.html">สมัครเลย</a></span>
+                </div>
+
             </div>
+        </div>
+
+        <div class="hero">
+            <div></div>
+            <img class="slideimg" style="height:100%" @click="next()" :src="images[index]">
+
+
+
+
 
         </div>
-    </div>
-    
-    <div class="hero">
-       <div></div>
-        <img class="slideimg"   style="height:100%"  @click="next()":src="images[index]">
-       
-            
-
-    
-
-    </div>
 
 
-    <br><br>
-    <div class="container is-widescreen ">
-    <div class="columns">
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    กีต้าโปร่ง
-                    
-                  </div>
+        <br><br>
+        <div class="container is-widescreen ">
+            <div class="is-multiline columns">
+                <div class="column is-half">
+                    <section class="hero is-small is-link" id="eguitar">
+                        <div class="hero-body">
+                            <p class="title">
+                                กีตาร์ไฟฟ้่า
+                            </p>
+                            <p class="subtitle">
+                                Electric Guitar
+                            </p>
+                        </div>
+                    </section>
                 </div>
-              </div>
-        </div>
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    กีต้าไฟ้ฟ้า
-                    
-                  </div>
+                <div class="column is-half">
+                    <section class="hero is-small is-link">
+                        <div class="hero-body">
+                            <p class="title">
+                                กีตาร์โปร่ง
+                            </p>
+                            <p class="subtitle">
+                                Acoustic Guitar
+                            </p>
+                        </div>
+                    </section>
                 </div>
-              </div>
-        </div>
-    </div>
-    <br><br>
-    <div class="columns">
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    
-                    มัลติ
-                  </div>
+                <div class="column is-half">
+                    <section class="hero is-small is-link" @click="log()">
+                        <div class="hero-body">
+                            <p class="title">
+                                เอฟเฟคก้อนและมัลติเอฟเฟค
+                            </p>
+                            <p class="subtitle">
+                                Effects
+                            </p>
+                        </div>
+                    </section>
                 </div>
-              </div>
-        </div>
-        <div class="column">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                   
-                   <p >amp</p>
-                   
-                  </div>
-                  
+                <div class="column is-half">
+                    <section class="hero is-small is-link">
+                        <div class="hero-body">
+                            <p class="title">
+                                ตู้แอมป์
+                            </p>
+                            <p class="subtitle">
+                                Ampifiers
+                            </p>
+                        </div>
+                    </section>
                 </div>
-              </div>
-        </div>
-    </div>
-    
-</div>
+
+
+            </div>
 
 
 </body>

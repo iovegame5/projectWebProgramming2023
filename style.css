@@ -13,8 +13,9 @@ body{
     padding:20px;
     margin:0;
     padding-top:90px;
-    background-color:var(--grey)
+    /* background-color:var(--grey); */
     background-color: var(--seconddary-color);
+    
 
   
 }
@@ -113,7 +114,7 @@ body{
     /* text-align: center; */
     margin:auto;
     padding:30px;
-    background-color: var(--grey);
+    
  
 }
 .noacc{
@@ -156,3 +157,7 @@ footer{
     font-size: 100px;
 } */
 
+#eguitar{
+    background-image: url('https://cdnb.artstation.com/p/assets/images/images/059/382/589/large/ck-uy-electric-guitar-cycles.jpg?1676282189');
+    background-size: cover;
+}

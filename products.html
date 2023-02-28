@@ -15,6 +15,23 @@
 
 <body>
     <div id="app">
+        <div class="popup">
+            <div class="popup-content">
+                
+                    <i class="fa-sharp fa-solid fa-circle-xmark close" @click="closelogin()"></i>
+    
+                <h1>LOG IN</h1>
+                <input type="text" placeholder="Username" v-model="login_username">
+                <input type="password" placeholder="Password" v-model="login_password">
+                <a @click="login()" class="btn" href="#">LOGIN</a>
+                <div class="noacc">
+                <a  href="register.html">
+                    <span>ยังไม่มีบัญชี? สมัครเลย</span> 
+                </a>
+                </div>
+    
+            </div>
+        </div>
         <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
             <!-- logo -->
             <div class="navbar-brand">
@@ -98,8 +115,8 @@
         <div class="columns">
             <div class="column is-2 pt-6">
                 <aside class="menu">
-                    <p class="menu-label has-text-black">
-                        ประเถทสินค้า
+                    <p class="menu-label has-text-white">
+                        ประเภทสินค้า
                     </p>
                     <ul class="menu-list">
                      <li>
@@ -114,35 +131,18 @@
                           </div>
                      </li>
                     </ul>
-                    <p class="menu-label">
-                      Administration
+                    <p class="menu-label has-text-white">
+                      ราคา
                     </p>
-                    <ul class="menu-list">
-                      <li><a>Team Settings</a></li>
-                      <li>
-                        <a class="is-active">Manage Your Team</a>
-                        <ul>
-                          <li><a>Members</a></li>
-                          <li><a>Plugins</a></li>
-                          <li><a>Add a member</a></li>
-                        </ul>
-                      </li>
-                      <li><a>Invitations</a></li>
-                      <li><a>Cloud Storage Environment Settings</a></li>
-                      <li><a>Authentication</a></li>
+                    <ul class="menu-list has-background-white">
+                   
                     </ul>
-                    <p class="menu-label">
-                      Transactions
-                    </p>
-                    <ul class="menu-list">
-                      <li><a>Payments</a></li>
-                      <li><a>Transfers</a></li>
-                      <li><a>Balance</a></li>
-                    </ul>
+                   
                   </aside>
             </div>
-            <div class="column is-10 pt-5">
-                <h1 class="is-size-4 mb-4 mt-4">ทั้งหมด(0)</h1>
+            <div class="column is-1"></div>
+            <div class="column is-8 pt-5">
+                <h1 class="is-size-4 mb-4 mt-4 has-text-white">ทั้งหมด(0)</h1>
         <div class="container is-fullhd mb-6">
         <div class="is-multiline columns ">
 
