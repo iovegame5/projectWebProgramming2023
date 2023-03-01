@@ -39,14 +39,32 @@ var home = new Vue({
             ],
             selected_pt:0,
             tmp_producted:null,
-
-            products:null
-            ,
+            products:null,
+            fav_pro:[],
            
         },
         created () {
-
             setInterval(this.next, 5000)
+            this.username = localStorage.getItem("username");
+            if(localStorage.getItem("login_state") != null){
+                console.log('eiei');
+                this.login_state = JSON.parse(localStorage.getItem("login_state"));
+            };
+
+
+            if(localStorage.getItem("fav") != null){
+            this.fav_pro = JSON.parse(localStorage.getItem("fav"));
+            };
+         
+            axios
+                .get('./data/items.json')
+                .then(response => {
+                    this.tmp_producted = response.data;
+                    this.products = response.data;
+                })
+                .catch((e) => {
+                    console.error(e)
+                })
         },
         methods:{
             showlogin(){
@@ -62,6 +80,9 @@ var home = new Vue({
                         this.login_password="";
                         this.login_state = true;
                         document.querySelector(".popup").style.display="none";
+                        localStorage.setItem("login_state", this.login_state);
+                        localStorage.setItem("username", this.username);
+
                     }
                     else{
                         alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!!");
@@ -86,6 +107,25 @@ var home = new Vue({
                 else{
                     this.showlogin()
                 }
+            },
+            logout(){
+
+                this.login_state = false;
+                localStorage.setItem("login_state", this.login_state);
+                window.location.href="index.html";
+                localStorage.clear();
+            },
+            addfav(item){
+                if(!this.fav_pro.includes(item)){
+                    this.fav_pro.push(item);
+                }
+                let myjson = JSON.stringify(this.fav_pro);
+                localStorage.setItem("fav", myjson);
+                
+            },
+            goproducts(num){
+                window.location.href="products.html";
+                this.selected_pt = num;
             }
 
         },
@@ -103,20 +143,9 @@ var home = new Vue({
               
             }
         },
-        created() {
-            console.log("eiei");
-            axios
-                .get('./data/items.json')
-                .then(response => {
-                    this.tmp_producted = response.data;
-                    this.products = response.data;
-                })
-                .catch((e) => {
-                    console.error(e)
-                })
-        }
+       
     });
-    var regis = new Vue({
+    var form = new Vue({
         el:'.register',
         data:{
             username:'',
@@ -124,6 +153,13 @@ var home = new Vue({
             confirmpassword:"",
             email:"",
             phone:'',
+
+            pd_name:"",
+            pd_price:"",
+            pd_img:"",
+            pd_detail:"", 
+            pd_type:""
+
         },
         watch:{
         }  

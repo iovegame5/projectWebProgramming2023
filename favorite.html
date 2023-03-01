@@ -15,14 +15,15 @@
 
 <body>
     <div id="app">
+       
         <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
             <!-- logo -->
-            <div class="navbar-brand">
+            <div class="navbar-brand ml-6">
                 <a class="navbar-item" href="index.html">
-                    LOGO
+                    <img src="./img/logo.png">
                 </a>
             </div>
-    
+
             <!-- เมนู nav -->
             <div class="navbar-start">
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -45,34 +46,18 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">text</a>
-                    <div class="navbar-dropdown">
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
-    
+
             <!-- ขอบขวา nav -->
-            <div class="navbar-end">
+            <div class="navbar-end mr-6">
                 <p class="navbar-item" href="#" v-if="login_state == false">ยังไม่ล็อคอิน</p>
                 <p class="navbar-item" href="#" v-else-if="login_state == true">ล็อกอินแล้ว</p>
-                <a class="navbar-item" href="#">
+                <a class="navbar-item" href="#" @click="gofavorite()">
                     <i class="fa-regular fa-heart"></i>
                 </a>
                 <a class="navbar-item" href="#">ลงขาย</a>
@@ -86,39 +71,38 @@
                             <a href="./favorite.html">รายการโปรด</a>
                         </div>
                         <div class="navbar-item">
-                            <a @click="login_state=false">ออกจากระบบ</a>
+                            <a @click="logout()">ออกจากระบบ</a>
                         </div>
                     </div>
                 </div>
-                <a class="navbar-item" href="#"  @click="showlogin()" v-if="login_state==false">login</a>
+                <a class="navbar-item" href="#" @click="showlogin()" v-if="login_state==false">login</a>
             </div>
-            
-    
+
         </nav>
-        <h1 class="is-size-4 mb-4 mt-4 has-text-light">รายการโปรด(0)</h1>
-        <div class="container is-fullhd mb-6">
+        <h1 class="is-size-4 mb-4 mt-4 has-text-light">รายการโปรด({{fav_pro.length}})</h1>
+        <div class="container is-large is-fullhd mb-6">
         <div class="is-multiline columns ">
 
             <!-- card column -->
-            <div v-for="n in 10" class="column is-one-quarter">
+            <div v-for="item in fav_pro" class="column is-one-quarter">
                 <div class="card" @click="log()">
                     <div class="card-image">
                         <figure class="image is-1by1">
-                            <img src="./img/guitarfirst.jpg" alt="Placeholder image">
+                            <img :src="item.product_img" alt="Placeholder image">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div clas="media">
                           
                             <div class="media-content">
-                                <p class="title is-4">สินค้า</p>
+                                <p class="title is-4">{{item.name}}</p>
                                 <p class="subtitle is-7">@username</p>
-                                <p class="subtitle is-5 has-text-success">75,000 บาท</p>
+                                <p class="subtitle is-5 has-text-success">{{item.product_price}}</p> บาท</p>
                             </div>
                            
                         </div>
                         <div class="content">
-                            รุ่นนี้เสียงดีสุดยอด Top Solid งามๆเด้อ
+                            {{item.product_detail}}
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                             <button class="button">รายละเอียด</button>

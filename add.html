@@ -95,71 +95,80 @@
             </div>
 
         </nav>
+        <div class="register-container">
+            <div class="register">
+                <div class="field">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content">
+                                <label class="label">ชื่อสินค้า</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="ชื่อสินค้า" value=""
+                                        v-model="pd_name">
 
-        <div class="columns">
-            <div class="column is-2 pt-6">
-                <aside class="menu">
-                    <p class="menu-label has-text-white">
-                        ประเภทสินค้า
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <div class="select">
-                                <select v-model="selected_pt">
-                                    <option value="0" selected="selected">ทั้งหมด</option>
-                                    <option v-for="item in product_type" :key="item.id" :value="item.id">{{item.name}}
-                                    </option>
-                                </select>
-                            </div>
-                        </li>
-                    </ul>
-                    <p class="menu-label has-text-white">
-                        ราคา
-                    </p>
-                    <ul class="menu-list has-background-white">
-
-                    </ul>
-
-                </aside>
-            </div>
-            <div class="column is-1"></div>
-            <div class="column is-8 pt-5">
-                <h1 class="is-size-4 mb-4 mt-4 has-text-white">ทั้งหมด({{products.length}})</h1>
-                <div class="container is-fullhd mb-6">
-                    <h1 class="title mb-6 mt-6 has-text-white" v-if="products.length==0">ยังไม่มีสินค้า</h1>
-                    <div class="is-multiline columns" v-if="products.length!=0">
-                        <!-- card column -->
-                        <div v-for="item in products" class="column is-one-third">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image is-1by1">
-                                        <img :src="item.product_img" alt="Placeholder image">
-                                    </figure>
                                 </div>
-                                <div class="card-content">
-                                    <div clas="media">
+                                <!-- <p class="help is-success">This username is available</p> -->
+                            </div>
+                            <div class="field">
+                                <label class="label">ประเภทสินค้า</label>
+                                <div class="select">
+                                    <select v-model="pd_type">
+                                        <option value="1" selected="selected">กีตาร์โปร่ง</option>
+                                        <option value="2" selected="selected">กีตาร์ไฟฟ้า</option>
+                                        <option value="3" selected="selected">เอฟเฟค</option>
+                                        <option value="4" selected="selected">แอมป์</option>
+                                    </select>
 
-                                        <div class="media-content">
-                                            <p class="title is-4">{{item.name}}</p>
-                                            <p class="subtitle is-7">@username</p>
-                                            <p class="subtitle is-5 has-text-success">{{item.product_price}} บาท</p>
-                                        </div>
+                                </div>
 
-                                    </div>
-                                    <div class="content">
-                                        {{item.product_detail}}
-                                    </div>
-                                    <div style="display:flex; justify-content: space-between;">
-                                        <button class="button">รายละเอียด</button>
-                                        <div class="icon is-size-4" @click="addfav(item)">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </div>
-                                    </div>
+
+                            </div>
+
+
+                            <div class="field">
+                                <label class="label">ราคา</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="ระบุราคาของสินค้า" value=""
+                                        v-model="product_price">
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="field">
+                                <label class="label">รูปสินค้า</label>
+                                <div class="control ">
+                                    <input class="input" type="file" @change="pd_img">
+                                  
                                 </div>
 
                             </div>
+                            <div class="field">
+                                <label class="label">รายละเอียดสินค้า</label>
+                                <div class="control ">
+                                    <textarea  class="textarea" name="" id="" cols="30" rows="3"></textarea>
+                                  
+                                </div>
+
+                            </div>
+                          
+
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link">Submit</button>
+                                </div>
+                                <div class="control">
+                                    <a href="index.html">
+                                        <button class="button is-link is-light">Cancel</button>
+                                    </a>
+
+                                </div>
+                            </div>
+
+
                         </div>
-
                     </div>
                 </div>
             </div>
