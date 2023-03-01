@@ -129,7 +129,16 @@ var home = new Vue({
                 window.location.href="products.html";
                 this.selected_pt = num;
                 localStorage.setItem("selected_pt", this.selected_pt);
+            },
+            gosell(){
+                if(this.login_state){
+                    window.location.href="add.html";
+                }
+                else{
+                    this.showlogin()
+                }
             }
+
 
         },
         watch:{
@@ -166,6 +175,85 @@ var home = new Vue({
         },
         watch:{
         }  
+    });
+    var profile = new Vue({
+        el:"#profile",
+        data:{
+            username:"test",
+            password:"1234",
+            email:"game2999@hotmail.co.th",
+            phone:"0991234567",
+            fname:"Thanakorn",
+            lname:"Amatrawet",
+            user_type:2,
+
+            f_username:"test",
+            f_password:"1234",
+            f_fname:"Thanakorn",
+            f_lname:"Amatrawet",
+            f_email:"game2999@hotmail.co.th",
+            f_phone:"0991234567",
+
+            panel:1,
+
+
+        },
+        created(){
+            if(localStorage.getItem("fname") != null){
+                this.fname = localStorage.getItem("fname");
+                this.f_fname = localStorage.getItem("fname");
+            }
+            if(localStorage.getItem("lname") != null){
+                this.lname = localStorage.getItem("lname");
+                this.f_lname = localStorage.getItem("lname");
+            }
+            if(localStorage.getItem("phone") != null){
+                this.phone = localStorage.getItem("phone");
+                this.f_phone = localStorage.getItem("phone");
+            }
+             if(localStorage.getItem("email") != null){
+                this.email = localStorage.getItem("email");
+                this.f_email = localStorage.getItem("email");
+            }
+            
+        },
+        methods:{
+            save(){
+
+                try {
+                    this.fname = this.f_fname;
+                this.lname = this.f_lname;
+                this.email = this.f_email;
+                this.phone = this.f_phone;
+
+                localStorage.setItem("fmame", this.fname);
+                localStorage.setItem("email", this.email);
+                localStorage.setItem("lname", this.lname);
+                localStorage.setItem("phone", this.phone);
+                alert("บันทึกข้อมูลสำเร็จ");
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+
+                
+            },
+            cancel(){
+                this.f_fname = this.fname;
+                this.f_lname = this.lname;
+                this.f_email = this.email;
+                this.f_phone = this.phone;
+            },
+            showp1(){
+                document.getElementById("panel1").style.display = "inline";
+                document.getElementById("panel2").style.display = "none";
+            },
+            showp2(){
+                document.getElementById('panel1').style.display = "none";
+                document.getElementById("panel2").style.display = "box";
+            },
+           
+        }
     })
     
 

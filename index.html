@@ -59,12 +59,12 @@
                 <a class="navbar-item" href="#" @click="gofavorite()">
                     <i class="fa-regular fa-heart"></i>
                 </a>
-                <a class="navbar-item" href="add.html">ลงขาย</a>
+                <a class="navbar-item" @click="gosell()" href="#">ลงขาย</a>
                 <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
                     <a class="navbar-link">{{username}}</a>
                     <div class="navbar-dropdown">
                         <div class="navbar-item">
-                            <a href="#">ข้อมูลส่วนตัว</a>
+                            <a href="user.html">ข้อมูลส่วนตัว</a>
                         </div>
                         <div class="navbar-item">
                             <a href="./favorite.html">รายการโปรด</a>

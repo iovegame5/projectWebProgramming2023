@@ -35,6 +35,11 @@ body{
     color:white;
 
 }
+.navbar-item:hover {
+    background-color: var(--seconddary-color);
+    
+}
+
 .navbar-item a{
     color:white;
 }
