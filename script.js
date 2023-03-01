@@ -50,7 +50,9 @@ var home = new Vue({
                 console.log('eiei');
                 this.login_state = JSON.parse(localStorage.getItem("login_state"));
             };
-
+            if(localStorage.getItem("selected_pt") != null){
+                this.selected_pt = localStorage.getItem("selected_pt");
+            }
 
             if(localStorage.getItem("fav") != null){
             this.fav_pro = JSON.parse(localStorage.getItem("fav"));
@@ -113,7 +115,7 @@ var home = new Vue({
                 this.login_state = false;
                 localStorage.setItem("login_state", this.login_state);
                 window.location.href="index.html";
-                localStorage.clear();
+                localStorage.removeItem("username");
             },
             addfav(item){
                 if(!this.fav_pro.includes(item)){
@@ -126,6 +128,7 @@ var home = new Vue({
             goproducts(num){
                 window.location.href="products.html";
                 this.selected_pt = num;
+                localStorage.setItem("selected_pt", this.selected_pt);
             }
 
         },
