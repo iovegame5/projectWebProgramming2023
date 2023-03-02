@@ -324,6 +324,7 @@ var home = new Vue({
         
 
         },
+        
         watch:{
         }  
     });
@@ -414,11 +415,23 @@ var home = new Vue({
     var detail = new Vue({
         el:'#detail',
         data:{
-            use:""
+            use:"",
+            report_name:"",
+            report_header:"",
+            report_detail:"",
+            reports:[]
+
+        },
+        methods:{
+            addreport(){ 
+                this.reports.push({"name": this.report_name, "header":this.report_header, "detail":this.report_detail})
+                localStorage.setItem("reports", JSON.stringify(this.reports))
+            }
 
         },
         created() {
         this.use = JSON.parse(localStorage.all);
+        this.reports = JSON.parse(localStorage.reports)
         }
     })
     
