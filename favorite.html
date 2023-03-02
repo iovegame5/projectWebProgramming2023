@@ -71,7 +71,7 @@
         </nav>
         <h1 class="is-size-4 mb-4 mt-4 has-text-light">รายการโปรด({{fav_pro.length}})</h1>
         <div class="container is-large is-fullhd mb-6">
-        <div class="is-multiline columns ">
+        <div class="is-multiline columns" style="min-height: 100%;">
 
             <!-- card column -->
             <div v-for="item in fav_pro" class="column is-one-quarter">
@@ -92,7 +92,8 @@
                            
                         </div>
                         <div class="content">
-                            {{item.product_detail}}
+                            <p class="subtitle is-7">{{item.product_detail}}</p>
+                          
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                             <button class="button" @click="adddetail(item)">รายละเอียด</button>

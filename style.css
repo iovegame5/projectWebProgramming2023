@@ -162,3 +162,7 @@ body{
     background-image: url('https://cdnb.artstation.com/p/assets/images/images/059/382/589/large/ck-uy-electric-guitar-cycles.jpg?1676282189');
     background-size: cover;
 }
+.subtitle{
+    text-overflow: ellipsis;
+}
+.card{}
