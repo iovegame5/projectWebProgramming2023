@@ -8,6 +8,7 @@ var home = new Vue({
             login_username:"",
             login_password:"",
             username:"",
+            user_id:1,
             images:[
                 "./img/guitarfirst.jpg",
                 "./img/guitarsecond.jpg",
@@ -38,35 +39,120 @@ var home = new Vue({
                 }
             ],
             selected_pt:0,
-            tmp_producted:null,
-            products:null,
+            tmp_producted:[
+                {
+                    "product_id":1,
+                    "name":"AGuitar1",
+                    "type_id":1,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":2,
+                    "name":"AGuitar2",
+                    "type_id":1,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":3,
+                    "name":"AGuitar3",
+                    "type_id":1,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":4,
+                    "name":"AGuitar4",
+                    "type_id":1,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":5,
+                    "name":"EGuitar1",
+                    "type_id":2,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarsecond.jpg"
+                },
+                {
+                    "product_id":6,
+                    "name":"EGuitar2",
+                    "type_id":2,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarsecond.jpg"
+                },
+                {
+                    "product_id":7,
+                    "name":"EGuitar3",
+                    "type_id":2,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarsecond.jpg"
+                },
+                {
+                    "product_id":8,
+                    "name":"EGuitar4",
+                    "type_id":2,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarsecond.jpg"
+                },
+                {
+                    "product_id":9,
+                    "name":"Effect1",
+                    "type_id":3,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":10,
+                    "name":"effect2",
+                    "type_id":3,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":11,
+                    "name":"effect3",
+                    "type_id":3,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                },
+                {
+                    "product_id":12,
+                    "name":"effect4",
+                    "type_id":3,
+                    "product_price":7900,
+                    "product_detail":"กีตาร์สำหรับคนหล่อเท่วัวตายควายล้ม",
+                    "user_id":12,
+                    "product_img":"./img/guitarthird.jpg"
+                }
+            ],
+            products:this.tmp_producted,
+             
             fav_pro:[],
            
-        },
-        created () {
-            setInterval(this.next, 5000)
-            this.username = localStorage.getItem("username");
-            if(localStorage.getItem("login_state") != null){
-                console.log('eiei');
-                this.login_state = JSON.parse(localStorage.getItem("login_state"));
-            };
-            if(localStorage.getItem("selected_pt") != null){
-                this.selected_pt = localStorage.getItem("selected_pt");
-            }
-
-            if(localStorage.getItem("fav") != null){
-            this.fav_pro = JSON.parse(localStorage.getItem("fav"));
-            };
-         
-            axios
-                .get('./data/items.json')
-                .then(response => {
-                    this.tmp_producted = response.data;
-                    this.products = response.data;
-                })
-                .catch((e) => {
-                    console.error(e)
-                })
         },
         methods:{
             showlogin(){
@@ -126,9 +212,9 @@ var home = new Vue({
                 
             },
             goproducts(num){
-                window.location.href="products.html";
                 this.selected_pt = num;
                 localStorage.setItem("selected_pt", this.selected_pt);
+                window.location.href="products.html";
             },
             gosell(){
                 if(this.login_state){
@@ -137,7 +223,9 @@ var home = new Vue({
                 else{
                     this.showlogin()
                 }
-            }
+                
+            },
+            
 
 
         },
@@ -155,6 +243,37 @@ var home = new Vue({
               
             }
         },
+        created () {
+            setInterval(this.next, 5000)
+            this.username = localStorage.getItem("username");
+            if(localStorage.getItem("login_state") != null){
+                console.log('eiei');
+                this.login_state = JSON.parse(localStorage.getItem("login_state"));
+            };
+            if(localStorage.getItem("products") != null){
+                this.tmp_producted = JSON.parse(localStorage.getItem("products"));
+                this.products = this.tmp_producted;
+            };
+
+
+            if(localStorage.getItem("fav") != null){
+            this.fav_pro = JSON.parse(localStorage.getItem("fav"));
+            };
+
+            if(localStorage.getItem("selected_pt") != null){
+                this.selected_pt = JSON.parse(localStorage.getItem("selected_pt"));
+            }
+         
+            // axios
+            //     .get('./data/items.json')
+            //     .then(response => {
+            //         this.tmp_producted = response.data;
+            //         this.products = response.data;
+            //     })
+            //     .catch((e) => {
+            //         console.error(e)
+            //     })
+        },
        
     });
     var form = new Vue({
@@ -167,15 +286,48 @@ var home = new Vue({
             phone:'',
 
             pd_name:"",
+            pd_type:"",
             pd_price:"",
-            pd_img:"",
-            pd_detail:"", 
-            pd_type:""
+            pd_img:"./img/guitarthird.jpg",
+            pd_detail:"",
+
+        },
+        methods:{
+            submit_pd(){
+
+                if(this.pd_name != "" && this.pd_price != "" && this.pd_type != "" && this.pd_detail != ""){
+                home.$data.tmp_producted.push({
+                    "product_id":home.$data.tmp_producted.length+1,
+                    "name":this.pd_name,
+                    "type_id": parseInt(this.pd_type),
+                    "product_price":this.pd_price,
+                    "product_detail":this.pd_detail,
+                    "user_id":home.$data.user_id,
+                    "product_img":""
+                });
+                localStorage.setItem("products", JSON.stringify(home.$data.tmp_producted));
+                alert("ลงขายสินค้าเรียบร้อย");
+            }
+            else{
+                alert("ใส่ข้อมูลให้ครบก่อนลงขายสินค้า");            }
+        }
+        
 
         },
         watch:{
         }  
     });
+
+
+
+
+
+
+
+
+
+
+
     var profile = new Vue({
         el:"#profile",
         data:{
@@ -185,7 +337,7 @@ var home = new Vue({
             phone:"0991234567",
             fname:"Thanakorn",
             lname:"Amatrawet",
-            user_type:2,
+            user_type:1,
 
             f_username:"test",
             f_password:"1234",
@@ -226,7 +378,7 @@ var home = new Vue({
                 this.email = this.f_email;
                 this.phone = this.f_phone;
 
-                localStorage.setItem("fmame", this.fname);
+                localStorage.setItem("fname", this.fname);
                 localStorage.setItem("email", this.email);
                 localStorage.setItem("lname", this.lname);
                 localStorage.setItem("phone", this.phone);
@@ -244,16 +396,11 @@ var home = new Vue({
                 this.f_email = this.email;
                 this.f_phone = this.phone;
             },
-            showp1(){
-                document.getElementById("panel1").style.display = "inline";
-                document.getElementById("panel2").style.display = "none";
-            },
-            showp2(){
-                document.getElementById('panel1').style.display = "none";
-                document.getElementById("panel2").style.display = "box";
-            },
+        
            
         }
     })
+
+
     
 

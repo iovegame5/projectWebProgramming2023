@@ -95,6 +95,7 @@
             </div>
 
         </nav>
+    </div>
         <div class="register-container">
             <div class="register">
                 <div class="field">
@@ -103,8 +104,8 @@
                             <div class="content">
                                 <label class="label">ชื่อสินค้า</label>
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="ชื่อสินค้า" value=""
-                                        v-model="pd_name">
+                                    <input class="input" type="text" placeholder="ชื่อสินค้า" 
+                                       v-model="pd_name" >
 
                                 </div>
                                 <!-- <p class="help is-success">This username is available</p> -->
@@ -129,7 +130,7 @@
                                 <label class="label">ราคา</label>
                                 <div class="control">
                                     <input class="input" type="text" placeholder="ระบุราคาของสินค้า" value=""
-                                        v-model="product_price">
+                                     v-model="pd_price">
 
 
                                 </div>
@@ -140,7 +141,7 @@
                             <div class="field">
                                 <label class="label">รูปสินค้า</label>
                                 <div class="control ">
-                                    <input class="input" type="file" @change="pd_img">
+                                    <input class="input" type="file">
                                   
                                 </div>
 
@@ -148,7 +149,7 @@
                             <div class="field">
                                 <label class="label">รายละเอียดสินค้า</label>
                                 <div class="control ">
-                                    <textarea  class="textarea" name="" id="" cols="30" rows="3"></textarea>
+                                    <textarea v-model="pd_detail" class="textarea" name="" id="" cols="30" rows="3"></textarea>
                                   
                                 </div>
 
@@ -157,7 +158,7 @@
 
                             <div class="field is-grouped">
                                 <div class="control">
-                                    <button class="button is-link">Submit</button>
+                                    <button class="button is-link" @click="submit_pd()">Submit</button>
                                 </div>
                                 <div class="control">
                                     <a href="index.html">
@@ -174,7 +175,7 @@
             </div>
         </div>
 
-    </div>
+   
     <!-- <footer class="footer is-fixed-bottom">
             <div class="columns">
                 <div class="column is-one-quarter">test</div>
