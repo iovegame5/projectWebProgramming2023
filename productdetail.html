@@ -1,21 +1,35 @@
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
-
-</head>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+            integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Document</title>
+    
+    </head>
 <body>
     <div id="app">
-       
+        <div class="popup">
+            <div class="popup-content">
+
+                <i class="fa-sharp fa-solid fa-circle-xmark close" @click="closelogin()"></i>
+
+                <h1>LOG IN</h1>
+                <input type="text" placeholder="Username" v-model="login_username">
+                <input type="password" placeholder="Password" v-model="login_password">
+                <a @click="login()" class="btn" href="#">LOGIN</a>
+                <div class="noacc">
+                    <a href="register.html">
+                        <span>ยังไม่มีบัญชี? สมัครเลย</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
         <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
             <!-- logo -->
             <div class="navbar-brand ml-6">
@@ -60,7 +74,7 @@
                 <a class="navbar-item" href="#" @click="gofavorite()">
                     <i class="fa-regular fa-heart"></i>
                 </a>
-                <a class="navbar-item" href="add.html">ลงขาย</a>
+                <a class="navbar-item" @click="gosell()" href="#">ลงขาย</a>
                 <div class="navbar-item has-dropdown is-hoverable" v-if="login_state==true">
                     <a class="navbar-link">{{username}}</a>
                     <div class="navbar-dropdown">
@@ -79,68 +93,57 @@
             </div>
 
         </nav>
-        <h1 class="is-size-4 mb-4 mt-4 has-text-light">รายการโปรด({{fav_pro.length}})</h1>
-        <div class="container is-large is-fullhd mb-6">
-        <div class="is-multiline columns ">
+    </div>
+ 
+    <div id="detail">
+        <div class="container is-fullhd" style="padding-top: 5%; min-height: 100%;" >
+            <div class="columns">
+                <div class="column">
+                    
+                    <img :src="use.detail_img">
+                
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p style="text-align: center;"class="card-header-title">
+                            ข้อมูลสินค้า
+                            </p>
+                        
 
-            <!-- card column -->
-            <div v-for="item in fav_pro" class="column is-one-quarter">
-                <div class="card" @click="log()">
-                    <div class="card-image">
-                        <figure class="image is-1by1">
-                            <img :src="item.product_img" alt="Placeholder image">
-                        </figure>
                     </div>
-                    <div class="card-content">
-                        <div clas="media">
-                          
-                            <div class="media-content">
-                                <p class="title is-4">{{item.name}}</p>
-                                <p class="subtitle is-7">@username</p>
-                                <p class="subtitle is-5 has-text-success">{{item.product_price}}</p> บาท</p>
-                            </div>
-                           
-                        </div>
+                    <div class="card" style="margin-top: 5%;">
                         <div class="content">
-                            {{item.product_detail}}
-                        </div>
-                        <div style="display:flex; justify-content: space-between;">
-                            <button class="button" @click="adddetail(item)">รายละเอียด</button>
-                            <div class="icon is-size-4" @click="log()">
-                                <i class="fa-regular fa-heart"></i>
+                            <div class="content">
+                                <p style="margin-left: 5%;  padding-top: 5%;" ><strong>ชื่อสินค้า: {{use.detail_name}}</strong></p>
+                                <p style="margin-left: 5%;"><strong>ราคาสินค้า: {{use.detail_price}}  บาท</strong></p>
+                                <p style="margin-left: 5%;"><strong>ลายละเอียดสินค้า: {{use.detail_prodetail}} </strong></p>
+                                <p style="margin-left: 5%;"><strong>อายุการใช้งาน:</strong></p>
+
                             </div>
+
                         </div>
+
                     </div>
-                  
-                    </div>
+                
                 </div>
 
             </div>
+        
+
             </div>
         </div>
-        <!-- <footer class="footer is-fixed-bottom">
-            <div class="columns">
-                <div class="column is-one-quarter">test</div>
-                <div class="column is-one-quarter">test</div>
-                <div class="column is-one-quarter">test</div>
-                <div class="column is-one-quarter">test</div>
-            </div>
-        </footer> -->
-        <div style="border-top: 1px solid rgb(120, 120, 120);;margin:2rem 2rem 2rem 2rem"></div>
-        <footer class="footer pt-5">
-            <div class="content has-text-centered">
-              <p>
-                Web Programming Project <strong>Kageetai</strong> By <a href="">Thanakorn Amatrawet </a> 
-                and <a href="#">Chotchda Aupayokin</a> 
-                
-              </p>
-            </div>
-          </footer>
-    
-    
+    </div>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                Web Programming Project <strong>Kageetai</strong> By <a href="">Thanakorn Amatrawet </a>
+                and <a href="#">Chotchda Aupayokin</a>
 
+            </p>
+        </div>
+    </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="./script.js"></script>
-
 </html>

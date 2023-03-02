@@ -225,6 +225,16 @@ var home = new Vue({
                 }
                 
             },
+            adddetail(items){
+                let all = {'detail_img':items.product_img, 
+                'detail_name':items.name, 
+                'detail_price':items.product_price, 
+                'detail_prodetail':items.product_detail}
+                localStorage.setItem("all", JSON.stringify(all))
+                window.location.href = "productdetail.html";
+                
+            }
+        
             
 
 
@@ -399,7 +409,19 @@ var home = new Vue({
         
            
         }
+    });
+
+    var detail = new Vue({
+        el:'#detail',
+        data:{
+            use:""
+
+        },
+        created() {
+        this.use = JSON.parse(localStorage.all);
+        }
     })
+    
 
 
     

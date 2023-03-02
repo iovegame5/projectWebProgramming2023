@@ -13,7 +13,7 @@
 
 </head>
 
-<body >
+<body>
     <div id="app">
         <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
             <!-- logo -->
@@ -25,31 +25,22 @@
 
             <!-- เมนู nav -->
             <div class="navbar-start">
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">text</a>
-                    <div class="navbar-dropdown">
-                        <div class="navbar-item">
-                            <a href="#">{{message}}</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#">text</a>
-                        </div>
-                    </div>
+                <div class="navbar-item">
+                    <a @click= "goproducts(1)">กีตาร์โปร่ง</a>
+                </div>
+                <div class="navbar-item">
+                    <a @click= "goproducts(2)">กีตาร์ไฟฟ้า</a>
+                </div>
+                <div class="navbar-item">
+                    <a @click="goproducts(3)">เอฟเฟค</a>
+                </div>
+                <div class="navbar-item">
+                    <a @click="goproducts(4)">แอมป์</a>
                 </div>
 
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">text</a>
 
-                </div>
+
+
             </div>
 
             <!-- ขอบขวา nav -->
@@ -117,7 +108,7 @@
             <div class="is-multiline columns">
                 <div class="column is-half">
                     <section class="hero is-small is-link" id="eguitar">
-                        <div class="hero-body" @click="goproducts(1)">
+                        <div class="hero-body" @click="goproducts(2)">
                             <p class="title">
                                 กีตาร์ไฟฟ้่า
                             </p>
@@ -129,7 +120,7 @@
                 </div>
                 <div class="column is-half">
                     <section class="hero is-small is-link">
-                        <div class="hero-body" @click="goproducts(2)">
+                        <div class="hero-body" @click="goproducts(1)">
                             <p class="title">
                                 กีตาร์โปร่ง
                             </p>
