@@ -25,7 +25,7 @@ var home = new Vue({
             {
                 id: 2,
                 name: "กีตาร์ไฟฟ้า",
-
+ 
             },
             {
                 id: 3,
@@ -403,7 +403,11 @@ var profile = new Vue({
     methods: {
         save() {
 
-            try {
+          
+                if(this.f_fname == "" || this.f_email == "" || this.f_lname == "" || this.f_phone == ""){
+                    alert("ใส่ข้อมูลให้ครบก่อนบันทึก");
+                }
+                else{
                 this.fname = this.f_fname;
                 this.lname = this.f_lname;
                 this.email = this.f_email;
@@ -414,10 +418,9 @@ var profile = new Vue({
                 localStorage.setItem("lname", this.lname);
                 localStorage.setItem("phone", this.phone);
                 alert("บันทึกข้อมูลสำเร็จ");
+                }
 
-            } catch (error) {
-                console.error(error);
-            }
+          
 
 
         },
