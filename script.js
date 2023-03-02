@@ -217,6 +217,14 @@ var home = new Vue({
             localStorage.setItem("selected_pt", this.selected_pt);
             window.location.href = "products.html";
         },
+        goreport(){
+            if(this.login_state){
+                window.location.href="watch_report.html";
+            }
+            else{
+                this.showlogin()
+            }
+        },
         gosell() {
             if (this.login_state) {
                 window.location.href = "add.html";
