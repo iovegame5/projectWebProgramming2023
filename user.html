@@ -97,7 +97,7 @@
         </nav>
     </div>
 
-    <div class="columns" id="profile" style="height:100%" >
+    <div class="columns" id="profile" style="min-height:100%" >
         <div class="column is-2 pt-6">
             <aside class="menu has-text-white">
                 <ul class="menu-list">
@@ -107,7 +107,7 @@
 
             </aside>
         </div>
-        <div class="column is-5 pt-5">
+        <div class="column is-5 pt-5"  :class="{'column is-5 pt-5' : panel==1, 'column is-8 pt-5' : panel==2}">
             <div id="panel1" v-show="panel==1">
                 <h1 class="title has-text-light"> ข้อมูลส่วนตัว </h1>
                 <div class="field">
@@ -161,36 +161,42 @@
             </div>
             <div id="panel2" v-show="panel==2">
                 <h1 class="title has-text-light">สินค้าของฉัน</h1>
-                <div  class="column is-half">
-                    <div class="card" @click="log()">
-                        <div class="card-image">
-                            <figure class="image is-1by1">
-                                <img src="./img/guitar_4_1.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div clas="media">
-                              
-                                <div class="media-content">
-                                    <p class="title is-4">เทส</p>
-                                    <p class="subtitle is-7">@username</p>
-                                    <p class="subtitle is-5 has-text-success">ราคา</p> บาท</p>
+                <div class="container is-full-desktop">
+                <div class="is-multiline columns" >
+                    <!-- card column -->
+                    <div v-for="item in $data.my_pd" class="column is-one-third">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-1by1">
+                                    <img :src="item.product_img" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div clas="media">
+
+                                    <div class="media-content">
+                                        <p class="title is-4">{{item.name}}</p>
+                                        <p class="subtitle is-7">@username</p>
+                                        <p class="subtitle is-5 has-text-success">{{item.product_price}} บาท</p>
+                                    </div>
+
                                 </div>
-                               
-                            </div>
-                            <div class="content">
-                                    เทสโคตรๆ
-                            </div>
-                            <div style="display:flex; justify-content: space-between;">
-                                <button class="button">รายละเอียด</button>
-                                <div class="icon is-size-4" @click="log()">
-                                    <i class="fa-regular fa-heart"></i>
+                                <div class="content">
+                                    <p class="subtitle is-7"> {{item.product_detail}} </p>
+                                </div>
+                                <div style="display:flex; justify-content: space-between;">
+                                    <button class="button" @click="adddetail(item)">รายละเอียด</button>
+                                    <div class="icon is-size-4" @click="addfav(item)">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                      
+
                         </div>
                     </div>
+
+                </div>
+            </div>
             </div>
 
         </div>
