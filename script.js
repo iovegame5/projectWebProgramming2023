@@ -196,6 +196,14 @@ var home = new Vue({
                     this.showlogin()
                 }
             },
+            goreport(){
+                if(this.login_state){
+                    window.location.href="report.html";
+                }
+                else{
+                    this.showlogin()
+                }
+            },
             logout(){
 
                 this.login_state = false;
@@ -348,7 +356,7 @@ var home = new Vue({
             phone:"0991234567",
             fname:"Thanakorn",
             lname:"Amatrawet",
-            user_type:1,
+            user_type:2,
 
             f_username:"test",
             f_password:"1234",
@@ -424,6 +432,7 @@ var home = new Vue({
         },
         methods:{
             addreport(){ 
+
                 this.reports.push({"name": this.report_name, "header":this.report_header, "detail":this.report_detail})
                 localStorage.setItem("reports", JSON.stringify(this.reports))
             }
