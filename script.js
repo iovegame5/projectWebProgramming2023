@@ -458,9 +458,18 @@ var profile = new Vue({
 
         },
         methods:{
-            addreport(){ 
+            addreport(){
+                if(this.report_name != "" && this.report_header != "" && this.report_detail != "" ) { 
                 this.reports.push({"name": this.report_name, "header":this.report_header, "detail":this.report_detail})
                 localStorage.setItem("reports", JSON.stringify(this.reports))
+                alert("ส่งรายงานเรียบร้อย ")
+                this.report_name = ""
+                this.report_header = ""
+                this.report_detail = ""
+                }
+                else{
+                alert("กรุณากรอกขอช้อมูลให้ครบ");
+                }
             }
         },
 
