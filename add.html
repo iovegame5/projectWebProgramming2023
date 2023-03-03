@@ -62,7 +62,7 @@
 
             <!-- ขอบขวา nav -->
             <div class="navbar-end mr-6">
-                <a @click=goreport() class="navbar-item">ดูreport</a>
+                <a @click=goreport()  v-show="login_state == true"class="navbar-item">ดูreport</a>
                 <a class="navbar-item" href="#" @click="gofavorite()">
                     <i class="fa-regular fa-heart"></i>
                 </a>
