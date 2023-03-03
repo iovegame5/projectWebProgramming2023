@@ -333,7 +333,7 @@ var form = new Vue({
                     "product_price": this.pd_price,
                     "product_detail": this.pd_detail,
                     "user_id": home.$data.user_id,
-                    "product_img": "./img/test.png"
+                    "product_img": "./img/test.jpg"
                 });
                 localStorage.setItem("products", JSON.stringify(home.$data.tmp_producted));
                 alert("ลงขายสินค้าเรียบร้อย");
@@ -430,6 +430,17 @@ var profile = new Vue({
             this.f_email = this.email;
             this.f_phone = this.phone;
         },
+        adddetail(items) {
+            let all = {
+                'detail_img': items.product_img,
+                'detail_name': items.name,
+                'detail_price': items.product_price,
+                'detail_prodetail': items.product_detail
+            }
+            localStorage.setItem("all", JSON.stringify(all))
+            window.location.href = "productdetail.html";
+
+        }
 
 
     },
@@ -455,9 +466,12 @@ var profile = new Vue({
 
     created() {
         if(localStorage.getItem("all") != null){}
-        this.use = JSON.parse(localStorage.all);
-        this.reports = JSON.parse(localStorage.reports)
+        this.use = JSON.parse(localStorage.getItem("all"));
+        
+        if(localStorage.getItem("reports") != null){
+            this.reports = JSON.parse(localStorage.getItem("reports"))
         }
+    }
     })
     
 

@@ -59,6 +59,9 @@
                             <a href="./favorite.html">รายการโปรด</a>
                         </div>
                         <div class="navbar-item">
+                            <a href="./report.html">ร้องเรียน</a>
+                        </div>
+                        <div class="navbar-item">
                             <a @click="logout()">ออกจากระบบ</a>
                         </div>
                     </div>
@@ -73,7 +76,7 @@
         <div class="container">
             <div class="columns">
                 <div class="column" >
-                    <h3 style="font-size: 50px; color: white;  text-align: center;">
+                    <h1 class="title has-text-centered has-text-light" style="font-size:50px">
                         คำร้องเรียน
                     </h3>
                     <div class="card" v-for="item in reports" style="margin-top: 5%;">
