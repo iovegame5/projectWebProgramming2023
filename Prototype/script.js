@@ -368,7 +368,7 @@ var profile = new Vue({
         phone: "0991234567",
         fname: "Thanakorn",
         lname: "Amatrawet",
-        user_type: 1,
+        user_type: 2,
     
         f_username: "test",
         f_password: "1234",

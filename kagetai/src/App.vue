@@ -1,0 +1,170 @@
+<script setup>
+import { RouterView } from 'vue-router'
+
+</script>
+<template>
+  <div id="app">
+
+    <router-view/>
+  </div>
+</template>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+
+:root {
+  --primary-color:#14274E;
+  --seconddary-color:#394867;
+  --grey:#9BA4B4;
+
+}
+*{
+  margin: 0;
+  /* box-sizing: border-box; */
+}
+body{
+  padding:20px;
+  margin:0;
+  padding-top:90px;
+  /* background-color:var(--grey); */
+}
+
+.btn{
+  background:var(--grey);
+  padding: 10px 15px;
+  color: var(--primary-color);
+  font-size:18px;
+  border-radius: 5px;
+  /* box-shadow:6px 6px 20px -4px rgba(0,0,0, 0.7); */
+  text-decoration: none;
+  transition: 0.4s;
+
+
+}
+.btn:hover{
+  background-color: var(--primary-color);
+  color: var(--grey)
+}
+.popup{
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+
+}
+.popup-content{
+  height:250px;
+  width:500px;
+  background-color:rgb(143, 143, 143);
+  position: relative;
+  padding-top: 20px;
+  border-radius: 5px;
+  color:white;
+}
+.popup-content input{
+  margin:20px auto;
+  display:block;
+  width:50%;
+  padding:8px;
+  border:1px solid;
+}
+.close{
+ text-decoration: none;
+ position:absolute;
+ top: 2px;
+ right:2px;
+ height:20px;
+ width:20px;
+ cursor: pointer;
+  
+}
+/* register.html */
+.register{
+  width:30%;
+  padding: 20px;
+  position: relative;
+  margin: auto;
+
+  
+}
+.register-container{
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  margin:auto;
+  padding:30px;
+  
+
+}
+.noacc{
+  color:white;
+  margin-top: 20px;
+}
+.slideimg{
+  display:block;
+  margin-left: auto;
+   margin-right:auto; 
+   width: 100%;
+    height: 100%;
+    object-fit: cover;
+     align-items: center;
+}
+/* footer{
+ 
+  bottom: 0;
+
+  background: black;
+  
+  padding: 2em;
+  height:300px;
+  margin-top:2em;
+} */
+
+/* .content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  background-image: url('./img/guitar_4_1.jpg');
+  background-size: cover;
+  color: white;
+  font-size: 100px;
+} */
+
+#eguitar{
+  background-image: url('https://cdnb.artstation.com/p/assets/images/images/059/382/589/large/ck-uy-electric-guitar-cycles.jpg?1676282189');
+  background-size: cover;
+}
+.subtitle{
+  text-overflow: ellipsis;
+}
+
+
+</style>
