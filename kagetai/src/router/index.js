@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
@@ -13,7 +12,7 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import('../views/AboutView.vue')
   },
   
 ]
