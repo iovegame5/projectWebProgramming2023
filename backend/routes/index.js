@@ -1,4 +1,4 @@
-// หน้า Home page 
+// หน้า Home page
 
 const express = require("express");
 const pool = require("../config");

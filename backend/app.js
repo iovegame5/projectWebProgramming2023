@@ -11,8 +11,10 @@ app.use(express.urlencoded({ extended: true })) // for parsing applica
 // routers
 const indexRouter = require('./routes/index')
 const addRouter = require('./routes/add')
+const productsRouter = require("./routes/products")
 app.use(indexRouter.router)
 app.use(addRouter.router)
+app.use(productsRouter.router)
 app.listen(3000, () => {
   console.log('Start server at port 3000.')
 })

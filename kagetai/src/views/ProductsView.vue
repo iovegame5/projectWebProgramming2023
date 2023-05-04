@@ -15,7 +15,7 @@ import NavBar from '@/components/NavBar.vue'
                             <div class="select">
                                 <select v-model="selected_pt">
                                     <option value="0" selected="selected">ทั้งหมด</option>
-                                    <option v-for="item in product_type" :key="item.id" :value="item.id">{{item.name}}
+                                    <option v-for="item in products_type" :key="item.id" :value="item.type_id">{{item.type_name}}
                                     </option>
                                 </select>
                             </div>
@@ -32,30 +32,30 @@ import NavBar from '@/components/NavBar.vue'
             </div>
         <div class="column is-1"></div>
         <div class="column is-8 pt-5">
-            <h1 class="is-size-4 mb-4 mt-4 has-text-white">จำนวนสินค้า (products.length)</h1>
+            <h1 class="is-size-4 mb-4 mt-4 has-text-white">จำนวนสินค้า ({{this.products.length}})</h1>
             <div class="container is-fullhd mb-6">
                 <h1 class="title mb-6 mt-6 has-text-white" v-if="products.length==0">ยังไม่มีสินค้า</h1>
                 <div class="is-multiline columns" v-if="products.length!=0">
                     <!-- card column -->
-                    <div  class="column is-one-third"> 
+                    <div  class="column is-one-third" v-for="product in products" :key="product.product_id"> 
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-1by1">
-                                    <img  alt="Placeholder image">
+                                    <img  alt="Placeholder image" :src="'http://localhost:3000/' +product.path_image">
                                 </figure>
                             </div>
                             <div class="card-content">
                                 <div clas="media">
 
                                     <div class="media-content">
-                                        <p class="title is-4">item.name</p>
+                                        <p class="title is-4">{{product.product_name}}</p>
                                         <p class="subtitle is-7">@username</p>
-                                        <p class="subtitle is-5 has-text-success">item.product_price บาท</p>
+                                        <p class="subtitle is-5 has-text-success">{{product.product_price}} บาท</p>
                                     </div>
 
                                 </div>
                                 <div class="content">
-                                    <p class="subtitle is-7">item.product_detail</p>
+                                    <p class="subtitle is-7">{{product.product_detail}}</p>
                                   
                                 </div>
                                 <div style="display:flex; justify-content: space-between;">
@@ -80,17 +80,53 @@ import NavBar from '@/components/NavBar.vue'
 
 <script>
 // @ is an alias to /src
+import axios from "axios";
 export default {
   name: 'HomeView',
-  components: {
-    NavBar
-  },
-  data() {
-        return {
-          products:[{dd:"ss"}],
 
-        }
+  data (){
+    return {
+        products:[],
+        search:"",
+        products_type :[],
+        selected_pt:''
+    };
+  },
+  components: {
+    NavBar,
+    // images:[
+    //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
+
+  },
+  methods:{
+        // next (){
+        
+        //     this.index += 1
+        //     if (this.index > keep.length - 1) {
+        //         this.index = 0
+        //     }
+        // },
+
+        // เอาสินค้าจาก database เข้ามา
+        getProducts(){
+            axios
+        .get("http://localhost:3000/products", {
+          
+        })
+        .then((response) => {
+            console.log(response.data)
+          this.products = response.data.products;
+          this.products_type = response.data.products_type
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
+        }
+,
+  mounted() {
+    this.getProducts();
+  },
 }
 </script>
 
