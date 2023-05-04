@@ -1,5 +1,6 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
+import FooterCom from '@/components/FooterCom.vue'
 </script>
 <template>
     <div>
@@ -33,7 +34,7 @@ import NavBar from '@/components/NavBar.vue'
         <div class="column is-1"></div>
         <div class="column is-8 pt-5">
             <h1 class="is-size-4 mb-4 mt-4 has-text-white">จำนวนสินค้า ({{this.products.length}})</h1>
-            <div class="container is-fullhd mb-6">
+            <div class="container is-fullhd mb-6" style="min-height:600px">
                 <h1 class="title mb-6 mt-6 has-text-white" v-if="products.length==0">ยังไม่มีสินค้า</h1>
                 <div class="is-multiline columns" v-if="products.length!=0">
                     <!-- card column -->
@@ -73,6 +74,7 @@ import NavBar from '@/components/NavBar.vue'
             </div>
         </div>
     </div>
+    <FooterCom></FooterCom>
     </div>
    
 
@@ -94,6 +96,7 @@ export default {
   },
   components: {
     NavBar,
+    FooterCom
     // images:[
     //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
 

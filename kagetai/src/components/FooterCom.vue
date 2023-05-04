@@ -12,3 +12,7 @@
 </footer>
 </div>
 </template>
+<script>
+export default {
+    name:"FooterCom",
+}</script>
