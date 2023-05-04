@@ -23,6 +23,33 @@ router.get("/products", async function (req, res, next) {
   }
 });
 
+router.get("/products/detail/:id", function (req, res, next) {
+    // Query data from 3 tables
+    const promise1 = pool.query("SELECT * FROM products WHERE product_id=?", [
+      req.params.id,
+    ]);
+    const promise3 = pool.query("SELECT * FROM product_image WHERE product_id =?", [
+      req.params.id,
+    ]);
+  
+    // Use Promise.all() to make sure that all queries are successful
+    Promise.all([promise1, promise3])
+      .then((results) => {
+        const [products, blogFields] = results[0];
+        const [images, imageFields] = results[1];
+        res.json({
+          products: products[0],
+          images: images,
+          error: null,
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+        return res.status(500).json(err);
+      });
+  });
+  
+
 
 
 
