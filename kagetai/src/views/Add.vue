@@ -12,7 +12,7 @@
                                 <div class="content">
                                     <label class="label">ชื่อสินค้า</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="ชื่อสินค้า">
+                                        <input class="input" type="text" placeholder="ชื่อสินค้า" v-model="pd_name">
 
                                     </div>
                                     <!-- <p class="help is-success">This username is available</p> -->
@@ -74,7 +74,7 @@
 
                                 <div class="field is-grouped">
                                     <div class="control">
-                                        <button class="button is-link" @click="">Submit</button>
+                                        <button class="button is-link" >Submit</button>
                                     </div>
                                     <div class="control">
                                         <a href="index.html">
@@ -118,7 +118,17 @@
 // @ is an alias to /src
 import NavBar from '@/components/NavBar.vue'
 export default {
-    name: 'Add',
+    name: 'AddProduct',
+    data() {
+        return {
+          pd_name : "",
+          pd_type : "",
+          pd_price: "",
+          pd_description: "",
+          
+
+        }
+    },
     components: {
         NavBar,
 

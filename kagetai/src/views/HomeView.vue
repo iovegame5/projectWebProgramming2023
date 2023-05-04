@@ -7,7 +7,7 @@
 
 <div class="hero">
             <div></div>
-            <img class="slideimg" style="height:100%" @click="next()" src="../assets/guitarfirst.jpg">
+            <img class="slideimg" style="height:100%" @click="next()" src="../assets/img/guitarfirst.jpg">
         </div>
   <div class="container is-widescreen ">
             <div class="is-multiline columns">
@@ -97,18 +97,18 @@ export default {
   name: 'HomeView',
   components: {
     NavBar,
-    images:[
-            "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
+    // images:[
+    //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
 
   },
   methods:{
-        next (){
+        // next (){
         
-            this.index += 1
-            if (this.index > keep.length - 1) {
-                this.index = 0
-            }
-        }
+        //     this.index += 1
+        //     if (this.index > keep.length - 1) {
+        //         this.index = 0
+        //     }
+        // }
   }
 }
 </script>
