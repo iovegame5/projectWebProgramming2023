@@ -38,7 +38,7 @@ router.get("/products/detail/:id", function (req, res, next) {
         const [products, blogFields] = results[0];
         const [images, imageFields] = results[1];
         res.json({
-          products: products[0],
+          product: products[0],
           images: images,
           error: null,
         });

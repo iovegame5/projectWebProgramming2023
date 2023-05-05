@@ -60,7 +60,8 @@ import FooterCom from '@/components/FooterCom.vue'
                                   
                                 </div>
                                 <div style="display:flex; justify-content: space-between;">
-                                    <button class="button" @click="adddetail(item)">รายละเอียด</button>
+                                    <router-link class="button" :to="`/products/detail/${product.product_id}`">รายละเอียด</router-link>
+                                
                                     <div class="icon is-size-4" @click="addfav(item)">
                                         <i class="fa-regular fa-heart"></i>
                                     </div>
@@ -91,7 +92,7 @@ export default {
         products:[],
         search:"",
         products_type :[],
-        selected_pt:''
+        selected_pt:0
     };
   },
   components: {
@@ -124,6 +125,12 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    shortDetail(detail) {
+      if (detail.length > 100) {
+        return detail.substring(0, 97) + "...";
+      }
+      return detail;
     },
         }
 ,

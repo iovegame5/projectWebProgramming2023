@@ -25,7 +25,7 @@ var storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage,
-    limits: { fileSize: 1 * 1024 * 1024 }});
+    limits: { fileSize: 3 * 1024 * 1024 }});
   
 // Submit New Product 
   router.post("/add",upload.array("myImage", 5) ,async function (req, res, next) {

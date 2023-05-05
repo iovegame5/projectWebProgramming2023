@@ -19,13 +19,13 @@
             <div class="card-content">
               <div class="content">
                 <p style="margin-left: 5%; padding-top: 5%">
-                  <strong>ชื่อสินค้า:  use.detail_name </strong>
+                  <strong>ชื่อสินค้า:  {{ this.product.product_name }} </strong>
                 </p>
                 <p style="margin-left: 5%">
-                  <strong>ราคาสินค้า:  use.detail_price  บาท</strong>
+                  <strong>ราคาสินค้า: {{ this.product.product_price }}  บาท</strong>
                 </p>
                 <p style="margin-left: 5%">
-                  <strong>รายละเอียดสินค้า: use.detail_prodetail  </strong>
+                  <strong>รายละเอียดสินค้า: {{ this.product.product_detail }}  </strong>
                 </p>
                 <p style="margin-left: 5%">
                   <strong
@@ -77,7 +77,7 @@ export default {
       axios
         .get(`http://localhost:3000/products/detail/${productId}`)
         .then((response) => {
-          this.product = response.data.blog;
+          this.product = response.data.product;
           this.images = response.data.images;
         })
         .catch((error) => {

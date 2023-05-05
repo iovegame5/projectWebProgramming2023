@@ -28,16 +28,16 @@
             <!-- เมนู nav -->
             <div class="navbar-start">
                 <div class="navbar-item">
-                    <a @click= "goproducts(1)">กีตาร์โปร่ง</a>
+                    <router-link  :to="`/products`">กีตาร์โปร่ง</router-link>
                 </div>
                 <div class="navbar-item">
-                    <a @click= "goproducts(2)">กีตาร์ไฟฟ้า</a>
+                    <router-link  :to="`/products`">กีตาร์ไฟฟ้า</router-link>
                 </div>
                 <div class="navbar-item">
-                    <a @click="goproducts(3)">เอฟเฟค</a>
+                    <router-link  :to="`/products`">เอฟเฟค</router-link>
                 </div>
                 <div class="navbar-item">
-                    <a @click="goproducts(4)">แอมป์</a>
+                    <router-link  :to="`/products`">แอมป์</router-link>
                 </div>
 
 

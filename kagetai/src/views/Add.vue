@@ -18,12 +18,17 @@
                       v-model="$v.pd_name.$model"
                     />
                   </div>
-                  <template v-if="$v.pd_name.$error">
-                    <p class="help is-danger" v-if="!$v.pd_name.required">กรอกช่องนี้</p>
-                    <p class="help is-danger" v-if="!$v.pd_name.minLength">ชื่อสินค้าต้องมีอย่างน้อย 10 ตัวอักษร</p>
-                    <p class="help is-danger" v-if="!$v.pd_name.maxLength">ชื่อสินค้ามีได้มากสุด 30 ตัวอักษร</p>
-                   
-                  </template>
+
+                  <p class="help is-danger" v-if="!$v.pd_name.required">
+                    กรอกช่องนี้
+                  </p>
+                  <p class="help is-danger" v-if="!$v.pd_name.minLength">
+                    ชื่อสินค้าต้องมีอย่างน้อย 10 ตัวอักษร
+                  </p>
+                  <p class="help is-danger" v-if="!$v.pd_name.maxLength">
+                    ชื่อสินค้ามีได้มากสุด 30 ตัวอักษร
+                  </p>
+
                   <!-- <p class="help is-success">This username is available</p> -->
                 </div>
                 <div class="field">
@@ -48,16 +53,16 @@
                       value=""
                       v-model="$v.pd_price.$model"
                     />
-                    <template v-if="$v.pd_price.$error">
-                        <p class="help is-danger" v-if="!$v.pd_price.required">กรอกราคาสินค้า</p>
-                        <p class="help is-danger" v-if="!$v.pd_price.pd_price">ราคาต้องเป็นตัวเลขเท่านั้น</p>
-                        
-                       
-                      </template>
+
+                    <p class="help is-danger" v-if="!$v.pd_price.required">
+                      กรอกราคาสินค้า
+                    </p>
+                    <p class="help is-danger" v-if="!$v.pd_price.pd_price">
+                      ราคาต้องเป็นตัวเลขเท่านั้น
+                    </p>
                   </div>
                 </div>
 
-                
                 <div class="field">
                   <label class="label">รายละเอียดสินค้า</label>
                   <div class="control">
@@ -69,59 +74,88 @@
                       rows="3"
                       v-model="$v.pd_description.$model"
                     ></textarea>
-                    <template v-if="$v.pd_description.$error">
-                        <p class="help is-danger" v-if="!$v.pd_description.required">กรอกช่องนี้</p>
-                        <p class="help is-danger" v-if="!$v.pd_description.minLength">รายละเอียดต้องมีอย่างน้อย 30 ตัวอักษร</p>
-                        <p class="help is-danger" v-if="!$v.pd_description.maxLength">รายละเอียดมีได้มากสุด 150 ตัวอักษร</p>
-                       
-                      </template>
+
+                    <p
+                      class="help is-danger"
+                      v-if="!$v.pd_description.required"
+                    >
+                      กรอกช่องนี้
+                    </p>
+                    <p
+                      class="help is-danger"
+                      v-if="!$v.pd_description.minLength"
+                    >
+                      รายละเอียดต้องมีอย่างน้อย 30 ตัวอักษร
+                    </p>
+                    <p
+                      class="help is-danger"
+                      v-if="!$v.pd_description.maxLength"
+                    >
+                      รายละเอียดมีได้มากสุด 150 ตัวอักษร
+                    </p>
                   </div>
                 </div>
 
                 <div class="field">
-                    <label><strong>รูปสินค้า</strong></label>
-                    <div class="file">
-                      <label class="file-label">
-                          <input
-                          class="file-input"
-                          multiple
-                          type="file"
-                          accept="image/png, image/jpeg, image/webp"
-                          @change="selectImages"
-                        />
-                        <span class="file-cta">
-                          <span class="file-icon">
-                            <i class="fas fa-upload"></i>
-                          </span>
-                          <span class="file-label"> Choose a file… </span>
+                  <label><strong>รูปสินค้า</strong></label>
+                  <div class="file">
+                    <label class="file-label">
+                      <input
+                        class="file-input"
+                        multiple
+                        type="file"
+                        accept="image/png, image/jpeg, image/webp"
+                        @change="selectImages"
+                      />
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
                         </span>
-                      </label>
-                    </div>
-              
+                        <span class="file-label"> Choose a file… </span>
+                      </span>
+                    </label>
                   </div>
-                  <div class="field mb-2">
-                      <div v-if="images" class="columns is-multiline">
-                          <div v-for="(image, index) in images" :key="image.id" class="column is-one-quarter">
-                            <div class="card">
-                              <div class="card-image">
-                                <figure class="image is-4by3">
-                                  <img :src="showSelectImage(image)" alt="Placeholder image" />
-                                </figure>
-                              </div>
-                              <footer class="card-footer">
-                                <a @click="deleteSelectImage(index)" class="card-footer-item has-text-danger is-size-7">Delete</a>
-                              </footer>
-                            </div>
-                          </div>
+                </div>
+                <div class="field mb-2">
+                  <div v-if="images" class="columns is-multiline">
+                    <div
+                      v-for="(image, index) in images"
+                      :key="image.id"
+                      class="column is-one-quarter"
+                    >
+                      <div class="card">
+                        <div class="card-image">
+                          <figure class="image is-4by3">
+                            <img
+                              :src="showSelectImage(image)"
+                              alt="Placeholder image"
+                            />
+                          </figure>
                         </div>
-                         
-        <p class="help is-danger" v-if="!$v.images.images">file size is more than 3 MB</p>
+                        <footer class="card-footer">
+                          <a
+                            @click="deleteSelectImage(index)"
+                            class="card-footer-item has-text-danger is-size-7"
+                            >Delete</a
+                          >
+                        </footer>
+                      </div>
+                    </div>
                   </div>
-  
+
+                  <p class="help is-danger" v-if="!$v.images.images">
+                    ขนาดไฟล์ใส่ได้ไม่เกิน 3 Mb
+                  </p>
+                  <p class="help is-danger" v-if="!$v.images.imageLength">
+                    ใส่รูปอย่างน้อย 3 รูป
+                  </p>
+                </div>
 
                 <div class="field is-grouped">
                   <div class="control">
-                    <button @click="submitProduct" class="button is-link">Submit</button>
+                    <button @click="submitProduct" class="button is-link">
+                      Submit
+                    </button>
                   </div>
                   <div class="control">
                     <a href="index.html">
@@ -165,25 +199,30 @@
 // @ is an alias to /src
 import NavBar from "@/components/NavBar.vue";
 import axios from "axios";
-import { required, minLength, maxLength} from 'vuelidate/lib/validators'
-function priceWrong (value) {
-  if (!(value.match(/^[0-9]/))) {
-     return false
-   }
-
-   return true
- }
-
- function imageSizes(value){
-  if(value != undefined){
-    if(this.imageSize > 3 * 1024 * 1024 ){
-      return false
-    }
-   
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
+function priceWrong(value) {
+  if (!value.match(/^[0-9]/) && value.length > 0) {
+    return false;
   }
-  console.log(value)
-  return true
- }
+
+  return true;
+}
+
+function imageSizes(value) {
+  if (value != undefined) {
+    if (this.imageSize > 3 * 1024 * 1024) {
+      return false;
+    }
+  }
+  console.log(value);
+  return true;
+}
+function imageLength() {
+  if (this.images.length < 3) {
+    return false;
+  }
+  return true;
+}
 
 export default {
   name: "AddProduct",
@@ -193,30 +232,31 @@ export default {
       pd_type: 1,
       pd_price: "",
       pd_description: "",
-      images:[],
-      imageSize:0
+      images: [],
+      imageSize: 0,
     };
   },
   validations: {
-    pd_name:{
-      required : required,
-      minLength : minLength(10),
-      maxLength : maxLength(30),
+    pd_name: {
+      required: required,
+      minLength: minLength(10),
+      maxLength: maxLength(30),
     },
-    pd_price:{
-      required : required,
-      pd_price : priceWrong
+    pd_price: {
+      required: required,
+      pd_price: priceWrong,
     },
-    pd_description:{
-        required:required,
-        minLength: minLength(30),
-        maxLength: maxLength(150)
+    pd_description: {
+      required: required,
+      minLength: minLength(30),
+      maxLength: maxLength(150),
     },
-    
+
     images: {
-      images : imageSizes
-    }
-},
+      images: imageSizes,
+      imageLength: imageLength,
+    },
+  },
 
   components: {
     NavBar,
@@ -226,10 +266,10 @@ export default {
       this.images = event.target.files;
       this.images = Array.from(this.images);
       let number = 0;
-      console.log(this.images)
-   
+      console.log(this.images);
+
       this.images.forEach((value) => {
-        console.log(value)
+        console.log(value);
         number += value.size;
       });
       this.imageSize = number;
@@ -251,24 +291,30 @@ export default {
       this.imageSize = number;
       console.log(this.imageSize / (1024 * 1024));
     },
-    submitProduct() {
-      let formData = new FormData();
-      formData.append("pd_name", this.pd_name);
-      formData.append("pd_type", this.pd_type);
-      formData.append("pd_price", this.pd_price);
-      formData.append("pd_detail", this.pd_description);
-      formData.append("user_id", 2);
-      this.images.forEach((image) => {
-        formData.append("myImage", image);
-      });
+  submitProduct() {
+  
+      if (this.$v.$invalid) {
+        alert("กรุณาใส่ข้อมูลให้ถูกต้อง")
+        return;
+      } else {
+        let formData = new FormData();
+        formData.append("pd_name", this.pd_name);
+        formData.append("pd_type", this.pd_type);
+        formData.append("pd_price", this.pd_price);
+        formData.append("pd_detail", this.pd_description);
+        formData.append("user_id", 2);
+        this.images.forEach((image) => {
+          formData.append("myImage", image);
+        });
 
-      axios
-        .post("http://localhost:3000/add", formData)
-        .then((res) => {
-          this.$router.push({ name: "home" });
-          console.log(res);
-        })
-        .catch((e) => console.log(e.response.data));
+        axios
+          .post("http://localhost:3000/add", formData)
+          .then((res) => {
+            this.$router.push({ name: "home" });
+            console.log(res);
+          })
+          .catch((e) => console.log(e.response.data));
+      }
     },
   },
 };
