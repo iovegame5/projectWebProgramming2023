@@ -174,7 +174,8 @@ export default {
     },
     mobile: {
       required,
-      mobile
+      mobile,
+      maxLength:maxLength(10)
     },
     password: {
       required,
@@ -223,12 +224,16 @@ export default {
           .then((res) => {
             alert("Sign up Success");
             console.log(res)
+            this.$router.push({ path: '/',});
           })
           .catch((err) => {
             console.log(err)
             
             
           })
+        }
+        else{
+          alert("ข้อมูลไม่ถูกต้อง")
         }
     },
   },

@@ -31,7 +31,7 @@
           <!-- seller chat list -->
           <div class="list" v-if="chatgroup == 'seller'">
             <div
-              class="list-item box mb-2"
+              class="list-item box mb-4"
               v-for="room in seller_rooms"
               :key="room.room_id "
               @click="select_room(room)"
@@ -63,7 +63,7 @@
 
           <div class="list" v-if="chatgroup == 'buyer'">
             <div
-              class="list-item box"
+              class="list-item box mb-4"
               v-for="room in buyer_rooms"
               :key="room.room_id"
               @click="select_room(room)"
@@ -83,7 +83,7 @@
                     <p>
                       <strong>{{ room.target_name }}</strong>
                       <br /><small class="has-text-weight-semibold"
-                        >1 new message</small
+                        >{{room.lastmsgtxt}}</small
                       >
                     </p>
                   </div>
@@ -309,7 +309,7 @@ export default {
       messagetxt: "",
       socket: {},
       eiei: null,
-      chatgroup: "seller",
+      chatgroup: "buyer",
 
       
     };
