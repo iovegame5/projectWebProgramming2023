@@ -151,6 +151,7 @@ export default {
     },
     getUser() {
       axios.get('/user/me').then(res => {
+        console.log(res.data)
         this.user = res.data
       })
     },

@@ -3,10 +3,10 @@
   <div>
     <NavBar></NavBar>
 
-    <div class="columns is-mobile">
+    <div class="columns is-mobile" style="max-height:900px;">
       <div
-        class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero is-fullheight"
-      >
+        class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero "
+      style="height:900px">
         <div class="columns top-field">
           <div
             class="column is-half chatgroup"
@@ -95,7 +95,7 @@
       </div>
       <div
         class="column is-9-desktop is-8-tablet is-10-mobile is-paddingless"
-        v-if="this.current_room != null"
+        v-if="this.current_room != null" style="max-height:900px"
       >
         <nav class="navbar has-shadow user-nav">
           <div class="navbar-start">
@@ -165,14 +165,14 @@
         </nav>
 
         <!-- Main Content columns: One for chat window another for profile -->
-        <div class="columns" style="max-height: 900px;">
+        <div class="columns"  style="max-height:825px;">
           <div
             class="column is-8 is-12-mobile is-flex hero is-fullheight message-window"
           >
             <div
               class="chat-messages"
               ref="chat"
-              style="width: 100%; height:100%; overflow-y: auto; overflow-x: hidden"
+              style="width: 100%; height:80%; overflow-y: auto; overflow-x: hidden"
             >
               <div v-for="message in messages" :key="message.message_id">
                 <!-- v-if recive messages -->
@@ -252,8 +252,37 @@
               </form>
             </div>
           </div>
-          <div class="column is-hidden-mobile sidebar-profile">
-            Profile Section
+          <div class="column is-hidden-mobile sidebar-profile pt-2" >
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-1by1">
+                        <img  alt="Placeholder image" src="">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div clas="media">
+
+                        <div class="media-content">
+                            <p class="title is-4">product_name</p>
+                            <p class="subtitle is-7">@username</p>
+                            <p class="subtitle is-5 has-text-success">product.product_price บาท</p>
+                        </div>
+
+                    </div>
+                    <div class="content">
+                        <p class="subtitle is-7">product.product_detail</p>
+                      
+                    </div>
+                    <div style="display:flex; justify-content: space-between;">
+                        <router-link class="button" :to="``">รายละเอียด</router-link>
+                    
+                        <div class="icon is-size-4" @click="addfav(item)">
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -304,10 +333,10 @@ export default {
     },
     
     select_room(room) {
-          // Emit the 'joinRoom' event to join the chat room
-      this.socket.emit('joinRoom', room.room_id);
-      this.current_room = room;
+        this.current_room = room;
       console.log(this.current_room);
+          // Emit the 'joinRoom' event to join the chat room
+      this.socket.emit('joinRoom', room.room_id, this.user_id);
       axios
         .get(`http://localhost:3000/chat/${room.room_id}/messages`)
         .then((res) => {
@@ -319,6 +348,9 @@ export default {
         });
     },
     sent_message(){
+        let time = new Date()
+        time = time.toISOString()
+        console.log(time)
         const messageData = {
         roomId: this.current_room.room_id,
         message: {
@@ -326,7 +358,7 @@ export default {
           receiver_id: this.current_room.target_id,
           content: this.messagetxt,
           room_id :this.current_room.room_id,
-          sent_time: new Date(),
+          sent_time: time,
         },
       };
 

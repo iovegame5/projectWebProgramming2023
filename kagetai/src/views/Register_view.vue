@@ -210,9 +210,9 @@ export default {
           password: this.password,
           confirm_password: this.confirm_password,
           email: this.email,
-          mobile: this.mobile,
-          first_name: this.first_name,
-          last_name: this.last_name,
+          phone: this.mobile,
+          firstname: this.first_name,
+          lastname: this.last_name,
         }
 
         console.log(this.username)
