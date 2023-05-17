@@ -309,7 +309,7 @@ export default {
         formData.append("pd_type", this.pd_type);
         formData.append("pd_price", this.pd_price);
         formData.append("pd_detail", this.pd_description);
-        formData.append("user_id", 2);
+        formData.append("user_id", this.user.user_id);
         this.images.forEach((image) => {
           formData.append("myImage", image);
         });

@@ -5,6 +5,33 @@ router = express.Router();
 
 
 
+
+// check and create room
+    router.post('/chat', async function(req, res, next){
+        const seller_id = req.body.seller_id
+        const buyer_id = req.body.buyer_id
+        try{
+        const[rows1, fields1] = await pool.query("select * from chat_room where seller_id = ? and buyer_id = ?", [seller_id, buyer_id])
+        console.log(rows1)
+        if (rows1.length == 0){
+            console.log("dont have room")
+            const result = await pool.query('insert into chat_room (seller_id, buyer_id) values(?,?)', [seller_id, buyer_id])
+            console.log(result)
+            return res.status(200).json({message:"create new chat room success!!",
+            room_id:result[0].insertId})
+        }
+        else{
+          console.log("already have room!")
+          return res.json({message:"already have room joining room ",room_id:rows1[0].room_id})
+        }
+    }
+    catch(err){
+        console.log(err)
+        return res.json(err).status(400)
+    }
+
+    })
+
 // get room
 
 router.get("/:userid/chat", async function (req, res, next) {

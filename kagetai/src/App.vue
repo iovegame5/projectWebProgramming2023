@@ -93,11 +93,7 @@ export default {
       localStorage.removeItem('token')
       window.location.href = ('/')
     },
-    goproducts(num) {
-      this.selected_pt = num;
-      localStorage.setItem("selected_pt", this.selected_pt);
-      window.location.href = "products.html";
-    },
+   
     gosell() {
       const token = localStorage.getItem('token')
       if (token) {
@@ -118,7 +114,10 @@ export default {
       localStorage.setItem("all", JSON.stringify(all))
       window.location.href = "productdetail.html";
 
-    }
+    },
+    goproducts(num) {
+      this.$router.push({ path: '/products', query: { selected_pt:num } });
+    },
 
 
 
@@ -141,22 +140,9 @@ export default {
     let myjson = JSON.stringify(this.fav_pro);
     localStorage.setItem("fav", myjson);
   },
-  goproducts(num) {
-    this.selected_pt = num;
-    localStorage.setItem("selected_pt", this.selected_pt);
-    window.location.href = "products.html";
-  },
+  
 
-  adddetail(items) {
-    let all = {
-      detail_img: items.product_img,
-      detail_name: items.name,
-      detail_price: items.product_price,
-      detail_prodetail: items.product_detail,
-    };
-    localStorage.setItem("all", JSON.stringify(all));
-    window.location.href = "productdetail.html";
-  },
+  
 
 };
 </script>
@@ -204,17 +190,17 @@ export default {
 
     <!-- เมนู nav -->
     <div class="navbar-start">
-      <div class="navbar-item">
-        <router-link :to="`/products`">กีตาร์โปร่ง</router-link>
+      <div class="navbar-item" @click="goproducts(1)">
+        กีตาร์โปร่ง
       </div>
-      <div class="navbar-item">
-        <router-link :to="`/products`">กีตาร์ไฟฟ้า</router-link>
+      <div class="navbar-item" @click="goproducts(2)">
+        กีตาร์ไฟฟ้า
       </div>
-      <div class="navbar-item">
-        <router-link :to="`/products`">เอฟเฟค</router-link>
+      <div class="navbar-item" @click="goproducts(3)">
+        กีตาร์เอฟเฟค
       </div>
-      <div class="navbar-item">
-        <router-link :to="`/products`">แอมป์</router-link>
+      <div class="navbar-item" @click="goproducts(4)">
+        แอมป์
       </div>
 
 

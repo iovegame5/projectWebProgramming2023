@@ -176,7 +176,7 @@
             >
               <div v-for="message in messages" :key="message.message_id">
                 <!-- v-if recive messages -->
-                <div class="columns ml-2 mt-2" v-if="message.sender_id != user_id">
+                <div class="columns ml-2 mt-2" v-if="message.sender_id != user.user_id">
                   <div class="column is-6" style="max-width: 40%">
                     <div class="message-text box">
                       {{ message.message }}
@@ -302,7 +302,7 @@ export default {
 
   data() {
     return {
-      seller_rooms: [],
+      seller_rooms: null,
       buyer_rooms: [],
       messages: [],
       current_room: null,
@@ -310,7 +310,7 @@ export default {
       socket: {},
       eiei: null,
       chatgroup: "seller",
-      user_id:null,
+
       
     };
   },
@@ -322,23 +322,25 @@ export default {
   },
   methods: {
     getRooms() {
-      // mockup user_id = 2
-      axios
-        .get(`http://localhost:3000/${this.user_id}/chat`, {})
-        .then((response) => {
-          this.seller_rooms = response.data.seller_rooms;
-          this.buyer_rooms = response.data.buyer_rooms;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`http://localhost:3000/${this.user.user_id}/chat`)
+      .then((response) => {
+        this.seller_rooms = response.data.seller_rooms;
+        this.buyer_rooms = response.data.buyer_rooms;
+        resolve(); // Resolve the promise once the data is available
+      })
+      .catch((error) => {
+        reject(error); // Reject the promise if there is an error
+      });
+  });
+},
     
     select_room(room) {
         this.current_room = room;
       console.log(this.current_room);
           // Emit the 'joinRoom' event to join the chat room
-      this.socket.emit('joinRoom', room.room_id, this.user_id);
+      this.socket.emit('joinRoom', room.room_id, this.user.user_id);
       axios
         .get(`http://localhost:3000/chat/${room.room_id}/messages`)
         .then((res) => {
@@ -356,7 +358,7 @@ export default {
         const messageData = {
         roomId: this.current_room.room_id,
         message: {
-          sender_id: this.user_id,
+          sender_id: this.user.user_id,
           receiver_id: this.current_room.target_id,
           content: this.messagetxt,
           room_id :this.current_room.room_id,
@@ -374,15 +376,44 @@ export default {
     },
   },
   mounted() {
-    this.user_id = this.$route.params.userid;
-    this.getRooms();
+    let current_room_id = Number(this.$route.query.current_room_id);
+    if (current_room_id) {
+    console.log("current_room_id:", current_room_id);
+    this.socket.emit('joinRoom', current_room_id, this.user.user_id);
+    this.current_room = this.seller_rooms.find((value) => {
+      return value.room_id === current_room_id;
+    });
+
+    console.log("this.current_room:", this.current_room);
+  } else {
+    console.log('current_room_id not found');
+  }
   },
   created() {
-    this.socket = io("http://localhost:3000");
-    this.socket.on('message', (data) => {
-        this.messages = data.messages
-  // Handle the received message
-});
-  },
+  this.getRooms()
+    .then(() => {
+      this.socket = io("http://localhost:3000");
+      this.socket.on('message', (data) => {
+        this.messages = data.messages;
+        // Handle the received message
+      });
+
+      let current_room_id = Number(this.$route.query.current_room_id);
+      if (current_room_id) {
+        console.log("current_room_id:", current_room_id);
+        this.socket.emit('joinRoom', current_room_id, this.user.user_id);
+        this.current_room = this.seller_rooms.find((value) => {
+          return value.room_id === current_room_id;
+        });
+        console.log("this.current_room:", this.current_room);
+      } else {
+        console.log('current_room_id not found');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+},
+
 };
 </script>
