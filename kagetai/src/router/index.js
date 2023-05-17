@@ -15,11 +15,6 @@ const routes = [
     component: () => import('../views/ProductsView.vue')
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('../views/Register.vue')
-  },
-  {
     path: '/user',
     name: 'user',
     component: () => import('../views/User.vue')
@@ -39,7 +34,16 @@ const routes = [
     name: 'Chat',
     component: () => import('../views/ChatView.vue')
   },
-  
+    {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register_view.vue')
+  },
+  {
+    path: '/favourite/:id',
+    name: 'Favourite',
+    component: () => import('../views/FavoriteView.vue')
+  }
   
 ]
 

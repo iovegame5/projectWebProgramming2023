@@ -1,6 +1,8 @@
 <script setup>
 import { RouterView } from 'vue-router'
 
+
+
 </script>
 <template>
   <div id="app">
@@ -98,7 +100,7 @@ body{
 
 }
 .popup-content{
-  height:250px;
+  height:370px;
   width:500px;
   background-color:rgb(143, 143, 143);
   position: relative;
@@ -178,7 +180,7 @@ body{
 } */
 
 #eguitar{
-  background-image: url('https://cdnb.artstation.com/p/assets/images/images/059/382/589/large/ck-uy-electric-guitar-cycles.jpg?1676282189');
+  background-image: url('./assets/img/elecguitar.png');
   background-size: cover;
 }
 .subtitle{
@@ -348,5 +350,6 @@ html, body {
 .mainnav{
   z-index: 1;
 }
+
 
 </style>

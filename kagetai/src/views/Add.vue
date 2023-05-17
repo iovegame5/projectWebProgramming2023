@@ -18,16 +18,18 @@
                       v-model="$v.pd_name.$model"
                     />
                   </div>
-
+                  <template v-if="$v.pd_name.$error"> 
                   <p class="help is-danger" v-if="!$v.pd_name.required">
                     กรอกช่องนี้
                   </p>
+
                   <p class="help is-danger" v-if="!$v.pd_name.minLength">
                     ชื่อสินค้าต้องมีอย่างน้อย 10 ตัวอักษร
                   </p>
                   <p class="help is-danger" v-if="!$v.pd_name.maxLength">
                     ชื่อสินค้ามีได้มากสุด 30 ตัวอักษร
                   </p>
+                  </template>
 
                   <!-- <p class="help is-success">This username is available</p> -->
                 </div>
@@ -53,13 +55,15 @@
                       value=""
                       v-model="$v.pd_price.$model"
                     />
-
+                      
+                    <template v-if="$v.pd_price.$error"> 
                     <p class="help is-danger" v-if="!$v.pd_price.required">
                       กรอกราคาสินค้า
                     </p>
                     <p class="help is-danger" v-if="!$v.pd_price.pd_price">
                       ราคาต้องเป็นตัวเลขเท่านั้น
                     </p>
+                  </template>
                   </div>
                 </div>
 
@@ -75,6 +79,7 @@
                       v-model="$v.pd_description.$model"
                     ></textarea>
 
+                    <template v-if="$v.pd_description.$error">
                     <p
                       class="help is-danger"
                       v-if="!$v.pd_description.required"
@@ -93,6 +98,7 @@
                     >
                       รายละเอียดมีได้มากสุด 150 ตัวอักษร
                     </p>
+                  </template>
                   </div>
                 </div>
 
@@ -142,15 +148,16 @@
                       </div>
                     </div>
                   </div>
-
+                  <template v-if="$v.images.$error">
                   <p class="help is-danger" v-if="!$v.images.images">
                     ขนาดไฟล์ใส่ได้ไม่เกิน 3 Mb
                   </p>
                   <p class="help is-danger" v-if="!$v.images.imageLength">
                     ใส่รูปอย่างน้อย 3 รูป
                   </p>
+                </template>
                 </div>
-
+                <br>
                 <div class="field is-grouped">
                   <div class="control">
                     <button @click="submitProduct" class="button is-link">

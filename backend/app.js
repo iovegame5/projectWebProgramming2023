@@ -4,7 +4,10 @@ const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors')
 const pool = require("./config");
+const{logger} = require('./middlewares')
+
 const io = require('socket.io')(server, {
+
   cors: {
     origin: '*',
   }
@@ -59,15 +62,21 @@ socket.on('message', async (data) => {
 app.use(express.static('static'))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing applica
+app.use(logger)
 // routers
 const indexRouter = require('./routes/index')
 const addRouter = require('./routes/add')
 const productsRouter = require("./routes/products")
 const chatRouter = require("./routes/chat")
+const userRoter = require("./routes/user")
+const favRoter = require("./routes/favourite")
 app.use(indexRouter.router)
 app.use(addRouter.router)
 app.use(productsRouter.router)
 app.use(chatRouter.router)
+app.use(userRoter.router)
+app.use(favRoter.router)
+
 server.listen(3000, () => {
   console.log('Start server at port 3000.')
 })
