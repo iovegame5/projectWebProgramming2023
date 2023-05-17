@@ -26,6 +26,9 @@ export default {
     console.log(this.token)
   },
   methods: {
+    gochat(){
+      this.$router.push({ path: '/chat' })
+    },
     showlogin() {
       document.querySelector(".popup").style.display = "flex";
     },
@@ -215,6 +218,7 @@ export default {
         <i class="fa-regular fa-heart"></i>
       </a>
       <div class="navbar-item" @click="gosell()">ลงขาย</div>
+      <div class="navbar-item" @click="gochat()">แชท</div>
       <div class="navbar-item has-dropdown is-hoverable" v-if="token">
         <div class="navbar-link">{{user.username}}</div>
         <div class="navbar-dropdown">

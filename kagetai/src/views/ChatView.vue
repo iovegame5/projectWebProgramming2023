@@ -223,7 +223,7 @@
               </div>
             </div>
             <div class="flex-item-2">
-              <form>
+              <form @submit.prevent="sent_message">
                 <div class="field has-addons">
                   <div class="control">
                     <input
@@ -328,7 +328,7 @@ export default {
       .then((response) => {
         this.seller_rooms = response.data.seller_rooms;
         this.buyer_rooms = response.data.buyer_rooms;
-        resolve(); // Resolve the promise once the data is available
+        resolve(); // ทำให้เสร็จก่อนค่อยไปทำอันอื่น
       })
       .catch((error) => {
         reject(error); // Reject the promise if there is an error
@@ -352,7 +352,8 @@ export default {
         });
     },
     sent_message(){
-        let time = new Date()
+        if(this.messagetxt != ""){
+            let time = new Date()
         time = time.toISOString()
         console.log(time)
         const messageData = {
@@ -373,37 +374,29 @@ export default {
 });
       // Clear the input field
       this.messagetxt = '';
+        }
+
     },
   },
   mounted() {
-    let current_room_id = Number(this.$route.query.current_room_id);
-    if (current_room_id) {
-    console.log("current_room_id:", current_room_id);
-    this.socket.emit('joinRoom', current_room_id, this.user.user_id);
-    this.current_room = this.seller_rooms.find((value) => {
-      return value.room_id === current_room_id;
-    });
-
-    console.log("this.current_room:", this.current_room);
-  } else {
-    console.log('current_room_id not found');
-  }
-  },
-  created() {
-  this.getRooms()
+    this.getRooms()
     .then(() => {
-      this.socket = io("http://localhost:3000");
-      this.socket.on('message', (data) => {
-        this.messages = data.messages;
-        // Handle the received message
-      });
-
       let current_room_id = Number(this.$route.query.current_room_id);
       if (current_room_id) {
         console.log("current_room_id:", current_room_id);
         this.socket.emit('joinRoom', current_room_id, this.user.user_id);
         this.current_room = this.seller_rooms.find((value) => {
           return value.room_id === current_room_id;
+        });
+        axios
+        .get(`http://localhost:3000/chat/${current_room_id}/messages`)
+        .then((res) => {
+            console.log("res:", res)
+          this.messages = res.data.messages;
+          console.log(res.data.messages);
+        })
+        .catch((err) => {
+          console.log(err);
         });
         console.log("this.current_room:", this.current_room);
       } else {
@@ -413,6 +406,28 @@ export default {
     .catch((error) => {
       console.log(error);
     });
+
+    // show current room in chat page
+    let current_room_id = Number(this.$route.query.current_room_id);
+    if (current_room_id) {
+    console.log("current_room_id:", current_room_id);
+    this.socket.emit('joinRoom', current_room_id, this.user.user_id);
+    this.current_room = this.seller_rooms.find((value) => {
+      return value.room_id === current_room_id;
+    });
+
+
+    console.log("this.current_room:", this.current_room);
+  } else {
+    console.log('current_room_id not found');
+  }
+  },
+  created() {
+    this.socket = io("http://localhost:3000");
+      this.socket.on('message', (data) => {
+        this.messages = data.messages;
+        // Handle the received message
+      });
 },
 
 };
