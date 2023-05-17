@@ -1,10 +1,10 @@
 <script setup>
-import NavBar from '@/components/NavBar.vue'
+
 import FooterCom from '@/components/FooterCom.vue'
 </script>
 <template>
     <div>
-        <NavBar></NavBar>
+
         <div class="columns" style="min-height: 100%;">
             <div class="column is-2 pt-6">
                 <aside class="menu">
@@ -62,7 +62,7 @@ import FooterCom from '@/components/FooterCom.vue'
                                 <div style="display:flex; justify-content: space-between;">
                                     <router-link class="button" :to="`/products/detail/${product.product_id}`">รายละเอียด</router-link>
                                 
-                                    <div class="icon is-size-4" @click="addfav(item)">
+                                    <div class="icon is-size-4" @click="test">
                                         <i class="fa-regular fa-heart"></i>
                                     </div>
                                 </div>
@@ -86,6 +86,7 @@ import FooterCom from '@/components/FooterCom.vue'
 import axios from "axios";
 export default {
   name: 'HomeView',
+  props: ['user'],
 
   data (){
     return {
@@ -96,7 +97,7 @@ export default {
     };
   },
   components: {
-    NavBar,
+
     FooterCom
     // images:[
     //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
@@ -132,6 +133,9 @@ export default {
       }
       return detail;
     },
+    test(){
+        console.log(this.user)
+    }
         }
 ,
   mounted() {

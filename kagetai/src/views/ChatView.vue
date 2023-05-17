@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <NavBar></NavBar>
+
 
     <div class="columns is-mobile" style="max-height:900px;">
       <div
@@ -292,12 +292,13 @@
 </template>
   <script>
 // @ is an alias to /src
-import NavBar from "@/components/NavBar.vue";
+
 import FooterCom from "@/components/FooterCom.vue";
 import axios from "axios";
 import io from 'socket.io-client';
 export default {
   name: "ChatView",
+  props: ['user'],
 
   data() {
     return {
@@ -310,10 +311,11 @@ export default {
       eiei: null,
       chatgroup: "seller",
       user_id:null,
+      
     };
   },
   components: {
-    NavBar,
+
     FooterCom,
     // images:[
     //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]

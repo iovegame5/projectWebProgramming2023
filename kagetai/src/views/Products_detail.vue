@@ -1,7 +1,7 @@
 
 <template>
   <div id="detail">
-    <NavBar></NavBar>
+
     <div class="container is-fullhd" style="padding-top: 5%; min-height: 100%">
       <div class="columns">
         <div class="column">
@@ -44,11 +44,12 @@
 </template>
 <script>
 // @ is an alias to /src
-import NavBar from '@/components/NavBar.vue'
+
 import FooterCom from '@/components/FooterCom.vue'
 import axios from "axios";
 export default {
   name: "ProductDetail",
+  props: ['user'],
 
   data() {
     return {
@@ -58,7 +59,7 @@ export default {
     };
   },
   components: {
-    NavBar,
+  
     FooterCom,
     // images:[
     //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]

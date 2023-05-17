@@ -2,7 +2,6 @@
 <template>
   <div>
   <div>
-  <NavBar/>
   </div>
 
 <div class="hero">
@@ -92,11 +91,12 @@
 </style>
 <script>
 // @ is an alias to /src
-import NavBar from '@/components/NavBar.vue'
+
 export default {
   name: 'HomeView',
+  props: ['user'],
   components: {
-    NavBar,
+    
     // images:[
     //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
 

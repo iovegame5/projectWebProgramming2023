@@ -1,6 +1,6 @@
 <template>
     <div>
-    <NavBar></NavBar>
+
     
     <div class="columns" id="profile" style="min-height:100%" >
         <div class="column is-2 pt-6">
@@ -116,11 +116,12 @@
 <script>
 // @ is an alias to /src
 import FooterCom from '@/components/FooterCom.vue'
-import NavBar from '@/components/NavBar.vue'
+
 export default {
   name: 'HomeView',
+  props: ['user'],
   components: {
-    NavBar,
+
     FooterCom
 
   },

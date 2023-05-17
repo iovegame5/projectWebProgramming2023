@@ -204,7 +204,6 @@
 </template>
 <script>
 // @ is an alias to /src
-import NavBar from "@/components/NavBar.vue";
 import axios from "axios";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
 function priceWrong(value) {
@@ -233,6 +232,7 @@ function imageLength() {
 
 export default {
   name: "AddProduct",
+  props: ['user'],
   data() {
     return {
       pd_name: "",
@@ -266,7 +266,7 @@ export default {
   },
 
   components: {
-    NavBar,
+ 
   },
   methods: {
     selectImages(event) {

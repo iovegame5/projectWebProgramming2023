@@ -113,6 +113,7 @@
 <script>
     export default{
         name:"registerForm",
+        props: ['user'],
         data(){
             return{
             username:"",

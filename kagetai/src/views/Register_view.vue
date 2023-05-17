@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <NavBar />
+
 
 
     </div>
@@ -137,7 +137,7 @@
 <script>
 import axios from "@/plugins/axios";
 import { required, email, sameAs, minLength, maxLength } from 'vuelidate/lib/validators'
-import NavBar from "@/components/NavBar.vue";
+
 
 function mobile(value) {
   return !!value.match(/0[0-9]{9}/)
@@ -151,6 +151,7 @@ function complexPassword(value) {
   return true
 }
 export default {
+  props: ['user'],
   data() {
     return {
       username: "",
@@ -164,7 +165,7 @@ export default {
     }
   },
   components: {
-    NavBar
+
   },
   validations: {
     email: {
