@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: '/favourite/:id',
-    name: 'Favourite',
+    name: 'FavouriteView',
     component: () => import('../views/FavoriteView.vue')
   }
   

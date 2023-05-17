@@ -75,7 +75,9 @@ export default {
       }
     },
     goregister() {
-      this.$router.push({ path: '/register' })
+      this.$router
+          .push({ path: '/register' })
+          .then(() => { this.$router.go() })
 
     },
     gofavorite() {
@@ -176,9 +178,9 @@ export default {
       </p>
         <button @click="login()" class="btn " href="#">LOGIN</button>
         <div class="noacc">
-          <a @click="goregister()">
-            <span>ยังไม่มีบัญชี? สมัครเลย</span>
-          </a>
+         
+            <a @click="goregister()">ยังไม่มีบัญชีหรอ? สมัรเลย</a>
+        
           
           
         </div>
@@ -226,10 +228,9 @@ export default {
       <a class="navbar-item" @click="gofavorite()">
         <i class="fa-regular fa-heart"></i>
       </a>
-      <a class="navbar-item" @click="gosell()" href="#">ลงขาย</a>
-      <a class="navbar-item" v-if="token">{{ user.username}}</a>
+      <div class="navbar-item" @click="gosell()">ลงขาย</div>
       <div class="navbar-item has-dropdown is-hoverable" v-if="token">
-        <a class="navbar-link"></a>
+        <div class="navbar-link">{{user.username}}</div>
         <div class="navbar-dropdown">
           <div class="navbar-item">
             <a href="user.html">ข้อมูลส่วนตัว</a>
@@ -312,7 +313,7 @@ body{
   color:white;
 }
 .navbar-link :hover{
-  background-color: var(--seconddary-color);
+  background: var(--seconddary-color) !important;
 }
 .btn{
   background:var(--grey);

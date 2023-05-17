@@ -12,12 +12,8 @@ const io = require('socket.io')(server, {
     origin: '*',
   }
 });
-
 app.use(cors())
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:8080");
-  next();
-});
+
 
 
 
@@ -25,28 +21,38 @@ io.on('connection', (socket) => {
   console.log('User connected');
 
  // Join a chat room
- socket.on('joinRoom', (roomId) => {
+ socket.on('joinRoom', (roomId, userid) => {
   socket.join(roomId);
-  console.log(`Client joined room ${roomId}`);
+  console.log(`Client user_id: ${userid} joined room ${roomId}`);
 });
 
 socket.on('message', async (data) => {
   const { roomId, message } = data;
-
+  const conn = await pool.getConnection()
+  await conn.beginTransaction();
   // Save the message to the database
   try{
-    await pool.query('insert into messages (room_id, sender_id, reciver_id, sent_time, message) values(?, ?, ?, ?, ?)',
+    await conn.query('insert into messages (room_id, sender_id, reciver_id, sent_time, message) values(?, ?, ?, ?, ?)',
     [roomId, message.sender_id, message.receiver_id,message.sent_time, message.content ])
 
-    const[rows1, fields1] = await pool.query("select * from messages where room_id = ? order by sent_time asc", [roomId])
+    const[rows1, fields1] = await conn.query("select *,DATE_FORMAT(CONVERT_TZ(sent_time, '+00:00', '+07:00'), '%H:%i') as sent_time from messages where room_id = ? order by sent_time asc", [roomId])
 
+    await conn.query('update chat_room set lastmsgtxt = ?, lastmsgtime =? where room_id = ?',
+    [String(message.content), message.sent_time, roomId])
+    conn.commit()
   let  messages = rows1
       // Emit the message to the room
       io.to(roomId).emit('message', {
           messages
       });
   }
-  catch(err){console.log(err)}
+  catch(err){
+    await conn.rollback();
+    console.log(err)}
+    finally{
+      await conn.release()
+    }
+    
 
  
 });
@@ -69,13 +75,13 @@ const addRouter = require('./routes/add')
 const productsRouter = require("./routes/products")
 const chatRouter = require("./routes/chat")
 const userRoter = require("./routes/user")
-const favRoter = require("./routes/favourite")
+// const favRoter = require("./routes/favourite")
 app.use(indexRouter.router)
 app.use(addRouter.router)
 app.use(productsRouter.router)
 app.use(chatRouter.router)
 app.use(userRoter.router)
-app.use(favRoter.router)
+// app.use(favRoter.router)
 
 server.listen(3000, () => {
   console.log('Start server at port 3000.')

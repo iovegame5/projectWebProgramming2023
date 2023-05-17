@@ -61,6 +61,7 @@ import FooterCom from '@/components/FooterCom.vue'
                                 </div>
                                 <div style="display:flex; justify-content: space-between;">
                                     <router-link class="button" :to="`/products/detail/${product.product_id}`">รายละเอียด</router-link>
+                                    <div class="button">แชท</div>
                                 
                                     <div class="icon is-size-4" @click="test">
                                         <i class="fa-regular fa-heart"></i>
