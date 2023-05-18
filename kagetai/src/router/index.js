@@ -40,10 +40,11 @@ const routes = [
     component: () => import('../views/Register_view.vue')
   },
   {
-    path: '/favourite/:id',
+    path: '/favorite/:user_id',
     name: 'FavouriteView',
     component: () => import('../views/FavoriteView.vue')
-  }
+  },
+ 
   
 ]
 
