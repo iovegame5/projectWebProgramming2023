@@ -18,7 +18,7 @@
                       v-model="$v.pd_name.$model"
                     />
                   </div>
-                  <template v-if="$v.pd_name.$error"> 
+                  <template > 
                   <p class="help is-danger" v-if="!$v.pd_name.required">
                     กรอกช่องนี้
                   </p>
@@ -56,7 +56,7 @@
                       v-model="$v.pd_price.$model"
                     />
                       
-                    <template v-if="$v.pd_price.$error"> 
+                    <template > 
                     <p class="help is-danger" v-if="!$v.pd_price.required">
                       กรอกราคาสินค้า
                     </p>
@@ -79,7 +79,7 @@
                       v-model="$v.pd_description.$model"
                     ></textarea>
 
-                    <template v-if="$v.pd_description.$error">
+                    <template>
                     <p
                       class="help is-danger"
                       v-if="!$v.pd_description.required"
@@ -148,7 +148,7 @@
                       </div>
                     </div>
                   </div>
-                  <template v-if="$v.images.$error">
+                  <template>
                   <p class="help is-danger" v-if="!$v.images.images">
                     ขนาดไฟล์ใส่ได้ไม่เกิน 3 Mb
                   </p>

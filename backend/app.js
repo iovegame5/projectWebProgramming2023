@@ -29,13 +29,13 @@ io.on('connection', (socket) => {
 socket.on('message', async (data) => {
   const { roomId, message } = data;
   const conn = await pool.getConnection()
-  await conn.beginTransaction();
   // Save the message to the database
   try{
+    await conn.beginTransaction();
     await conn.query('insert into messages (room_id, sender_id, reciver_id, sent_time, message) values(?, ?, ?, ?, ?)',
     [roomId, message.sender_id, message.receiver_id,message.sent_time, message.content ])
-
-    const[rows1, fields1] = await conn.query("select *,DATE_FORMAT(CONVERT_TZ(sent_time, '+00:00', '+07:00'), '%H:%i') as sent_time from messages where room_id = ? order by sent_time asc", [roomId])
+     
+    const[rows1, fields1] = await conn.query("select *,sent_time as sent_time_full,DATE_FORMAT(CONVERT_TZ(sent_time, '+00:00', '+07:00'), '%H:%i') as sent_time from messages where room_id = ? order by sent_time_full asc", [roomId])
 
     await conn.query('update chat_room set lastmsgtxt = ?, lastmsgtime =? where room_id = ?',
     [String(message.content), message.sent_time, roomId])

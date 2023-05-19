@@ -1,12 +1,11 @@
 
 <template>
   <div>
-
-
-    <div class="columns is-mobile" style="max-height:900px;">
+    <div class="columns is-mobile" style="max-height: 900px">
       <div
-        class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero "
-      style="height:900px">
+        class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero"
+        style="height: 900px"
+      >
         <div class="columns top-field">
           <div
             class="column is-half chatgroup"
@@ -33,7 +32,7 @@
             <div
               class="list-item box mb-4"
               v-for="room in seller_rooms"
-              :key="room.room_id "
+              :key="room.room_id"
               @click="select_room(room)"
             >
               <div class="media">
@@ -82,9 +81,9 @@
                   <div class="content">
                     <p>
                       <strong>{{ room.target_name }}</strong>
-                      <br /><small class="has-text-weight-semibold"
-                        >{{room.lastmsgtxt}}</small
-                      >
+                      <br /><small class="has-text-weight-semibold">{{
+                        room.lastmsgtxt
+                      }}</small>
                     </p>
                   </div>
                 </div>
@@ -95,7 +94,8 @@
       </div>
       <div
         class="column is-9-desktop is-8-tablet is-10-mobile is-paddingless"
-        v-if="this.current_room != null" style="max-height:900px"
+        v-if="this.current_room != null"
+        style="height: 900px"
       >
         <nav class="navbar has-shadow user-nav">
           <div class="navbar-start">
@@ -165,18 +165,26 @@
         </nav>
 
         <!-- Main Content columns: One for chat window another for profile -->
-        <div class="columns"  style="max-height:825px;">
+        <div class="columns" style="max-height: 825px">
           <div
             class="column is-8 is-12-mobile is-flex hero is-fullheight message-window"
           >
             <div
               class="chat-messages"
-              ref="chat"
-              style="width: 100%; height:80%; overflow-y: auto; overflow-x: hidden"
+              ref="chatContainer"
+              style="
+                width: 100%;
+                max-height: 80%;
+                overflow-y: auto;
+                overflow-x: hidden;
+              "
             >
               <div v-for="message in messages" :key="message.message_id">
                 <!-- v-if recive messages -->
-                <div class="columns ml-2 mt-2" v-if="message.sender_id != user.user_id">
+                <div
+                  class="columns ml-2 mt-2"
+                  v-if="message.sender_id != user.user_id"
+                >
                   <div class="column is-6" style="max-width: 40%">
                     <div class="message-text box">
                       {{ message.message }}
@@ -208,7 +216,7 @@
                         position: absolute;
                       "
                     >
-                    {{ message.sent_time }}
+                      {{ message.sent_time }}
                     </p>
                   </div>
                   <div class="column is-5" style="max-width: 40%">
@@ -234,7 +242,11 @@
                     />
                   </div>
                   <div class="control">
-                    <button type="submit" class="button" @click="sent_message()">
+                    <button
+                      type="submit"
+                      class="button"
+                      @click="sent_message()"
+                    >
                       <svg height="36px" width="36px" viewBox="0 0 36 36">
                         <g fill="none" fill-rule="evenodd">
                           <g>
@@ -252,36 +264,34 @@
               </form>
             </div>
           </div>
-          <div class="column is-hidden-mobile sidebar-profile pt-2" >
+          <div class="column is-hidden-mobile sidebar-profile pt-2">
             <div class="card">
-                <div class="card-image">
-                    <figure class="image is-1by1">
-                        <img  alt="Placeholder image" src="">
-                    </figure>
+              <div class="card-image">
+                <figure class="image is-1by1">
+                  <img alt="Placeholder image" src="" />
+                </figure>
+              </div>
+              <div class="card-content">
+                <div clas="media">
+                  <div class="media-content">
+                    <p class="title is-4">product_name</p>
+                    <p class="subtitle is-7">@username</p>
+                    <p class="subtitle is-5 has-text-success">
+                      product.product_price บาท
+                    </p>
+                  </div>
                 </div>
-                <div class="card-content">
-                    <div clas="media">
-
-                        <div class="media-content">
-                            <p class="title is-4">product_name</p>
-                            <p class="subtitle is-7">@username</p>
-                            <p class="subtitle is-5 has-text-success">product.product_price บาท</p>
-                        </div>
-
-                    </div>
-                    <div class="content">
-                        <p class="subtitle is-7">product.product_detail</p>
-                      
-                    </div>
-                    <div style="display:flex; justify-content: space-between;">
-                        <router-link class="button" :to="``">รายละเอียด</router-link>
-                    
-                        <div class="icon is-size-4" @click="addfav(item)">
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
+                <div class="content">
+                  <p class="subtitle is-7">product.product_detail</p>
                 </div>
+                <div style="display: flex; justify-content: space-between">
+                  <router-link class="button" :to="``">รายละเอียด</router-link>
 
+                  <div class="icon is-size-4" @click="addfav(item)">
+                    <i class="fa-regular fa-heart"></i>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -295,10 +305,10 @@
 
 import FooterCom from "@/components/FooterCom.vue";
 import axios from "axios";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 export default {
   name: "ChatView",
-  props: ['user'],
+  props: ["user"],
 
   data() {
     return {
@@ -310,125 +320,145 @@ export default {
       socket: {},
       eiei: null,
       chatgroup: "buyer",
-
-      
     };
   },
   components: {
-
     FooterCom,
     // images:[
     //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
   },
   methods: {
     getRooms() {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`http://localhost:3000/${this.user.user_id}/chat`)
-      .then((response) => {
-        this.seller_rooms = response.data.seller_rooms;
-        this.buyer_rooms = response.data.buyer_rooms;
-        resolve(); // ทำให้เสร็จก่อนค่อยไปทำอันอื่น
-      })
-      .catch((error) => {
-        reject(error); // Reject the promise if there is an error
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`http://localhost:3000/${this.user.user_id}/chat`)
+          .then((response) => {
+            this.seller_rooms = response.data.seller_rooms;
+            this.buyer_rooms = response.data.buyer_rooms;
+            resolve(); // ทำให้เสร็จก่อนค่อยไปทำอันอื่น
+          })
+          .catch((error) => {
+            reject(error); // Reject the promise if there is an error
+          });
       });
-  });
-},
-    
-    select_room(room) {
-        this.current_room = room;
+    },
+
+    async select_room(room) {
+      this.current_room = room;
       console.log(this.current_room);
-          // Emit the 'joinRoom' event to join the chat room
-      this.socket.emit('joinRoom', room.room_id, this.user.user_id);
-      axios
+      // Emit the 'joinRoom' event to join the chat room
+      this.socket.emit("joinRoom", room.room_id, this.user.user_id);
+      await new Promise((resolve, reject) => {
+        axios
         .get(`http://localhost:3000/chat/${room.room_id}/messages`)
         .then((res) => {
           this.messages = res.data.messages;
           console.log(res.data.messages);
+          resolve()
+          
         })
         .catch((err) => {
           console.log(err);
+          reject(err)
         });
+   
+      });
+      this.scrollToBottom()
+
     },
-    sent_message(){
-        if(this.messagetxt != ""){
-            let time = new Date()
-        time = time.toISOString()
-        console.log(time)
+    async sent_message() {
+      if (this.messagetxt !== "") {
+        let time = new Date();
+        time = time.toISOString();
+        console.log(time);
         const messageData = {
-        roomId: this.current_room.room_id,
-        message: {
-          sender_id: this.user.user_id,
-          receiver_id: this.current_room.target_id,
-          content: this.messagetxt,
-          room_id :this.current_room.room_id,
-          sent_time: time,
-        },
-      };
+          roomId: this.current_room.room_id,
+          message: {
+            sender_id: this.user.user_id,
+            receiver_id: this.current_room.target_id,
+            content: this.messagetxt,
+            room_id: this.current_room.room_id,
+            sent_time: time,
+          },
+        };
 
-      this.socket.emit('message', messageData);
-      this.socket.on('message', (data) => {
-        this.messages = data.messages
-  // Handle the received message
-});
-      // Clear the input field
-      this.messagetxt = '';
-        }
+        await new Promise((resolve) => {
+          this.socket.on("message", (data) => {
+            this.messages = data.messages;
+            resolve();
+            // Handle the received message
+          });
 
+          this.socket.emit("message", messageData);
+        });
+
+        // Clear the input field
+        this.messagetxt = "";
+        
+      }
+    },
+
+    scrollToBottom() {
+      const container = this.$refs.chatContainer;
+      console.log(container);
+      container.scrollTop = container.scrollHeight;
     },
   },
-  mounted() {
+   mounted() {
     this.getRooms()
-    .then(() => {
-      let current_room_id = Number(this.$route.query.current_room_id);
-      if (current_room_id) {
-        console.log("current_room_id:", current_room_id);
-        this.socket.emit('joinRoom', current_room_id, this.user.user_id);
-        this.current_room = this.seller_rooms.find((value) => {
-          return value.room_id === current_room_id;
-        });
+      .then(async () => {
+        let current_room_id = Number(this.$route.query.current_room_id);
+        if (current_room_id) {
+          console.log("current_room_id:", current_room_id);
+          this.socket.emit("joinRoom", current_room_id, this.user.user_id);
+          this.current_room = this.seller_rooms.find((value) => {
+            return value.room_id === current_room_id;
+          });
+          await new Promise((resolve, reject) => {
         axios
         .get(`http://localhost:3000/chat/${current_room_id}/messages`)
         .then((res) => {
-            console.log("res:", res)
           this.messages = res.data.messages;
           console.log(res.data.messages);
+          resolve()
+          
         })
         .catch((err) => {
           console.log(err);
+          reject(err)
         });
-        console.log("this.current_room:", this.current_room);
-      } else {
-        console.log('current_room_id not found');
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+   
+      });
+      this.scrollToBottom()
+          console.log("this.current_room:", this.current_room);
+        } else {
+          console.log("current_room_id not found");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     // show current room in chat page
     let current_room_id = Number(this.$route.query.current_room_id);
     if (current_room_id) {
-    console.log("current_room_id:", current_room_id);
-    this.socket.emit('joinRoom', current_room_id, this.user.user_id);
-    this.current_room = this.seller_rooms.find((value) => {
-      return value.room_id === current_room_id;
-    });
+      console.log("current_room_id:", current_room_id);
+      this.socket.emit("joinRoom", current_room_id, this.user.user_id);
+      this.current_room = this.seller_rooms.find((value) => {
+        return value.room_id === current_room_id;
+      });
 
-
-    console.log("this.current_room:", this.current_room);
-  } else {
-    console.log('current_room_id not found');
-  }
+      console.log("this.current_room:", this.current_room);
+    } else {
+      console.log("current_room_id not found");
+    }
   },
   created() {
     this.socket = io("http://localhost:3000");
-      this.socket.on('message', (data) => {
-        this.messages = data.messages;
-        // Handle the received message
-      });
-},
-
+    this.socket.on("message", (data) => {
+      this.messages = data.messages;
+      // Handle the received message
+    });
+  },
 };
 </script>

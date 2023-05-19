@@ -55,7 +55,7 @@ router.get("/:userid/chat", async function (req, res, next) {
 router.get('/chat/:roomid/messages', async function(req, res, next){
   const room_id = Number(req.params.roomid)
   try{
-    const [rows1, fieds1] = await pool.query(`select * , DATE_FORMAT(CONVERT_TZ(sent_time, '+00:00', '+07:00'), '%H:%i') as sent_time from messages where room_id = ? order by sent_time`, [room_id])
+    const [rows1, fieds1] = await pool.query(`select * ,sent_time as sent_time_full ,DATE_FORMAT(CONVERT_TZ(sent_time, '+00:00', '+07:00'), '%H:%i') as sent_time from messages where room_id = ? order by sent_time_full ASC`, [room_id])
     return res.status(200).json({messages: rows1})
   }
   catch(err){
