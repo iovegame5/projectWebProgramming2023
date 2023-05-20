@@ -143,4 +143,19 @@ router.get('/user/me', isLoggedIn, async (req, res, next) => {
 })
 
 
+router.get('/user/:userid', async (req, res, next) => {
+    try{
+    const [rows1, fields1] = await pool.query('select username, usertype, user_id, phone, firstname, lastname, phone, DATE_FORMAT(join_date, "%d %M %Y") as join_date,email from users where user_id = ?',[req.params.userid])
+        if(rows1 != 0 ){
+            return res.status(200).json({userinfo:rows1[0]})
+        }
+        else return res.status(404).json({message:`No user info that have ID:${req.params.userid}`})
+      
+}
+    catch(err){
+        console.log(err)
+        res.status(400).json(err.message)
+    }
+})
+
 exports.router = router

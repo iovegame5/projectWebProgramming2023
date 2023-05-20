@@ -7,6 +7,7 @@
         <div class="hero">
             <div></div>
             <img class="slideimg" style="height:100%" @click="next()" :src="slideimg[index]">
+           
         </div>
         <div class="container is-widescreen ">
             <div class="is-multiline columns">
@@ -65,17 +66,7 @@
 
 
 
-        <div style="border-top: 1px solid rgb(120, 120, 120);;margin:2rem 2rem 2rem 2rem">
-            <footer class="footer">
-                <div class="content has-text-centered">
-                    <p>
-                        Web Programming Project <strong>Kageetai</strong> By <a href="">Thanakorn Amatrawet </a>
-                        and <a href="#">Chotchda Aupayokin</a>
-
-                    </p>
-                </div>
-            </footer>
-        </div>
+       
     </div>
 </template>
 <style>
@@ -98,7 +89,7 @@ export default {
     props: ['user'],
     data() {
         return {
-            slideimg: ['/img/guitarsecond.73137436.png', "/img/guitarthird.6d573a46.png", '/img/guitarone.f4d7e5e6.png'],
+            slideimg: ['../assets/img/guitarone.png', "../assets/img/guitarsecond.png", '../assets/img/guitarthird.png',],
             index: 0
         };
     },

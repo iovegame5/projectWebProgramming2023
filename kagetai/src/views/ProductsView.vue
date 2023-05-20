@@ -59,7 +59,7 @@
                   <div clas="media">
                     <div class="media-content">
                       <p class="title is-4">{{ product.product_name }}</p>
-                      <p class="subtitle is-5">@{{product.username}} </p>
+                      <p style="cursor:pointer;" class="subtitle is-5" @click="gouserprofile(product.user_id)"> @{{product.username}} </p>
                       <p class="subtitle is-5 has-text-success">
                         {{ product.product_price }} บาท
                       </p>
@@ -219,7 +219,7 @@ export default {
           .post(`http://localhost:3000/favorite/${proid}/${id}`)
           .then((res) => {
             console.log(res);
-            this.$router.push({ path: `/favorite/${this.user.user_id}` });
+           alert("เพิ่มเข้ารายการโปรดเรียบร้อย")
           })
           .catch((err) => console.log(err));
       }
@@ -227,6 +227,9 @@ export default {
     showlogin() {
       document.querySelector(".popup").style.display = "flex";
     },
+    gouserprofile(user_id){
+      this.$router.push({ path: `/user/${user_id}` });
+    }
   },
   mounted() {
     this.getProducts();

@@ -15,7 +15,7 @@ const routes = [
     component: () => import('../views/ProductsView.vue')
   },
   {
-    path: '/user',
+    path: '/user/:user_id',
     name: 'user',
     component: () => import('../views/User.vue')
   },
@@ -40,7 +40,7 @@ const routes = [
     component: () => import('../views/Register_view.vue')
   },
   {
-    path: '/favorite/:user_id',
+    path: '/favorite',
     name: 'FavouriteView',
     component: () => import('../views/FavoriteView.vue')
   },

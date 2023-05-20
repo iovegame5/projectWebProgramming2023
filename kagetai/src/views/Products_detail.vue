@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-          <div class="card mt-5" style="background:#9BA4B4; cursor: pointer;" @click="chatwith(product.user_id)" v-if="this.user.user_id != product.user_id">
+          <div class="card mt-5 chatbutton" style="cursor: pointer;" @click="chatwith(product.user_id)" v-if="this.user.user_id != product.user_id">
             <header class="card-header">
               <p style="text-align: center; justify-content: center; color:white" class="card-header-title is-size-2">
                 แชท
@@ -120,6 +120,9 @@ export default {
           this.error = error.response.data.message;
         });
     },
+    gouserprofile(user_id){
+      this.$router.push({ path: `/user/${user_id}` });
+    }
   },
   mounted() {
     this.getDetail(this.$route.params.id);

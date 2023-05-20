@@ -37,7 +37,7 @@
                   <label class="label">ประเภทสินค้า</label>
                   <div class="select" >
                     <select v-model='$v.pd_type.$model' :class="{ 'is-danager': $v.pd_type.$error }">>
-                      <option selected value>ประเภท</option>
+                      <option selected value="0">ประเภท</option>
                       <option value="1">กีตาร์โปร่ง</option>
                       <option value="2">กีตาร์ไฟฟ้า</option>
                       <option value="3">เอฟเฟค</option>
@@ -45,11 +45,11 @@
                     </select>
                   </div>
                   
-                  <template v-if="$v.pd_type.$error">
-                            <p class="help is-danger" v-if="!$v.pd_type.required"> โปรดเลือกประเภท</p>
+              
+                            <p class="help is-danger" v-if="!$v.pd_type.pdtypecor"> โปรดเลือกประเภท</p>
 
 
-                        </template>
+                
                 </div>
 
                 <div class="field">
@@ -228,6 +228,12 @@ function imageLength() {
   }
   return true;
 }
+function pdtypecor(){
+  if (this.pd_type == 0){
+    return false
+  }
+  else return true
+}
 
 export default {
   name: "AddProduct",
@@ -235,7 +241,7 @@ export default {
   data() {
     return {
       pd_name: "",
-      pd_type: 1,
+      pd_type: 0,
       pd_price: "",
       pd_description: "",
       images: [],
@@ -263,7 +269,8 @@ export default {
       imageLength: imageLength,
     },
     pd_type:{
-      required
+      required,
+      pdtypecor: pdtypecor
     }
   },
 

@@ -24,10 +24,12 @@ router.get("/products", async function (req, res, next) {
     return res.status(500).json(err)
   }
 });
+
+
 router.get("/:userid/products", async function (req, res, next) {
   try {
 
-    const [rows, fields] = await pool.query('SELECT a.*, b.path_image FROM products AS a LEFT JOIN (SELECT * FROM product_image WHERE main=1) AS b ON a.product_id = b.product_id where user_id = ?', [req.params.userid]);
+    const [rows, fields] = await pool.query('SELECT a.*, b.path_image, username FROM products AS a LEFT JOIN (SELECT * FROM product_image WHERE main=1) AS b ON a.product_id = b.product_id join users as c using(user_id) where user_id = ?', [req.params.userid]);
     return res.json({
       products: rows,
     });

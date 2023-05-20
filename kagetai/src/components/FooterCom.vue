@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div style="border-top: 1px solid rgb(120, 120, 120);;margin:2rem 2rem 2rem 2rem"></div>
+    <div style="border-top: 1px solid rgb(120, 120, 120);;margin:4rem 2rem 2rem 2rem"></div>
     <footer class="footer">
     <div class="content has-text-centered">
         <p>

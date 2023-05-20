@@ -90,11 +90,14 @@ export default {
     gofavorite() {
       const token = localStorage.getItem('token')
       if (token) {
-        this.$router.push({ path: `/favorite/${this.user.user_id}` })
+        this.$router.push({ path: '/favorite' })
       }
       else {
         this.showlogin()
       }
+    },
+    gouser(userid){
+      this.$router.push({ path: `/user/${userid}` })
     },
     logout() {
       localStorage.removeItem('token')
@@ -200,9 +203,11 @@ export default {
   <nav class="navbar is-fixed-top is-hide-mobile" role="navigation" aria-label="main navigation">
     <!-- logo -->
     <div class="navbar-brand ml-6">
-      <a class="navbar-item" href="index.html">
-        <img src="./assets/img/logo5.png">
-      </a>
+      <router-link class="navbar-item" to="/">
+        <img src="../public/assets/img/logo5.png">
+      </router-link>
+       
+      
     </div>
 
     <!-- เมนู nav -->
@@ -236,11 +241,11 @@ export default {
       <div class="navbar-item has-dropdown is-hoverable" v-if="token">
         <div class="navbar-link">{{user.username}}</div>
         <div class="navbar-dropdown">
-          <div class="navbar-item">
-            <a href="user.html">ข้อมูลส่วนตัว</a>
+          <div class="navbar-item" @click="gouser(user.user_id)">
+           ข้อมูลส่วนตัว
           </div>
-          <div class="navbar-item">
-            <a href="./favorite.html">รายการโปรด</a>
+          <div class="navbar-item" @click="gofavorite">
+            รายการโปรด
           </div>
           <div class="navbar-item">
             <a  @click="goreport()">ร้องเรียน</a>
@@ -285,6 +290,7 @@ body{
   padding-top:90px;
   /* background-color:var(--grey); */
   background-color: var(--seconddary-color);
+
   
 
 
@@ -308,6 +314,7 @@ body{
 .navbar-item:hover {
   background: var(--seconddary-color);
   cursor: pointer;
+  transition: 0.3s !important; 
 }
 
 .navbar-item a{
@@ -319,6 +326,7 @@ body{
 }
 .navbar-link :hover{
   background: var(--seconddary-color) !important;
+  transition: 0.3s !important; 
 }
 .btn{
   background:var(--grey);
@@ -334,7 +342,8 @@ body{
 }
 .btn:hover{
   background-color: var(--primary-color);
-  color: var(--grey)
+  color: var(--grey);
+  transition: 0.3s !important; 
 }
 .popup{
   background-color: rgba(0, 0, 0, 0.6);
@@ -430,17 +439,17 @@ body{
 } */
 
 #eguitar{
-  background-image: url('./assets/img/elecguitar.png');
+  background-image: url('../public/assets/img/elecguitar.png');
   background-size: cover;
 }
 #guitar{
-  background-image: url('./assets/img/guitar.png');
+  background-image: url('../public/assets/img/guitar.png');
 }
 #effect{
-  background-image: url('./assets/img/effects.png');
+  background-image: url('../public/assets/img/effects.png');
 }
 #amplifier{
-  background-image: url('./assets/img/amplifier.png');
+  background-image: url('../public/assets/img/amplifier.png');
 }
 .subtitle{
   text-overflow: ellipsis;
@@ -608,6 +617,19 @@ html, body {
 
 .mainnav{
   z-index: 1;
+}
+.chatbutton{
+  background:var(--primary-color);
+  transition: 0.3s !important; 
+}
+.chatbutton :hover{
+  background: var(--grey);
+  transition: 0.3s !important; 
+}
+.box chatbutton :hover{
+
+    background: var(--grey);
+    transition: 0.3s !important; 
 }
 
 
