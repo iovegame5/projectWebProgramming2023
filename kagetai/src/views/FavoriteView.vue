@@ -46,12 +46,12 @@
                     </div>
                 </div>
             </div>
-            <FooterCom></FooterCom>
+
     </div>
 </template>
 <script>
 import axios from "@/plugins/axios";
-import FooterCom from '@/components/FooterCom.vue'
+
 export default {
     name: 'HomeView',
     props: ['user'],
@@ -61,13 +61,7 @@ export default {
 
         };
     },
-    components: {
-        
-        FooterCom
-        // images:[
-        //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
-
-    },
+ 
     methods: {
         getfav(id) {
             axios

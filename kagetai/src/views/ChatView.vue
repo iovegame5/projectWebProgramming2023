@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div class="columns is-mobile" style="max-height: 900px">
+    <div class="columns is-mobile" style="height: 900px">
       <div
         class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero"
         style="height: 900px"
@@ -167,14 +167,14 @@
         <!-- Main Content columns: One for chat window another for profile -->
         <div class="columns" style="max-height: 825px">
           <div
-            class="column is-8 is-12-mobile is-flex hero is-fullheight message-window"
+            class="column is-12  is-flex hero is-fullheight message-window"
           >
             <div
               class="chat-messages"
               ref="chatContainer"
               style="
                 width: 100%;
-                max-height: 80%;
+                height: 80%;
                 overflow-y: auto;
                 overflow-x: hidden;
               "
@@ -185,17 +185,19 @@
                   class="columns ml-2 mt-2"
                   v-if="message.sender_id != user.user_id"
                 >
-                  <div class="column is-6" style="max-width: 40%">
-                    <div class="message-text box">
+                  <div class="column is-pulled-left" style="max-width: 40%">
+                    <div class="message-text box is-pulled-left">
                       {{ message.message }}
                     </div>
                   </div>
-                  <div class="column is-2" style="position: relative">
+                  <div class="column" style="position: relative">
                     <p
+                    class="is-pulled-left"
                       style="
                         color: rgb(205, 205, 205);
                         font-size: 14px;
                         bottom: 10px;
+                        left:0px;
                         position: absolute;
                       "
                     >
@@ -207,8 +209,8 @@
                 <!-- v-if sent message -->
                 <div class="columns ml-2 mt-2" style="align-items: end" v-else>
                   <div class="column is-6"></div>
-                  <div class="column is-1" style="position: relative">
-                    <p
+                  <div class="column is-1 " style="position: relative">
+                    <p class="is-pulled-right"
                       style="
                         color: rgb(205, 205, 205);
                         font-size: 14px;
@@ -219,10 +221,11 @@
                       {{ message.sent_time }}
                     </p>
                   </div>
-                  <div class="column is-5" style="max-width: 40%">
+                  <div class="column is-full " style="max-width: 40%">
+                   
                     <div
-                      class="message-text box"
-                      style="background: rgb(194, 240, 194); width: auto"
+                      class="message-text box is-pulled-right"
+                      style="background: rgb(194, 240, 194); "
                     >
                       {{ message.message }}
                     </div>
@@ -264,46 +267,17 @@
               </form>
             </div>
           </div>
-          <div class="column is-hidden-mobile sidebar-profile pt-2">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-1by1">
-                  <img alt="Placeholder image" src="" />
-                </figure>
-              </div>
-              <div class="card-content">
-                <div clas="media">
-                  <div class="media-content">
-                    <p class="title is-4">product_name</p>
-                    <p class="subtitle is-7">@username</p>
-                    <p class="subtitle is-5 has-text-success">
-                      product.product_price บาท
-                    </p>
-                  </div>
-                </div>
-                <div class="content">
-                  <p class="subtitle is-7">product.product_detail</p>
-                </div>
-                <div style="display: flex; justify-content: space-between">
-                  <router-link class="button" :to="``">รายละเอียด</router-link>
-
-                  <div class="icon is-size-4" @click="addfav(item)">
-                    <i class="fa-regular fa-heart"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
-    <FooterCom></FooterCom>
+
   </div>
 </template>
   <script>
 // @ is an alias to /src
 
-import FooterCom from "@/components/FooterCom.vue";
+
 import axios from "axios";
 import io from "socket.io-client";
 export default {
@@ -322,11 +296,7 @@ export default {
       chatgroup: "buyer",
     };
   },
-  components: {
-    FooterCom,
-    // images:[
-    //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
-  },
+ 
   methods: {
     getRooms() {
       return new Promise((resolve, reject) => {
@@ -394,6 +364,7 @@ export default {
 
         // Clear the input field
         this.messagetxt = "";
+        this.scrollToBottom()
         
       }
     },
@@ -455,10 +426,7 @@ export default {
   },
   created() {
     this.socket = io("http://localhost:3000");
-    this.socket.on("message", (data) => {
-      this.messages = data.messages;
-      // Handle the received message
-    });
+   
   },
 };
 </script>

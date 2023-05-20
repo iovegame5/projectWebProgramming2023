@@ -7,11 +7,11 @@ router = express.Router();
 router.get("/products", async function (req, res, next) {
   try {
     const search = req.query.search || ''
-    let sql = 'SELECT a.*, b.path_image FROM products AS a LEFT JOIN (SELECT * FROM product_image WHERE main=1) AS b ON a.product_id = b.product_id;'
+    let sql = 'SELECT a.*, b.path_image, username FROM products AS a LEFT JOIN (SELECT * FROM product_image WHERE main=1) AS b ON a.product_id = b.product_id join users as c using(user_id)'
     let cond = []
 
     if (search.length > 0) {
-      sql = 'SELECT a.*, b.path_image FROM products AS a LEFT JOIN (SELECT * FROM product_image WHERE main=1) AS b ON a.product_id = b.product_id WHERE a.product_name LIKE ? OR a.product_detail LIKE ?;'
+      sql = 'SELECT a.*, b.path_image , username FROM products AS a LEFT JOIN (SELECT * FROM product_image WHERE main=1) AS b ON a.product_id = b.product_id join users as c using(user_id) WHERE a.product_name LIKE ? OR a.product_detail LIKE ?;'
       cond = [`%${search}%`, `%${search}%`]
     }
     const [rows, fields] = await pool.query(sql, cond);

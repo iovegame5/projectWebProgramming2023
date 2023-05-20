@@ -56,13 +56,13 @@
         </div>
       </div>
     </div>
-    <FooterCom></FooterCom>
+
   </div>
 </template>
 <script>
 // @ is an alias to /src
 
-import FooterCom from '@/components/FooterCom.vue'
+
 import axios from "axios";
 export default {
   name: "ProductDetail",
@@ -75,12 +75,7 @@ export default {
       imageIndex: 0
     };
   },
-  components: {
-
-    FooterCom,
-    // images:[
-    //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
-  },
+  
   methods: {
     chatwith(seller_id) {
       if (!this.user) {

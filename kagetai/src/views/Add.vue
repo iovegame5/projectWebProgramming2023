@@ -190,15 +190,7 @@
           margin: 2rem 2rem 2rem 2rem;
         "
       ></div>
-      <footer class="footer">
-        <div class="content has-text-centered">
-          <p>
-            Web Programming Project <strong>Kageetai</strong> By
-            <a href="">Thanakorn Amatrawet </a> and
-            <a href="#">Chotchda Aupayokin</a>
-          </p>
-        </div>
-      </footer>
+     
     </div>
   </div>
 </template>

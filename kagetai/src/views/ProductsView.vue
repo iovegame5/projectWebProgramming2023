@@ -1,5 +1,5 @@
 <script setup>
-import FooterCom from "@/components/FooterCom.vue";
+
 </script>
 <template>
   <div>
@@ -59,14 +59,14 @@ import FooterCom from "@/components/FooterCom.vue";
                   <div clas="media">
                     <div class="media-content">
                       <p class="title is-4">{{ product.product_name }}</p>
-                      <p class="subtitle is-7">@username</p>
+                      <p class="subtitle is-5">@{{product.username}} </p>
                       <p class="subtitle is-5 has-text-success">
                         {{ product.product_price }} บาท
                       </p>
                     </div>
                   </div>
                   <div class="content">
-                    <p class="subtitle is-7">{{ product.product_detail }}</p>
+                    <p class="subtitle is-6">{{ product.product_detail }}</p>
                   </div>
                   <div style="display: flex; justify-content: space-between">
                     <router-link
@@ -83,7 +83,7 @@ import FooterCom from "@/components/FooterCom.vue";
                     </div>
                     <div
                       v-if="product.user_id == user.user_id"
-                      class="button"
+                      class="button has-background-danger has-text-white"
                       @click="removeproduct(product.product_id)"
                     >
                       ลบ
@@ -109,7 +109,7 @@ import FooterCom from "@/components/FooterCom.vue";
         </div>
       </div>
     </div>
-    <FooterCom></FooterCom>
+
   </div>
 </template>
 
@@ -129,11 +129,7 @@ export default {
       tmp_producted: [],
     };
   },
-  components: {
-    FooterCom,
-    // images:[
-    //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
-  },
+  
   created() {
     this.getProducts();
     const productType = this.$route.query.selected_pt;

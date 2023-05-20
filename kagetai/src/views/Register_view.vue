@@ -135,6 +135,7 @@
   </div>
 </template>
 <script>
+
 import axios from "@/plugins/axios";
 import { required, email, sameAs, minLength, maxLength } from 'vuelidate/lib/validators'
 

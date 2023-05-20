@@ -5,10 +5,14 @@ import { RouterView } from 'vue-router'
 
 </script>
 <script>
+import FooterCom from "@/components/FooterCom.vue";
 import axios from "@/plugins/axios";
 export default {
   name: "NavBar",
-  
+  components:{
+    FooterCom
+  }
+  ,
   data() {
     return {
       username: '',
@@ -183,7 +187,7 @@ export default {
 
     </div>
   </div>
-  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top is-hide-mobile" role="navigation" aria-label="main navigation">
     <!-- logo -->
     <div class="navbar-brand ml-6">
       <a class="navbar-item" href="index.html">
@@ -241,6 +245,7 @@ export default {
 
   </nav>
   <router-view :key="$route.fullPath" @auth-change="onAuthChange" :user="user" :token="token" />
+  <footer-com></footer-com>
 </div>
 </template>
 
