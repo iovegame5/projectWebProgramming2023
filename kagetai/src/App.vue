@@ -90,7 +90,7 @@ export default {
     gofavorite() {
       const token = localStorage.getItem('token')
       if (token) {
-        this.$router.push({ path: '/favourite/:id' })
+        this.$router.push({ path: `/favorite/${this.user.user_id}` })
       }
       else {
         this.showlogin()
@@ -124,6 +124,16 @@ export default {
     },
     goproducts(num) {
       this.$router.push({ path: '/products', query: { selected_pt:num } });
+    },
+    goreport(){
+      const token = localStorage.getItem('token')
+      if (token) {
+        this.$router.push({ path: '/report' })
+      }
+      else {
+        this.showlogin()
+      }
+
     },
 
 
@@ -172,7 +182,7 @@ export default {
         <button @click="login()" class="btn " href="#">LOGIN</button>
         <div class="noacc">
          
-            <a @click="goregister()">ยังไม่มีบัญชีหรอ? สมัรเลย</a>
+            <a @click="goregister()">ยังไม่มีบัญชีหรอ? สมัครเลย</a>
         
           
           
@@ -233,7 +243,7 @@ export default {
             <a href="./favorite.html">รายการโปรด</a>
           </div>
           <div class="navbar-item">
-            <a href="./report.html">ร้องเรียน</a>
+            <a  @click="goreport()">ร้องเรียน</a>
           </div>
           <div class="navbar-item">
             <a @click="logout()">ออกจากระบบ</a>
@@ -422,6 +432,15 @@ body{
 #eguitar{
   background-image: url('./assets/img/elecguitar.png');
   background-size: cover;
+}
+#guitar{
+  background-image: url('./assets/img/guitar.png');
+}
+#effect{
+  background-image: url('./assets/img/effects.png');
+}
+#amplifier{
+  background-image: url('./assets/img/amplifier.png');
 }
 .subtitle{
   text-overflow: ellipsis;

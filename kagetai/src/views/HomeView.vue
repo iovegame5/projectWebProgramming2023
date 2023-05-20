@@ -1,14 +1,14 @@
 
 <template>
-  <div>
-  <div>
-  </div>
-
-<div class="hero">
-            <div></div>
-            <img class="slideimg" style="height:100%" @click="next()" src="../assets/img/guitarfirst.jpg">
+    <div>
+        <div>
         </div>
-  <div class="container is-widescreen ">
+
+        <div class="hero">
+            <div></div>
+            <img class="slideimg" style="height:100%" @click="next()" :src="slideimg[index]">
+        </div>
+        <div class="container is-widescreen ">
             <div class="is-multiline columns">
                 <div class="column is-half">
                     <section class="hero is-small is-link" id="eguitar">
@@ -23,7 +23,7 @@
                     </section>
                 </div>
                 <div class="column is-half">
-                    <section class="hero is-small is-link">
+                    <section class="hero is-small is-link" id="guitar">
                         <div class="hero-body" @click="goproducts(1)">
                             <p class="title">
                                 กีตาร์โปร่ง
@@ -35,7 +35,7 @@
                     </section>
                 </div>
                 <div class="column is-half">
-                    <section class="hero is-small is-link">
+                    <section class="hero is-small is-link" id="effect">
                         <div class="hero-body" @click="goproducts(3)">
                             <p class="title">
                                 เอฟเฟคก้อนและมัลติเอฟเฟค
@@ -47,7 +47,7 @@
                     </section>
                 </div>
                 <div class="column is-half">
-                    <section class="hero is-small is-link">
+                    <section class="hero is-small is-link" id="amplifier">
                         <div class="hero-body" @click="goproducts(4)">
                             <p class="title">
                                 ตู้แอมป์
@@ -58,49 +58,73 @@
                         </div>
                     </section>
                 </div>
-
-
+  
             </div>
         </div>
-  
-    <div style="border-top: 1px solid rgb(120, 120, 120);;margin:2rem 2rem 2rem 2rem">
-   
-  </div>
-</div>
 
+
+
+
+        <div style="border-top: 1px solid rgb(120, 120, 120);;margin:2rem 2rem 2rem 2rem">
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>
+                        Web Programming Project <strong>Kageetai</strong> By <a href="">Thanakorn Amatrawet </a>
+                        and <a href="#">Chotchda Aupayokin</a>
+
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
 </template>
 <style>
-.slideimg{
-    display:block;
+.slideimg {
+    display: block;
     margin-left: auto;
-     margin-right:auto; 
-     width: 100%;
-      height: 100%;
-      object-fit: cover;
-       align-items: center;
-       margin-bottom: 2%;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    align-items: center;
+    margin-bottom: 2%;
 }
 </style>
 <script>
 // @ is an alias to /src
 
 export default {
-  name: 'HomeView',
-  props: ['user'],
-  components: {
-    
-    // images:[
-    //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
+    name: 'HomeView',
+    props: ['user'],
+    data() {
+        return {
+            slideimg: ['/img/guitarsecond.73137436.png', "/img/guitarthird.6d573a46.png", '/img/guitarone.f4d7e5e6.png'],
+            index: 0
+        };
+    },
+    components: {
 
-  },
-  methods:{
-        // next (){
-        
-        //     this.index += 1
-        //     if (this.index > keep.length - 1) {
-        //         this.index = 0
-        //     }
-        // }
-  }
+        // images:[
+        //         "../assets/guitarfirst.jpg", "../assets/guitarsecond.jpg", "../assets/guitarthird.jpg"]
+
+    },
+    methods: {
+
+        next() {
+
+            this.index += 1
+            if (this.index > this.slideimg.length - 1) {
+                this.index = 0
+            }
+        }
+    },
+    mounted() {
+        this.next()
+    },
+    created() {
+
+        setInterval(this.next, 5000)
+    }
 }
+
 </script>

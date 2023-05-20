@@ -44,6 +44,12 @@ const routes = [
     name: 'FavouriteView',
     component: () => import('../views/FavoriteView.vue')
   },
+  {
+    path: '/report',
+    name: 'ReportView',
+    component: () => import('../views/ReportView.vue')
+  },
+
  
   
 ]

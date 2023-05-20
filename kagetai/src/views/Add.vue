@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar />
+    
 
     <div>
       <div class="register-container">
@@ -35,14 +35,21 @@
                 </div>
                 <div class="field">
                   <label class="label">ประเภทสินค้า</label>
-                  <div class="select">
-                    <select v-model="pd_type">
+                  <div class="select" >
+                    <select v-model='$v.pd_type.$model' :class="{ 'is-danager': $v.pd_type.$error }">>
+                      <option selected value>ประเภท</option>
                       <option value="1">กีตาร์โปร่ง</option>
                       <option value="2">กีตาร์ไฟฟ้า</option>
                       <option value="3">เอฟเฟค</option>
                       <option value="4">แอมป์</option>
                     </select>
                   </div>
+                  
+                  <template v-if="$v.pd_type.$error">
+                            <p class="help is-danger" v-if="!$v.pd_type.required"> โปรดเลือกประเภท</p>
+
+
+                        </template>
                 </div>
 
                 <div class="field">
@@ -255,6 +262,9 @@ export default {
       images: imageSizes,
       imageLength: imageLength,
     },
+    pd_type:{
+      required
+    }
   },
 
   components: {
