@@ -103,8 +103,8 @@
           </div>
         </div>
         <div id="panel2" v-show="panel == 2">
-          <h1 class="title has-text-light" v-if="user.user_id == this.userinfo.user_id" >สินค้าของฉัน</h1>
-          <h1 class="title has-text-light" v-else>สินค้าของ {{this.userinfo.username}}</h1>
+          <h1 class="title has-text-light" v-if="user.user_id == this.userinfo.user_id" >สินค้าของฉัน ({{ products.length }})</h1>
+         
           <div class="container is-fullhd mb-6" style="min-height: 600px">
             <h1
               class="title mb-6 mt-6 has-text-white"
@@ -226,8 +226,8 @@
          
         >
           <div id="panel2" >
-            <h1 class="title has-text-light" v-if="user.user_id == this.userinfo.user_id" >สินค้าของฉัน</h1>
-            <h1 class="title has-text-light" v-else>สินค้าของ {{this.userinfo.username}}</h1>
+            
+            <h1 class="title has-text-light">สินค้าของ {{this.userinfo.username}} ({{ products.length }})</h1>
             <div class="container is-fullhd mb-6" style="min-height: 600px">
               <h1
                 class="title mb-6 mt-6 has-text-white"

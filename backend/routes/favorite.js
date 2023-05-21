@@ -56,7 +56,7 @@ router.get('/favorite/:user_id', async(req, res, next) => {
    }
 
     try{
-        const promise1 = await pool.query('SELECT users.username,tf.id, tf.product_id, tp.product_name, tp.product_price, tp.product_detail, pi.path_image FROM favorite as tf join products as tp on(tf.product_id = tp.product_id) join product_image as pi on (pi.product_id = tp.product_id) join users on (tp.user_id = users.user_id) where tf.user_id = ? and  pi.main = 1', [id])
+        const promise1 = await pool.query('SELECT tp.user_id as product_owner_id, users.username,tf.id, tf.product_id, tp.product_name, tp.product_price, tp.product_detail, pi.path_image FROM favorite as tf join products as tp on(tf.product_id = tp.product_id) join product_image as pi on (pi.product_id = tp.product_id) join users on (tp.user_id = users.user_id) where tf.user_id = ? and  pi.main = 1', [id])
 
         
 

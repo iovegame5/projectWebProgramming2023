@@ -37,9 +37,7 @@
                 <p style="margin-left: 5%" class="is-size-5">
                   <strong>ราคาสินค้า:</strong> {{ this.product.product_price }} บาท
                 </p>
-                <p style="margin-left: 5%" class="is-size-5">
-                  <strong>รายละเอียดสินค้า:</strong> {{ this.product.product_detail }}
-                </p>
+               
                 <p style="margin-left: 5%" class="is-size-5">
                   <strong>รายละเอียดสินค้า:</strong> {{ this.product.product_detail }}
                 </p>

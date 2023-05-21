@@ -53,7 +53,7 @@
                   <div
                       v-if="fav.user_id != user.user_id"
                       class="button"
-                      @click="chatwith(fav.user_id)"
+                      @click="chatwith(fav.product_owner_id)"
                     >
                       แชท
                     </div>
