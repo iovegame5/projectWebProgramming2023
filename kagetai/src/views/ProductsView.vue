@@ -81,6 +81,12 @@
                     >
                       แชท
                     </div>
+                    <router-link
+                    v-if="product.user_id == user.user_id"
+                      class="button"
+                      :to="`/products/update/${product.product_id}`"
+                      >แก้ไข</router-link
+                    >
                     <div
                       v-if="product.user_id == user.user_id"
                       class="button has-background-danger has-text-white"
@@ -225,9 +231,9 @@ export default {
           .post(`http://localhost:3000/favorite/${proid}/${id}`)
           .then((res) => {
             console.log(res);
-           alert("เพิ่มเข้ารายการโปรดเรียบร้อย")
+            alert('เพิ่มสินค้านี่เข้าสิ่งที่ชื่นชอบแล้ว');
           })
-          .catch((err) => console.log(err));
+          .catch(() => alert('คุณมีสินค้านี้ในสิ่งที่ชื่นชอบแล้ว'));
       }
     },
     showlogin() {

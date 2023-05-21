@@ -53,6 +53,12 @@ const routes = [
     path: '/admin',
     name: 'AdminView',
     component: () => import('../views/AdminView.vue')
+
+  },
+  {
+    path: '/products/update/:id',
+    name: 'UpdateView',
+    component: () => import('../views/UpdateblogView.vue')
   },
 
  

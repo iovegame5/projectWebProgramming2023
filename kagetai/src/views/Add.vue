@@ -111,6 +111,8 @@
 
                 <div class="field">
                   <label><strong>รูปสินค้า</strong></label>
+
+
                   <div class="file">
                     <label class="file-label">
                       <input
@@ -272,10 +274,6 @@ export default {
       required,
       pdtypecor: pdtypecor
     }
-  },
-
-  components: {
- 
   },
   methods: {
     selectImages(event) {

@@ -2,7 +2,27 @@
 
 const express = require("express");
 const pool = require("../config");
+const path = require("path")
+const fs = require("fs");
+
 router = express.Router();
+
+const multer = require("multer");
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "./static/uploads/products_img");
+  },
+  filename: function (req, file, callback) {
+    callback(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: storage,
+    limits: { fileSize: 3 * 1024 * 1024 }});
 
 router.get("/products", async function (req, res, next) {
   try {
@@ -21,7 +41,7 @@ router.get("/products", async function (req, res, next) {
       products_type: rows2
     });
   } catch (err) {
-    return res.status(500).json(err)
+    return res.status(500).json(err.message)
   }
 });
 
@@ -34,7 +54,7 @@ router.get("/:userid/products", async function (req, res, next) {
       products: rows,
     });
   } catch (err) {
-    return res.status(500).json(err)
+    return res.status(500).json(err.message)
   }
 });
 
@@ -60,11 +80,12 @@ router.get("/products/detail/:id", function (req, res, next) {
     })
     .catch((err) => {
       console.log(err)
-      return res.status(500).json(err);
+      return res.status(500).json(err.message);
     });
 });
 router.delete("/products/:product_id", async (req, res, next) => {
   const product_id = Number(req.params.product_id);
+  
   try { 
     const[rows1, fields1] = await pool.query('select * from products where product_id = ?', [product_id])
     console.log()
@@ -85,7 +106,160 @@ router.delete("/products/:product_id", async (req, res, next) => {
 }
 )
 
+router.put('/products/setmain/:productid/:imageid', async(req, res, next) => {
 
+  const productId = Number(req.params.productid)
+   
+  const imageId = Number(req.params.imageid)
+
+
+  console.log(productId)
+  console.log(imageId)
+  const conn = await pool.getConnection()
+  await conn.beginTransaction();
+
+  try {
+      console.log(req.params)
+        const [up1] = await conn.query(
+          'UPDATE product_image SET main = 0 WHERE product_id =?;', [productId]
+          // 'UPDATE `images` SET `main`="0" WHERE `blog_id`=?'[req.params.blogId]
+      )
+      const [up2] = await conn.query(
+         'UPDATE product_image SET main = 1 WHERE product_image_id = ?', [imageId]
+          // 'UPDATE images SET main=1 WHERE id=?'[req.params.imageId]
+      )
+      await conn.commit()
+      res.json({ message: 'Change main to ' + imageId })
+
+  } catch (e) {
+      await conn.rollback();
+      next(e)
+  } finally {
+      conn.release();
+  }
+
+})
+
+
+
+router.delete('/image/:imageId', async function (req, res, next) {
+    
+  const imageid = Number(req.params.imageId)
+
+  const [sel] = await pool.query('Select * from product_image where product_image_id=?', [imageid])
+
+  if(sel.length == 0){
+    return res.status(400).send({'message': `Don't have product_image_id :${imageid}`})
+  }
+ 
+  console.log(imageid)
+  const conn = await pool.getConnection();
+  await conn.beginTransaction();
+
+  try {
+      // Get Path files from the upload folder
+      const [
+          images,
+          imageFields,] = await conn.query(
+          "SELECT path_image FROM product_image WHERE product_image_id = ?",
+          [imageid]
+      );
+      console.log(images[0])
+
+      // Delete File from path
+      const appDir = path.dirname(require.main.filename); // Get app root directory
+      console.log(appDir)
+      const p = path.join(appDir, 'static', images[0].path_image);
+      fs.unlinkSync(p);
+
+      // Delete Data from Table images
+      const [rows1, fields1] = await conn.query(
+          'DELETE FROM product_image WHERE product_image_id = ?', [imageid]
+      )
+
+      // commit
+      await conn.commit()
+      res.json({ message: "Delete image Complete" })
+  } catch (error) {
+      next(error)
+      await conn.rollback();
+      // res.status(500).json(error)
+  } finally {
+      conn.release();
+  }
+})
+
+
+
+router.put("/update", upload.array("myImage", 5), async function (req, res, next) {
+  // Your code here
+  
+
+    const file = req.files;
+    let pathArray = [];
+
+    if (!file) {
+      return res.status(400).json({ message: "Please upload a file" });
+    }
+    const pd_name = req.body.pd_name;
+    const pd_price = Number(req.body.pd_price);
+    const pd_detail = req.body.pd_detail
+    const product_id = Number(req.body.pd_id);
+    const user_id = Number(req.body.user_id);
+
+    console.log(req.body)
+
+    const [sel] = await pool.query("Select * from users where user_id=?", [user_id])
+
+    if(sel.length == 0){
+      return res.status(400).send({'message': `Don't have User_id :${user_id}` })
+    }
+
+    const [sel2] = await pool.query("Select * from products where product_id=?",[product_id])
+
+    if(sel2.length == 0){
+      return res.status(400).send({'message': `Don't have Product_id :${product_id}` })
+    }
+
+  const conn = await pool.getConnection()
+  await conn.beginTransaction();
+
+  try {
+    
+      await conn.query(
+      "UPDATE products  SET product_name=?, product_price=?, product_detail=? WHERE product_id=?",
+      [pd_name, pd_price, pd_detail, product_id]
+    )
+    
+
+    if (file.length > 0) {
+      req.files.forEach((file, index) => {
+        let path = [product_id, file.path.substring(6), 0, user_id]
+        pathArray.push(path)
+      })
+
+      console.log(pathArray)
+      await conn.query(
+        "INSERT INTO product_image(product_id, path_image, main, upload_by_id) VALUES ?;",
+        [pathArray]
+      );
+        
+        await conn.commit()
+        return res.status(200).send({'message' : "Update Complete"});
+    }
+
+
+
+
+  } catch (err) {
+    await conn.rollback();
+    next(err);
+  } finally {
+    console.log('finally')
+    conn.release();
+  }
+  return;
+});
 
 
 
