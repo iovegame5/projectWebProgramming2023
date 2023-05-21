@@ -24,12 +24,12 @@
                     <i class="fas fa-user"></i>
                   </span>
                 </div>
-                <template v-if="$v.username.$error">
+             
                   <p class="help is-danger" v-if="!$v.username.required"> This field is required</p>
                   <p class="help is-danger" v-if="!$v.username.minLength"> Username must be at least 5 letters </p>
                   <p class="help is-danger" v-if="!$v.username.maxLength"> Username must not more than 20 letters </p>
 
-                </template>
+            
                 </div>
   
                 <div class="field">
@@ -41,12 +41,12 @@
                       <i class="fas fa-lock"></i>
                     </span>
                   </div>
-                   <template v-if="$v.password.$error">
+            
                     <p class="help is-danger" v-if="!$v.password.required"> This field is required</p>
                     <p class="help is-danger" v-if="!$v.password.minLength"> Password must be at least 8 letters </p>
                     <p class="help is-danger" v-if="!$v.password.complexPassword"> Password is too easy </p>
   
-                  </template> 
+        
                 </div>
   
   
@@ -59,11 +59,11 @@
                       <i class="fas fa-lock"></i>
                     </span>
                   </div>
-                  <template v-if="$v.confirm_password.$error">
+               
                     <p class="help is-danger" v-if="!$v.confirm_password.sameAS"> Password does not match</p>
   
   
-                  </template> 
+        
                 </div>
   
 

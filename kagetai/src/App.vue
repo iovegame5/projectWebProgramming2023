@@ -23,10 +23,13 @@ export default {
   },
   mounted() {
   },
-  created() {
-    this.token = localStorage.getItem('token')
+  async created() {
+    await new Promise((resolve) => {
+      this.token = localStorage.getItem('token')
     this.onAuthChange()
     console.log(this.token)
+            resolve();
+          });
   },
   methods: {
     gochat(){
@@ -366,7 +369,7 @@ background-size: cover;
   justify-content: center;
   align-items: center;
   text-align: center;
-  z-index: 1;
+  z-index: 10;
 
 }
 .popup-content{
