@@ -5,10 +5,14 @@
     <div class="container is-fullhd" style="padding-top: 5%; min-height: 100%">
       <div class="columns">
         <div class="column">
-          <figure class="image is-1by1">
-            <img :src="'http://localhost:3000/' + images[imageIndex].path_image" @click="next()" />
+          <figure class="image is-1by1" style="background:white">
+            <img :src="'http://localhost:3000/' + images[imageIndex].path_image"  />
           </figure>
-          
+          <div class="preview-images">
+            <div v-for="(image, index) in images" :key="index" class="preview-image"  :class="{ selected: imageIndex == index}">
+              <img :src="'http://localhost:3000/' + image.path_image" @click="selectImage(index)" />
+            </div>
+          </div>
         </div>
         <div class="column">
           <div class="card">
@@ -100,13 +104,16 @@ export default {
           });
       }
     },
-    next() {
+    // next() {
 
-      this.imageIndex += 1
-      if (this.imageIndex > this.images.length - 1) {
-        this.imageIndex = 0
-      }
-    },
+    //   this.imageIndex += 1
+    //   if (this.imageIndex > this.images.length - 1) {
+    //     this.imageIndex = 0
+    //   }
+    // },
+    selectImage(index) {
+    this.imageIndex = index;
+  },
 
     // เอาสินค้าจาก database เข้ามา
     getDetail(productId) {

@@ -695,6 +695,41 @@ li :hover .tab{
   color: #999999;
   font-style: italic;
 }
+.preview-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  justify-content: center;
+
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 2%;
+  margin-top:2em;
+  cursor: pointer;
+  background:white;
+flex-shrink: 0; /* Prevent image from shrinking */
+}
+.preview-image:hover img{
+  transition: .4s;
+  transform: scale(1.2);
+}
+.preview-image:hover {
+  opacity: 0.6;
+
+}
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.preview-image.selected img {
+  transform: scale(1.2);
+}
 
 
 

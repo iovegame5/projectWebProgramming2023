@@ -231,6 +231,7 @@ export default {
         },
     },
     created() {
+        this.ownercheck()
         this.getDetail()
 
     },
@@ -305,12 +306,38 @@ export default {
                     .delete("http://localhost:3000/image/" + imageId)
                     .then((response) => {
                         console.log("delete image ", response);
-                        this.$router.push({ path: "/products" });
+                        location.reload();
                     })
                     .catch((e) => {
                         console.log(e);
                     });
             }
+        },
+        ownercheck(){
+            
+            axios
+        .post(`http://localhost:3000/productcheck/${this.$route.params.id}/${this.user.user_id}`, {
+        })
+        .then((response) => {
+          console.log(response.data);
+          if(response.data.check == false || this.user.usertype !="admin"){
+            alert("คุณไม่ได้เป็นเจ้าของสินค้านี้ ไม่สามารถแก้ไขได้")
+            this.$router.push({ path: "/" });
+
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.data.check);
+          if(err.response.data.check == false){
+            alert("ไม่มีสินค้า ID นี้")
+            this.$router.push({ path: "/" });
+          }
+          else{
+            alert(err.message)
+            this.$router.push({ path: "/" });
+            
+          }
+        });
         },
 
         submitBlog() {

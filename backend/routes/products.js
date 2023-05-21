@@ -261,6 +261,37 @@ router.put("/update", upload.array("myImage", 5), async function (req, res, next
   return;
 });
 
+router.post("/productcheck/:product_id/:user_id", async (req, res, next) => {
+  const product_id = Number(req.params.product_id);
+  const user_id = Number(req.params.user_id)
+  
+  try { 
+    const[rows1, fields1] = await pool.query('select * from products where product_id = ?', [product_id])
+    
+    if(rows1.length == 0){
+      return res.status(404).json({message: `There is no product that have id ${product_id}`, check:false})
+    }
+    else{
+      if(rows1[0].user_id == user_id){
+        return res.status(200).json({message:`user id : ${user_id} is ownder of product_id : ${rows1[0].product_id}`,
+      check:true })
+      }
+      else{
+        return res.status(200).json({message:`user id : ${user_id} is not ownder of product_id : ${rows1[0].product_id}`,
+        check:false })
+      }
+
+    }
+
+  }
+  catch (err) {
+    console.log(err)
+    return res.status(400).json(err.message)
+  }
+
+}
+)
+
 
 
 exports.router = router;

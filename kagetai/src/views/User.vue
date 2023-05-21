@@ -154,6 +154,12 @@
                     >
                       แชท
                     </div>
+                    <router-link
+                    v-if="product.user_id == user.user_id"
+                      class="button"
+                      :to="`/products/update/${product.product_id}`"
+                      >แก้ไข</router-link
+                    >
                     <div
                       v-if="product.user_id == user.user_id"
                       class="button has-background-danger has-text-white"
@@ -271,6 +277,12 @@
                         >
                           แชท
                         </div>
+                        <router-link
+                        v-if="product.user_id == user.user_id"
+                          class="button"
+                          :to="`/products/update/${product.product_id}`"
+                          >แก้ไข</router-link
+                        >
                         <div
                           v-if="product.user_id == user.user_id"
                           class="button has-background-danger has-text-white"
@@ -402,6 +414,21 @@ export default {
     },
     gouserprofile(user_id){
       this.$router.push({ path: `/user/${user_id}` });
+    },
+    removeproduct(product_id) {
+      if (window.confirm(`ต้องการที่จะลบสินค้านี้ใช่หรือไม่?`)) {
+        // User clicked "OK"
+        axios
+        .delete(`http://localhost:3000/products/${product_id}`)
+        .then((res) => {
+          console.log(res);
+          this.getProducts()
+        })
+        .catch((err) => console.log(err));
+      } else {
+        // User clicked "Cancel"
+        
+      }
     },
     getuserinfo(user_id) {
       axios
