@@ -23,7 +23,7 @@
               </div>
             </li>
           </ul>
-          <p class="menu-label has-text-white">ราคา</p>
+
           <ul class="menu-list has-background-white"></ul>
         </aside>
       </div>
@@ -32,7 +32,7 @@
         <h1 class="is-size-4 mb-4 mt-4 has-text-white">
           จำนวนสินค้า ({{ this.filteredProducts.length }})
         </h1>
-        <div class="container is-fullhd mb-6" style="min-height: 600px">
+        <div class="container is-fullhd mb-6" style="min-height: 950px">
           <h1
             class="title mb-6 mt-6 has-text-white"
             v-if="filteredProducts.length == 0"
@@ -177,13 +177,19 @@ export default {
       console.log(this.user);
     },
     removeproduct(product_id) {
-      axios
+      if (window.confirm(`ต้องการที่จะลบสินค้านี้ใช่หรือไม่?`)) {
+        // User clicked "OK"
+        axios
         .delete(`http://localhost:3000/products/${product_id}`)
         .then((res) => {
           console.log(res);
           this.getProducts()
         })
         .catch((err) => console.log(err));
+      } else {
+        // User clicked "Cancel"
+        
+      }
     },
     chatwith(seller_id) {
       if (!this.user) {

@@ -4,12 +4,12 @@
         <div>
         </div>
 
-        <div class="hero">
+        <div class="hero" style="height:1000px">
             <div></div>
             <img class="slideimg" style="height:100%" @click="next()" :src="slideimg[index]">
            
         </div>
-        <div class="container is-widescreen ">
+        <div class="container is-widescreen mt-6">
             <div class="is-multiline columns">
                 <div class="column is-half">
                     <section class="hero is-small is-link" id="eguitar">
@@ -100,6 +100,9 @@ export default {
 
     },
     methods: {
+        goproducts(num) {
+      this.$router.push({ path: '/products', query: { selected_pt:num } });
+    },
 
         next() {
 

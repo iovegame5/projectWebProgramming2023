@@ -40,7 +40,7 @@ router.get("/:userid/products", async function (req, res, next) {
 
 router.get("/products/detail/:id", function (req, res, next) {
   // Query data from 3 tables
-  const promise1 = pool.query("SELECT * FROM products WHERE product_id=?", [
+  const promise1 = pool.query("SELECT * FROM products join users using(user_id)  WHERE product_id=?", [
     req.params.id,
   ]);
   const promise3 = pool.query("SELECT * FROM product_image WHERE product_id =?", [

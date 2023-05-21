@@ -144,17 +144,146 @@ router.get('/user/me', isLoggedIn, async (req, res, next) => {
 
 
 router.get('/user/:userid', async (req, res, next) => {
-    try{
-    const [rows1, fields1] = await pool.query('select username, usertype, user_id, phone, firstname, lastname, phone, DATE_FORMAT(join_date, "%d %M %Y") as join_date,email from users where user_id = ?',[req.params.userid])
-        if(rows1 != 0 ){
-            return res.status(200).json({userinfo:rows1[0]})
+    try {
+        const [rows1, fields1] = await pool.query('select username,avatar, usertype, user_id, phone, firstname, lastname, phone, DATE_FORMAT(join_date, "%d %M %Y") as join_date,email from users where user_id = ?', [req.params.userid])
+        if (rows1 != 0) {
+            return res.status(200).json({ userinfo: rows1[0] })
         }
-        else return res.status(404).json({message:`No user info that have ID:${req.params.userid}`})
-      
-}
-    catch(err){
+        else return res.status(404).json({ message: `No user info that have ID:${req.params.userid}` })
+
+    }
+    catch (err) {
         console.log(err)
         res.status(400).json(err.message)
+    }
+})
+
+router.put('/user/:userid', async (req, res, next) => {
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const phone = req.body.phone
+    const email = req.body.email
+    try {
+        const [rows1, fields1] = await pool.query('select * from users where user_id=?', [req.params.userid])
+        if (rows1 != 0) {
+            await pool.query('update users set firstname = ?, lastname= ?, email = ?, phone = ?  where user_id = ?', [firstname, lastname, email, phone, req.params.userid])
+            const [rows2, fields2] = await pool.query('select * from users where user_id=?', [req.params.userid])
+            return res.status(200).json(rows2[0])
+
+        }
+        else return res.status(404).json({ message: `No user info that have ID:${req.params.userid}` })
+
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err.message)
+    }
+})
+
+router.get('/getuser/allusers', async (req, res, next) => {
+    const search = req.query.search
+    console.log(search)
+    console.log(req.body.search)
+    try {
+        let [rows1, fields1] = await pool.query('select *, DATE_FORMAT(join_date, "%d %M %Y") as join_date from users',)
+        if (search.length > 0) {
+            if (Number.isInteger(Number(search))) {
+                [rows1, fields1] = await pool.query('select *, DATE_FORMAT(join_date, "%d %M %Y") as join_date from users where user_id like? OR phone like ?', [
+                    search + "%", search + "%"
+                ])
+            }
+            else {
+                [rows1, fields1] = await pool.query('select *, DATE_FORMAT(join_date, "%d %M %Y") as join_date from users where username like ? OR firstname like ? OR lastname like ? OR email like ?', [
+                    "%" + search + "%", "%" + search + "%", "%" + search + "%", "%" + search + "%"
+                ])
+            }
+
+
+        }
+
+
+        return res.status(200).json({ users: rows1 })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err.message)
+    }
+})
+router.get('/getuser/bannedusers', async (req, res, next) => {
+    const search = req.query.search
+    try {
+        let [rows1, fields1] = await pool.query('select *, DATE_FORMAT(join_date, "%d %M %Y") as join_date from users where isbanned = 1',)
+        if (search.length > 0) {
+            if (Number.isInteger(Number(search))) {
+                [rows1, fields1] = await pool.query('select *, DATE_FORMAT(join_date, "%d %M %Y") as join_date from users where (user_id like? OR phone like ?) AND isbanned = 1', [
+                    search + "%", search + "%"
+                ])
+            }
+            else {
+                [rows1, fields1] = await pool.query('select *, DATE_FORMAT(join_date, "%d %M %Y") as join_date from users where (username like ? OR firstname like ? OR lastname like ? OR email like ?) and isbanned = 1', [
+                    "%" + search + "%", "%" + search + "%", "%" + search + "%", "%" + search + "%"
+                ])
+            }
+
+
+        }
+
+        return res.status(200).json({ users: rows1 })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err.message)
+    }
+})
+router.put('/ban/:userid', async (req, res, next) => {
+    const user_id = Number(req.params.userid)
+    const conn = await pool.getConnection()
+
+    try {
+        await conn.beginTransaction();
+        const [rows1, fields1] = await conn.query('select * from users where user_id = ?', [user_id])
+        if (rows1.length == 0) {
+            return res.status(404).json({ message: `ไม่พบผู้ใช้ ไอดี: ${user_id}` })
+        }
+        else {
+            await conn.query('Update users set isbanned = 1 where user_id = ?', [user_id])
+            await conn.query('DELETE from products where user_id = ?', [user_id])
+        }
+        conn.commit()
+        return res.status(200).json({ message: `แบนผู้ใช้ไอดี : ${user_id} สำเร็จ` })
+    }
+    catch (err) {
+        await conn.rollback()
+        console.log(err)
+        res.status(400).json(err.message)
+    }
+    finally {
+        await conn.release()
+    }
+})
+router.put('/unban/:userid', async (req, res, next) => {
+    const user_id = Number(req.params.userid)
+    const conn = await pool.getConnection()
+
+    try {
+        await conn.beginTransaction();
+        const [rows1, fields1] = await conn.query('select * from users where user_id = ?', [user_id])
+        if (rows1.length == 0) {
+            return res.status(404).json({ message: `ไม่พบผู้ใช้ ไอดี: ${user_id}` })
+        }
+        else {
+            await conn.query('Update users set isbanned = 0 where user_id = ?', [user_id])
+        }
+        conn.commit()
+        return res.status(200).json({ message: `ปลดแบนผู้ใช้ไอดี : ${user_id} สำเร็จ` })
+    }
+    catch (err) {
+        await conn.rollback()
+        console.log(err)
+        res.status(400).json(err.message)
+    }
+    finally {
+        await conn.release()
     }
 })
 

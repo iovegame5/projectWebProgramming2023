@@ -37,9 +37,9 @@ router = express.Router();
 router.get("/:userid/chat", async function (req, res, next) {
   const user_id = Number(req.params.userid)
   try{
-    const [rows1, fields1] = await pool.query("select room_id,user_id as 'target_id', seller_id, buyer_id, lastmsgtxt, username as 'target_username', concat(firstname, ' ', lastname) as'target_name', avatar as'target_avatar' from chat_room join users on(chat_room.buyer_id = users.user_id) where seller_id = ? order by lastmsgtime ", [user_id])
+    const [rows1, fields1] = await pool.query("select room_id,user_id as 'target_id', seller_id, buyer_id, lastmsgtxt, username as 'target_username', concat(firstname, ' ', lastname) as'target_name', avatar as'target_avatar' from chat_room join users on(chat_room.buyer_id = users.user_id) where seller_id = ? order by lastmsgtime DESC ", [user_id])
     console.log(rows1)
-    const [rows2, fields2] = await pool.query ("select room_id,user_id as 'target_id', seller_id, buyer_id, lastmsgtxt, username as 'target_username', concat(firstname, ' ', lastname) as'target_name', avatar as'target_avatar' from chat_room join users on(chat_room.seller_id = users.user_id) where buyer_id = ? order by lastmsgtime", [user_id])
+    const [rows2, fields2] = await pool.query ("select room_id,user_id as 'target_id', seller_id, buyer_id, lastmsgtxt, username as 'target_username', concat(firstname, ' ', lastname) as'target_name', avatar as'target_avatar' from chat_room join users on(chat_room.seller_id = users.user_id) where buyer_id = ? order by lastmsgtime DESC", [user_id])
     res.status(200).json({buyer_rooms : rows1,
     seller_rooms : rows2})
   }

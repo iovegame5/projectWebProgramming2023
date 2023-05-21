@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 1080px">
+  <div style="min-height: 1080px">
 
 
 
@@ -74,11 +74,17 @@
             </div>
           </div>
           <div class="field">
+            <label class="label has-text-white">อีเมลล์</label>
+            <div class="control">
+              <input class="input" type="text" v-model="f_email" />
+            </div>
+          </div>
+          <div class="field">
             <label class="label has-text-white">ประเภทผู้ใช้งาน</label>
             <div class="select">
-              <select disabled>
-                <option value="1">normal</option>
-                <option value="2">admin</option>
+              <select disabled v-model="this.usertype">
+                <option value="normal">normal</option>
+                <option value="admin">admin</option>
               </select>
             </div>
           </div>
@@ -176,6 +182,9 @@
           </div>
         </div>
       </div>
+      <div class="column">
+        
+      </div>
     </div>
 
 
@@ -185,7 +194,7 @@
             <div class="card is-fixed" style="position: fixed; width:20%; margin-left:2rem;">
                 <div class="card-image">
                   <figure class="image ">
-                    <img class="is-rounded" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                    <img class="is-rounded"   :src="'http://localhost:3000/'+ userinfo.avatar" alt="Placeholder image">
                   </figure>
                 </div>
                 <div class="card-content">
@@ -316,6 +325,7 @@ export default {
       f_lname: "",
       f_phone: "",
       products: [],
+      usertype:""
     };
   },
   methods: {
@@ -332,8 +342,22 @@ export default {
         this.lname = this.f_lname;
         this.email = this.f_email;
         this.phone = this.f_phone;
+       var data = {
+        firstname:this.fname,
+        lastname:this.lname,
+        email:this.email,
+        phone:this.phone
+       }
+        
 
+        axios
+          .put(`http://localhost:3000/user/${this.user.user_id}`, data)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((e) => console.log(e.response.data));
         alert("บันทึกข้อมูลสำเร็จ");
+        location.reload()
       }
     },
     chatwith(seller_id) {
@@ -383,6 +407,8 @@ export default {
       axios
         .get(`http://localhost:3000/user/${user_id}`, {})
         .then((response) => {
+            console.log(response.data.userinfo)
+          
           console.log(response.data);
           this.userinfo = response.data.userinfo;
           this.fname = this.userinfo.firstname;
@@ -391,9 +417,15 @@ export default {
           this.f_fname = this.userinfo.firstname;
           this.f_lname = this.userinfo.lastname;
           this.f_phone = this.userinfo.phone;
+          this.f_email = this.userinfo.email
+          this.email = this.userinfo.email
+          this.usertype = this.userinfo.usertype
         })
         .catch((err) => {
           console.log(err);
+          
+      this.$router.push({path: '/'})
+    
         });
     },
   },

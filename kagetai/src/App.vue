@@ -23,10 +23,10 @@ export default {
     }
   },
   mounted() {
-    this.onAuthChange()
   },
   created() {
     this.token = localStorage.getItem('token')
+    this.onAuthChange()
     console.log(this.token)
   },
   methods: {
@@ -98,6 +98,9 @@ export default {
     },
     gouser(userid){
       this.$router.push({ path: `/user/${userid}` })
+    },
+    goadmin(){
+      this.$router.push({ path: `/admin` })
     },
     logout() {
       localStorage.removeItem('token')
@@ -173,7 +176,7 @@ export default {
       <div class="popup-content">
         <i class="fa-sharp fa-solid fa-circle-xmark close" @click="closelogin()"></i>
 
-        <h1>LOG IN</h1>
+        <h1 class="title has-text-white">LOG IN</h1>
         <input type="text" placeholder="Username" v-model="username" />
         <input type="password" placeholder="Password" v-model="password" />
         <p
@@ -185,15 +188,13 @@ export default {
         <button @click="login()" class="btn " href="#">LOGIN</button>
         <div class="noacc">
          
-            <a @click="goregister()">ยังไม่มีบัญชีหรอ? สมัครเลย</a>
+            <a @click="goregister()" class="linktxt">ยังไม่มีบัญชีหรอ? สมัครเลย</a>
         
           
           
         </div>
         <div>
-          <a @click="gopass()">
-            <span>ลืมรหัสผ่าน</span>
-          </a>
+        
         </div>
       </div>
  
@@ -241,13 +242,16 @@ export default {
       <div class="navbar-item has-dropdown is-hoverable" v-if="token">
         <div class="navbar-link">{{user.username}}</div>
         <div class="navbar-dropdown">
-          <div class="navbar-item" @click="gouser(user.user_id)">
+          <div class="navbar-item" @click="goadmin" v-show="this.user.usertype == 'admin'">
+            admin 
+           </div>
+          <div class="navbar-item" @click="gouser(user.user_id)" >
            ข้อมูลส่วนตัว
           </div>
-          <div class="navbar-item" @click="gofavorite">
+          <div class="navbar-item" @click="gofavorite" >
             รายการโปรด
           </div>
-          <div class="navbar-item">
+          <div class="navbar-item" v-show="this.user.usertype == 'normal'">
             <a  @click="goreport()">ร้องเรียน</a>
           </div>
           <div class="navbar-item">
@@ -289,8 +293,9 @@ body{
   margin:0;
   padding-top:90px;
   /* background-color:var(--grey); */
-  background-color: var(--seconddary-color);
-
+  background: var(--seconddary-color);
+background-size: cover;
+  
   
 
 
@@ -337,6 +342,7 @@ body{
   /* box-shadow:6px 6px 20px -4px rgba(0,0,0, 0.7); */
   text-decoration: none;
   transition: 0.4s;
+  cursor:pointer
 
 
 }
@@ -351,6 +357,7 @@ body{
   height: 100%;
   position: fixed;
   top: 0;
+  left:0;
   display: none;
   justify-content: center;
   align-items: center;
@@ -359,9 +366,9 @@ body{
 
 }
 .popup-content{
-  height:370px;
+  height:330px;
   width:500px;
-  background-color:rgb(143, 143, 143);
+  background:url('https://media.istockphoto.com/id/1322201765/photo/classical-guitar-on-a-dark-wood-background.jpg?b=1&s=170667a&w=0&k=20&c=1rd9sYTcoOu0CGrP83FQAB90bpzjuuywSM6ueKxGRDc=');
   position: relative;
   padding-top: 20px;
   border-radius: 5px;
@@ -373,6 +380,7 @@ body{
   width:50%;
   padding:8px;
   border:1px solid;
+  
 }
 .close{
  text-decoration: none;
@@ -441,15 +449,19 @@ body{
 #eguitar{
   background-image: url('../public/assets/img/elecguitar.png');
   background-size: cover;
+  cursor:pointer;
 }
 #guitar{
   background-image: url('../public/assets/img/guitar.png');
+  cursor:pointer;
 }
 #effect{
   background-image: url('../public/assets/img/effects.png');
+  cursor:pointer;
 }
 #amplifier{
   background-image: url('../public/assets/img/amplifier.png');
+  cursor:pointer;
 }
 .subtitle{
   text-overflow: ellipsis;
@@ -524,18 +536,12 @@ html, body {
 }
 .chatgroup {
   border-radius: 10px;
-}
-
-.sidebar-user .list a.box:hover,
-.sidebar-user .list a.box:focus,
-.sidebar-user .list a.box:active {
-	box-shadow: none;
-	background-color: #f9f9f9;
+  transition: .4s;
 }
 
 .sidebar-user .list {
 	max-height: calc(100vh - 120px);
-	overflow-y: auto;
+	overflow-y: hidden;
 	overflow-x: hidden;
 }
 
@@ -631,6 +637,28 @@ html, body {
     background: var(--grey);
     transition: 0.3s !important; 
 }
+li :hover{
+  background:#b8bcc0 !important;
+  color:black !important;
+}
+li :hover .tab{
+  background:#b8bcc0 !important;
+  color:black !important
+  ;
+}
+.linktxt :hover{
+  color:rgb(147, 147, 147)
+
+}
+.linktxt{
+  color:white
+}
+.chat-container{
+  background:var(--seconddary-color)
+}
+#chat-box.active{
+  background:var(--grey)!important;
+} 
 
 
 </style>

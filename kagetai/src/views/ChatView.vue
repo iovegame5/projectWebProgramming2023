@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div class="columns is-mobile" style="">
+    <div class="columns is-mobile chat-container" style="">
       <div
         class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero"
         style="height: 950px"
@@ -9,7 +9,7 @@
         <div class="columns top-field">
           <div
             class="column is-half chatgroup"
-            style="color: white"
+            style="color: white; cursor:pointer;"
             @click="chatgroup = 'buyer'"
             :class="{ active: chatgroup == 'buyer' }"
           >
@@ -17,7 +17,7 @@
           </div>
           <div
             class="column is-half chatgroup"
-            style="color: white"
+            style="color: white ;cursor:pointer;"
             @click="chatgroup = 'seller'"
             :class="{ active: chatgroup == 'seller' }"
           >
@@ -26,11 +26,12 @@
         </div>
 
         <!-- chat list  -->
-        <div style="overflow: auto">
+        <div style="overflow: auto; max-height:90%">
           <!-- seller chat list -->
           <div class="list" v-if="chatgroup == 'seller'">
-            <div
-              class="list-item box mb-4"
+            <div style="cursor:pointer;"
+              class="list-item box mb-4" id="chat-box"
+              :class="{ active: current_room.room_id == room.room_id}"
               v-for="room in seller_rooms"
               :key="room.room_id"
               @click="select_room(room)"
@@ -39,7 +40,7 @@
                 <div class="media-left">
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
-                      src="https://via.placeholder.com/150"
+                      :src="'http://localhost:3000/' + room.target_avatar"
                       alt="Image"
                       class="is-rounded"
                     />
@@ -49,9 +50,9 @@
                   <div class="content">
                     <p>
                       <strong>{{ room.target_name }}</strong>
-                      <br /><small class="has-text-weight-semibold"
-                        >1 new message</small
-                      >
+                      <br /><small class="has-text-weight-semibold">{{
+                        room.lastmsgtxt
+                      }}</small>
                     </p>
                   </div>
                 </div>
@@ -61,8 +62,9 @@
           <!-- buyer chat list -->
 
           <div class="list" v-if="chatgroup == 'buyer'">
-            <div
-              class="list-item box mb-4"
+            <div  style="cursor:pointer;"
+              class="list-item box mb-4" id="chat-box"
+              :class="{ active: current_room.room_id == room.room_id}"
               v-for="room in buyer_rooms"
               :key="room.room_id"
               @click="select_room(room)"
@@ -71,7 +73,7 @@
                 <div class="media-left">
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
-                      src="https://via.placeholder.com/150"
+                      :src="'http://localhost:3000/' + room.target_avatar"
                       alt="Image"
                       class="is-rounded"
                     />
@@ -94,7 +96,7 @@
       </div>
       <div
         class="column is-9-desktop is-8-tablet is-10-mobile is-paddingless"
-        v-if="this.current_room != null"
+        v-if="this.current_room.room_id != null"
         style="height: 900px"
       >
         <nav class="navbar has-shadow user-nav">
@@ -103,22 +105,26 @@
               <div class="media-left">
                 <figure class="image is-48x48">
                   <img
-                    src="https://via.placeholder.com/150"
+                    :src="
+                      'http://localhost:3000/' + this.current_room.target_avatar
+                    "
                     alt="Image"
                     class="is-rounded"
                   />
                 </figure>
               </div>
               <div class="media-content">
-                <div class="content">
-                  <p>
-                    <strong
-                      style="color: white"
-                      v-if="this.current_room != null"
-                      >{{ this.current_room.target_name }}</strong
-                    >
+                <div class="content" style="cursor:pointer;" @click="gouserprofile(current_room.target_id)" >
+                  <p class="title"
+                    style="color: white; font-size:20px" >
+                    {{
+                      this.current_room.target_name
+                    }}
+                  
                     <br />
-                    <small>{{ this.current_room.target_username }}</small>
+                    <small style="color: rgb(123, 123, 123); font-size: 20px">@{{
+                      this.current_room.target_username
+                    }}</small>
                   </p>
                 </div>
               </div>
@@ -165,10 +171,8 @@
         </nav>
 
         <!-- Main Content columns: One for chat window another for profile -->
-        <div class="columns" style="max-height: 825px">
-          <div
-            class="column is-12 mb-4 is-flex hero  message-window"
-          >
+        <div class="columns" style="max-height: 900px">
+          <div class="column is-12 is-flex hero message-window">
             <div
               class="chat-messages"
               ref="chatContainer"
@@ -192,12 +196,12 @@
                   </div>
                   <div class="column" style="position: relative">
                     <p
-                    class="is-pulled-left"
+                      class="is-pulled-left"
                       style="
                         color: rgb(205, 205, 205);
                         font-size: 14px;
                         bottom: 10px;
-                        left:0px;
+                        left: 0px;
                         position: absolute;
                       "
                     >
@@ -209,8 +213,9 @@
                 <!-- v-if sent message -->
                 <div class="columns ml-2 mt-2" style="align-items: end" v-else>
                   <div class="column is-6"></div>
-                  <div class="column is-1 " style="position: relative">
-                    <p class="is-pulled-right"
+                  <div class="column is-1" style="position: relative">
+                    <p
+                      class="is-pulled-right"
                       style="
                         color: rgb(205, 205, 205);
                         font-size: 14px;
@@ -221,11 +226,10 @@
                       {{ message.sent_time }}
                     </p>
                   </div>
-                  <div class="column is-full " style="max-width: 40%">
-                   
+                  <div class="column is-full" style="max-width: 40%">
                     <div
                       class="message-text box is-pulled-right"
-                      style="background: rgb(194, 240, 194); "
+                      style="background: rgb(194, 240, 194)"
                     >
                       {{ message.message }}
                     </div>
@@ -233,7 +237,7 @@
                 </div>
               </div>
             </div>
-            <div class="flex-item-2 mb-4">
+            <div class="flex-item-2">
               <form @submit.prevent="sent_message">
                 <div class="field has-addons">
                   <div class="control">
@@ -245,28 +249,26 @@
                     />
                   </div>
                   <div class="control">
-                    <button style=""
+                    <button
+                      style=""
                       type="submit"
                       class="button ml-4"
                       @click="sent_message()"
                     >
-                    send
+                      send
                     </button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-         
         </div>
       </div>
     </div>
-
   </div>
 </template>
   <script>
 // @ is an alias to /src
-
 
 import axios from "axios";
 import io from "socket.io-client";
@@ -279,15 +281,27 @@ export default {
       seller_rooms: null,
       buyer_rooms: [],
       messages: [],
-      current_room: null,
+      current_room: {
+        room_id: null,
+    target_id: null,
+    seller_id: null,
+    buyer_id: null,
+    lastmsgtxt: null,
+    target_username: null,
+    target_name: null,
+    target_avatar: null
+      },
       messagetxt: "",
       socket: {},
       eiei: null,
       chatgroup: "buyer",
     };
   },
- 
+
   methods: {
+    gouserprofile(user_id){
+      this.$router.push({ path: `/user/${user_id}` });
+    },
     getRooms() {
       return new Promise((resolve, reject) => {
         axios
@@ -310,21 +324,18 @@ export default {
       this.socket.emit("joinRoom", room.room_id, this.user.user_id);
       await new Promise((resolve, reject) => {
         axios
-        .get(`http://localhost:3000/chat/${room.room_id}/messages`)
-        .then((res) => {
-          this.messages = res.data.messages;
-          console.log(res.data.messages);
-          resolve()
-          
-        })
-        .catch((err) => {
-          console.log(err);
-          reject(err)
-        });
-   
+          .get(`http://localhost:3000/chat/${room.room_id}/messages`)
+          .then((res) => {
+            this.messages = res.data.messages;
+            console.log(res.data.messages);
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
       });
-      this.scrollToBottom()
-
+      this.scrollToBottom();
     },
     async sent_message() {
       if (this.messagetxt !== "") {
@@ -343,19 +354,18 @@ export default {
         };
 
         await new Promise((resolve) => {
+          this.socket.emit("message", messageData);
           this.socket.on("message", (data) => {
             this.messages = data.messages;
+            this.scrollToBottom();
             resolve();
-            // Handle the received message
           });
-
-          this.socket.emit("message", messageData);
         });
 
         // Clear the input field
         this.messagetxt = "";
-        this.scrollToBottom()
-        
+        this.scrollToBottom();
+        this.getRooms();
       }
     },
 
@@ -364,8 +374,19 @@ export default {
       console.log(container);
       container.scrollTop = container.scrollHeight;
     },
+
+    
   },
-   mounted() {
+  mounted() {
+    this.socket = io("http://localhost:3000");
+    this.socket.on("message", (data) => {
+      // Handle the received message
+      this.messages = data.messages;
+      console.log("recieve message");
+      this.$nextTick(() => {
+        this.scrollToBottom();
+      });
+    });
     this.getRooms()
       .then(async () => {
         let current_room_id = Number(this.$route.query.current_room_id);
@@ -376,21 +397,19 @@ export default {
             return value.room_id === current_room_id;
           });
           await new Promise((resolve, reject) => {
-        axios
-        .get(`http://localhost:3000/chat/${current_room_id}/messages`)
-        .then((res) => {
-          this.messages = res.data.messages;
-          console.log(res.data.messages);
-          resolve()
-          
-        })
-        .catch((err) => {
-          console.log(err);
-          reject(err)
-        });
-   
-      });
-      this.scrollToBottom()
+            axios
+              .get(`http://localhost:3000/chat/${current_room_id}/messages`)
+              .then((res) => {
+                this.messages = res.data.messages;
+                this.scrollToBottom();
+                console.log(res.data.messages);
+                resolve();
+              })
+              .catch((err) => {
+                console.log(err);
+                reject(err);
+              });
+          });
           console.log("this.current_room:", this.current_room);
         } else {
           console.log("current_room_id not found");
@@ -400,23 +419,8 @@ export default {
         console.log(error);
       });
 
-    // show current room in chat page
-    let current_room_id = Number(this.$route.query.current_room_id);
-    if (current_room_id) {
-      console.log("current_room_id:", current_room_id);
-      this.socket.emit("joinRoom", current_room_id, this.user.user_id);
-      this.current_room = this.seller_rooms.find((value) => {
-        return value.room_id === current_room_id;
-      });
-
-      console.log("this.current_room:", this.current_room);
-    } else {
-      console.log("current_room_id not found");
-    }
+    this.scrollToBottom();
   },
-  created() {
-    this.socket = io("http://localhost:3000");
-   
-  },
+  created() {},
 };
 </script>

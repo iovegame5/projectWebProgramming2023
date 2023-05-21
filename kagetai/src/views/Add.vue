@@ -308,6 +308,11 @@ export default {
       console.log(this.imageSize / (1024 * 1024));
     },
   submitProduct() {
+    console.log(this.user.isbanned)
+    if(this.user.isbanned == 1){
+      return alert("คุณถูกแบนไม่สามารถเพิ่มสินค้าได้")
+    }
+    else{
   
       if (this.$v.$invalid) {
         alert("กรุณาใส่ข้อมูลให้ถูกต้อง")
@@ -331,7 +336,8 @@ export default {
           })
           .catch((e) => console.log(e.response.data));
       }
-    },
+    }
+  },
   },
 };
 </script>

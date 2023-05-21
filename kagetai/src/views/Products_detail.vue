@@ -38,7 +38,7 @@
                   <strong>รายละเอียดสินค้า:</strong> {{ this.product.product_detail }}
                 </p>
                 <p style="margin-left: 5%" class="is-size-5">
-                  <strong>ติดต่อ: <i class="fa-solid fa-phone"></i> 0922467684 
+                  <strong>ติดต่อ: <i class="fa-solid fa-phone"></i> {{ product.phone }}
                   </strong>
                 </p>
               </div>

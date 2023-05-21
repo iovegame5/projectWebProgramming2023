@@ -62,6 +62,18 @@ router.get('/report', async(req, res, next) => {
     return res.json({
             report_type: sel
       });
+}),
+router.get('/reports/:report_type', async(req,res,next)=>{
+try{
+  const [rows1, fields1] = await pool.query('select * from reports join users on(users.user_id = reports.report_by_id) where report_type = ?',[req.params.report_type])
+  res.status(200).json({reports:rows1})
+}
+  catch(err){
+    console.log(err)
+    res.status(400).json({message:err.message})
+  }
+
+
 })
 
 
