@@ -283,6 +283,7 @@
 import axios from "axios";
 export default {
   name: "AdminView",
+  props: ["user"],
   data() {
     return {
       allusers: [],
@@ -299,7 +300,10 @@ export default {
       
     };
   },
+  mounted() {
+  },
   created() {
+    this.checkAdmin()
     this.getallusers();
     this.getbannedusers();
     this.getproductreports();
@@ -415,6 +419,11 @@ export default {
     // Set the current page number
     this.currentPage = pageNumber;
   },
+  checkAdmin(){
+    if(this.user.usertype != "admin")
+    alert("สำหรับ Admin เท่านั้น")
+    { this.$router.push({ path: `/` });}
+  }
   },
 };
 </script>
