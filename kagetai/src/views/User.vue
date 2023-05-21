@@ -341,6 +341,22 @@ export default {
     };
   },
   methods: {
+    addfav(proid, id) {
+      if (!this.user) {
+        console.log("ยังไม่ได้ล้อคอิน");
+        this.showlogin();
+      } else {
+        console.log(proid);
+        console.log(id);
+        axios
+          .post(`http://localhost:3000/favorite/${proid}/${id}`)
+          .then((res) => {
+            console.log(res);
+            alert('เพิ่มสินค้านี่เข้าสิ่งที่ชื่นชอบแล้ว');
+          })
+          .catch(() => alert('คุณมีสินค้านี้ในสิ่งที่ชื่นชอบแล้ว'));
+      }
+    },
     save() {
       if (
         this.f_fname == "" ||

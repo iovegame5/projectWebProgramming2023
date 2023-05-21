@@ -82,6 +82,7 @@ export default {
       }
     },
     goregister() {
+      this.closelogin()
       this.$router
           .push({ path: '/register' })
           .then(() => { this.$router.go() })
@@ -666,7 +667,7 @@ li :hover .tab{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
-  margin:auto;
+  margin:auto !important;
 }
 
 .report-user {
