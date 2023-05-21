@@ -43,6 +43,7 @@ export default {
     },
     gorememberpass(){
       this.$router.push({ path: '/updatepassword' })
+      this.closelogin()
     },
     async login() {
 
@@ -380,6 +381,7 @@ background-size: cover;
   padding-top: 20px;
   border-radius: 5px;
   color:white;
+
 }
 .popup-content input{
   margin:20px auto;
@@ -387,6 +389,8 @@ background-size: cover;
   width:50%;
   padding:8px;
   border:1px solid;
+
+
   
 }
 .close{
