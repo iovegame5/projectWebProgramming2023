@@ -731,6 +731,8 @@ flex-shrink: 0; /* Prevent image from shrinking */
   transform: scale(1.2);
 }
 
-
+.card{
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
 
 </style>

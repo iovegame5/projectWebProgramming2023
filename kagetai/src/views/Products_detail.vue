@@ -5,7 +5,7 @@
     <div class="container is-fullhd" style="padding-top: 5%; min-height: 100%">
       <div class="columns">
         <div class="column">
-          <figure class="image is-1by1" style="background:white">
+          <figure class="image is-1by1" style="background:white; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
             <img :src="'http://localhost:3000/' + images[imageIndex].path_image"  />
           </figure>
           <div class="preview-images">
@@ -14,21 +14,20 @@
             </div>
           </div>
         </div>
-        <div class="column">
-          <div class="card">
+        <div class="column" style="" >
+      
+          <div class="card" style="margin-top: 5%">
             <header class="card-header">
               <p style="text-align: center; justify-content: center;" class="card-header-title is-size-2">
                 ข้อมูลสินค้า
               </p>
               
             </header>
-          </div>
-          <div class="card" style="margin-top: 5%">
             <div class="card-content">
               <div class="content">
                 <div class="tile mb-6">
-                  <article class="tile is-child notification is-info">
-                    <p style="margin-left: 25%; padding-top: 2%" class="is-size-2 ">
+                  <article class="tile is-child notification has-text-centered">
+                    <p style="" class="is-size-2 ">
                       <strong>{{ this.product.product_name }} </strong>
                     </p>
                   </article>
@@ -42,21 +41,25 @@
                   <strong>รายละเอียดสินค้า:</strong> {{ this.product.product_detail }}
                 </p>
                 <p style="margin-left: 5%" class="is-size-5">
+                  <strong>รายละเอียดสินค้า:</strong> {{ this.product.product_detail }}
+                </p>
+                <p style="margin-left: 5%" class="is-size-5">
                   <strong>ติดต่อ: <i class="fa-solid fa-phone"></i> {{ product.phone }}
                   </strong>
                 </p>
               </div>
+              <div class="card mt-5 chatbutton" style="cursor: pointer;" @click="chatwith(product.user_id)" v-if="this.user.user_id != product.user_id">
+                <header class="card-header">
+                  <p style="text-align: center; justify-content: center; color:white" class="card-header-title is-size-2">
+                    แชท
+                  </p>
+                 
+                        
+                </header>
+              </div>
             </div>
           </div>
-          <div class="card mt-5 chatbutton" style="cursor: pointer;" @click="chatwith(product.user_id)" v-if="this.user.user_id != product.user_id">
-            <header class="card-header">
-              <p style="text-align: center; justify-content: center; color:white" class="card-header-title is-size-2">
-                แชท
-              </p>
-             
-                    
-            </header>
-          </div>
+          
         </div>
       </div>
     </div>

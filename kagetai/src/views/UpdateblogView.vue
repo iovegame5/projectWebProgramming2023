@@ -3,11 +3,11 @@
 
         <section class="hero">
             <div class="hero-body">
-                <p class="title has-text-danger">แก้ไขรายละเอียดสินค้า</p>
+                <p class="title has-text-white">แก้ไขรายละเอียดสินค้า</p>
             </div>
         </section>
         <section class="px-6">
-            <h1 class="is-size-4 has-text-danger"> Update Image</h1>
+            <h1 class="is-size-4 has-text-white"> Update Image</h1>
 
             <div v-if="now_images.length > 0" class="columns is-multiline">
                 <div v-for=" image in now_images" :key="image.product_image_id" class="column is-one-quarter">
@@ -35,7 +35,7 @@
 
 
 
-            <h1 class="is-size-4 has-text-danger">รูปสินค้าใหม่</h1>
+            <h1 class="is-size-4 has-text-white">รูปสินค้าใหม่</h1>
             <div class="file">
                 <label class="file-label">
                     <input class="file-input" multiple type="file" accept="image/png, image/jpeg, image/webp"
@@ -58,7 +58,7 @@
                             </figure>
                         </div>
                         <footer class="card-footer">
-                            <a @click="deleteSelectImage(index)" class="card-footer-item has-text-danger">Delete</a>
+                            <a @click="deleteSelectImage(index)" class="card-footer-item has-text-white">Delete</a>
                         </footer>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
 
 
             <div class="field mt-5">
-                <label class="label has-text-danger">ชื่อสินค้า</label>
+                <label class="label has-text-white">ชื่อสินค้า</label>
                 <div class="control">
                     <input v-model="$v.product_title.$model" :class="{ 'is-danger': $v.product_title.$error }" class="input"
                         type="text" />
@@ -95,7 +95,7 @@
                   </template>
             </div>
             <div class="field mt-5">
-                <label class="label has-text-danger">ราคาสินค้า</label>
+                <label class="label has-text-white">ราคาสินค้า</label>
                 <div class="control">
                     <input
                       class="input"
@@ -116,7 +116,7 @@
             </div>
 
             <div class="field">
-                <label class="label has-text-danger">รายละเอียดสินค้า</label>
+                <label class="label has-text-white">รายละเอียดสินค้า</label>
                 <div class="control">
                     <textarea v-model="$v.product_detail.$model" :class="{ 'is-danger': $v.product_detail.$error }" class="textarea"
                         type="text" ></textarea>
@@ -320,11 +320,11 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          if(response.data.check == false || this.user.usertype !="admin"){
+        
+         if(response.data.check == false){
             alert("คุณไม่ได้เป็นเจ้าของสินค้านี้ ไม่สามารถแก้ไขได้")
             this.$router.push({ path: "/" });
-
-          }
+        }
         })
         .catch((err) => {
           console.log(err.response.data.check);
