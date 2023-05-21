@@ -2,7 +2,6 @@
 import { RouterView } from 'vue-router'
 
 
-
 </script>
 <script>
 import FooterCom from "@/components/FooterCom.vue";
@@ -38,6 +37,9 @@ export default {
     },
     closelogin() {
       document.querySelector(".popup").style.display = "none";
+    },
+    gorememberpass(){
+      this.$router.push({ path: '/updatepassword' })
     },
     async login() {
 
@@ -190,9 +192,10 @@ export default {
         <div class="noacc">
          
             <a @click="goregister()" class="linktxt">ยังไม่มีบัญชีหรอ? สมัครเลย</a>
-        
-          
-          
+            
+        </div>
+        <div>
+          <a @click="gorememberpass()" class="linktxt">ลืมรหัสผ่าน</a>
         </div>
         <div>
         
@@ -303,7 +306,7 @@ background-size: cover;
 }
 
 .navbar{
-  background-color: var(--primary-color);
+  background-color: var(--primary-color);   
 
   height: 75px;
 }

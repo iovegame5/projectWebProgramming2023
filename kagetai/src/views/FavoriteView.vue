@@ -32,7 +32,7 @@
                 <div clas="media">
                   <div class="media-content">
                     <p class="title is-4">{{ fav.product_name }}</p>
-                    <p class="subtitle is-7">@username</p>
+                    <p class="subtitle is-7">@{{fav.username}}</p>
                     <p class="subtitle is-5 has-text-success">
                       {{ fav.product_price }} บาท
                     </p>
@@ -49,7 +49,21 @@
                   >
                     ลบรายการโปรด
                   </button>
+
+                  <div
+                      v-if="fav.user_id != user.user_id"
+                      class="button"
+                      @click="chatwith(fav.user_id)"
+                    >
+                      แชท
+                    </div>
+
+
+
+                  <router-link class="button" :to="`/products/detail/${fav.product_id}`">รายละเอียด</router-link>
+
                 </div>
+       
               </div>
             </div>
           </div>
@@ -71,6 +85,29 @@ export default {
   },
 
   methods: {
+    chatwith(seller_id) {
+      if (!this.user) {
+        this.showlogin();
+      } else {
+        console.log(this.user.user_id);
+        axios
+          .post("http://localhost:3000/chat", {
+            buyer_id: this.user.user_id,
+            seller_id: seller_id,
+          })
+          .then((res) => {
+            // this.$router.push({ path: '/products', query: { selected_pt:num } });
+
+            this.$router.push({
+              path: "/chat",
+              query: { current_room_id: res.data.room_id },
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
     getfav(id) {
       axios
         .get(`http://localhost:3000/favorite/${id}`)

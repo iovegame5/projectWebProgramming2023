@@ -8,6 +8,7 @@ const { isLoggedIn } = require('../middlewares');
 
 
 
+
 router = express.Router();
 
 const passwordValidator = (value, helpers) => {
@@ -283,8 +284,43 @@ router.put('/unban/:userid', async (req, res, next) => {
         res.status(400).json(err.message)
     }
     finally {
-        await conn.release()
+         conn.release()
     }
+})
+
+
+
+
+
+router.put('/updatepassword', async (req, res, next) => {
+        const username = req.body.username
+        const password = await bcrypt.hash(req.body.password, 5)
+        console.log(username)
+        console.log(password)
+
+    const [sel] = await pool.query("Select password from users where username=?", [username])
+    console.log(sel[0])
+    if(sel.length == 0){
+        return res.status(400).send({'message': 'Username incorrect'})
+    }
+
+    const start = await pool.getConnection()
+    await start.beginTransaction()
+
+    try{
+        const [update] = await start.query('Update users set password=? where username=?', [password, username])
+
+        await start.commit()
+
+        return res.status(200).send({'message': 'Update Password Success'})
+
+    }catch(error){
+        await start.rollback()
+        return res.status(404).send({'message': error.message})
+    }finally{
+        start.release()
+    }
+
 })
 
 exports.router = router

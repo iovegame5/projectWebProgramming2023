@@ -60,6 +60,11 @@ const routes = [
     name: 'UpdateView',
     component: () => import('../views/UpdateblogView.vue')
   },
+  {
+    path: '/updatepassword',
+    name: 'UpdatePasswordView',
+    component: () => import('../views/UpdatePassView.vue')
+  }
 
  
   
