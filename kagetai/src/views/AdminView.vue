@@ -301,13 +301,14 @@ export default {
     };
   },
   mounted() {
-  },
-  created() {
     this.checkAdmin()
     this.getallusers();
     this.getbannedusers();
     this.getproductreports();
     this.getsystemreports()
+  },
+  created() {
+   
   },
   computed: {
   filteredUsers() {
@@ -420,9 +421,13 @@ export default {
     this.currentPage = pageNumber;
   },
   checkAdmin(){
+    console.log(this.user.usertype)
     if(this.user.usertype != "admin")
-    alert("สำหรับ Admin เท่านั้น")
-    { this.$router.push({ path: `/` });}
+    {
+      alert("สำหรับ Admin เท่านั้น")
+      this.$router.push({ path: `/` });
+
+  }
   }
   },
 };
