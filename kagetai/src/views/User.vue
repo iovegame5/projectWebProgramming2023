@@ -201,7 +201,7 @@
                   <div class="media">
                     
                     <div class="media-content has-text-centered">
-                      <p class="title" style="font-size:48px">@{{userinfo.username}}</p>
+                      <p class="title" style="font-size:35px">@{{userinfo.username}}</p>
                       <p class="subtitle is-12">{{userinfo.firstname}} {{userinfo.lastname}}</p>
                       <p class="subtitle is-10">หมายเลขสมาชิก {{ userinfo.user_id }}</p>
                       <p class="subtitle is-10">วันที่เข้าร่วม {{userinfo.join_date}} </p>
