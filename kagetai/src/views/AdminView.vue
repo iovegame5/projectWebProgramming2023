@@ -15,17 +15,7 @@
                 >ผู้ใช้ทั้งหมด</a
               >
             </li>
-            <li>
-              <a
-                class="has-text-white tab"
-                :class="{
-                  'has-background-light': panel == 2,
-                  'has-text-black': panel == 2,
-                }"
-                @click="panel = 2"
-                >ผู้ใช้ที่โดนแบน</a
-              >
-            </li>
+          
             <li>
               <a
                 class="has-text-white tab"
@@ -45,6 +35,78 @@
 
       <!-- panel 1 -->
       <div class="column is-8" v-if="panel == 1">
+        <div class="columns" style="  margin-left: auto !important;
+        margin-right: auto !important;">
+          <div class="column is-8 is-offset-2">
+            <input class="input" type="text" name="search" placeholder="ค้นหาผู้ใช้งาน" v-model="search">
+          </div>
+         
+        </div>
+      
+        <div style="height: 70%; min-height: 800px; overflow-y: auto; overflow-x: hidden;">
+          <div class="m-table is-vcentered" style="min-height:70%; j">
+            <table class="table is-bordered is-striped is-narrow" style="  margin-left: auto!important;
+            margin-right: auto !important;">
+              <thead>
+                <tr>
+                  <th class="m-table-index">#</th>
+                  <th>Username</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Join date</th>
+                  <th>User_id</th>
+                  <th></th>
+                </tr>
+              </thead>
+      
+              <tbody>
+                <tr v-for="(user, index) in displayedUsers" :key="user.user_id">
+                  <td>{{ (currentPage - 1) * pageSize + index + 1 }}</td>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.firstname }}</td>
+                  <td>{{ user.lastname }}</td>
+                  <td>{{ user.phone }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.join_date }}</td>
+                  <td>{{ user.user_id }}</td>
+                  <td>
+                    <div class="button is-danger" @click="banuser(user.user_id)" v-if="user.isbanned == 0">
+                      แบนผู้ใช้นี้
+                    </div>
+                    <div class="button is-link" @click="unbanuser(user.user_id)" v-else-if="user.isbanned == 1">
+                      ปลดแบนผู้ใช้นี้
+                    </div>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+      
+          <nav class="pagination is-centered" role="navigation" v-if="totalPages > 1">
+            <ul class="pagination-list">
+              <li v-if="currentPage > 1">
+                <a class="pagination-link button" @click="setCurrentPage(currentPage - 1)">Previous</a>
+              </li>
+              <li v-for="pageNumber in totalPages" :key="pageNumber">
+                <a
+                  class="pagination-link button"
+                  :class="{ 'is-current': pageNumber === currentPage }"
+                  @click="setCurrentPage(pageNumber)"
+                >{{ pageNumber }}</a>
+              </li>
+              <li v-if="currentPage < totalPages">
+                <a class="pagination-link button" @click="setCurrentPage(currentPage + 1)">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      
+
+      <!-- <div class="column is-8" v-if="panel == 1">
         <div class="columns">
           <div class="column is-4 is-offset-2">
             <input class="input" type="text" name="search" placeholder="ค้นหาผู้ใช้งาน" v-model="search">
@@ -63,40 +125,34 @@
             overflow-x: hidden;
           "
         >
-          <table class="table">
+        <div class="m-table">
+          <table class="table is-bordered is-striped is-narrow">
             <thead>
               <tr>
-                <th>User_id</th>
+                
+                <th class="m-table-index">#</th>
+             
                 <th>Username</th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Join date</th>
+                <th>User_id</th>
                 <th></th>
               </tr>
             </thead>
-            <tfoot>
-              <tr>
-                <th>User_id</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Join date</th>
-                <th></th>
-              </tr>
-            </tfoot>
+           
             <tbody>
-              <tr v-for="user in allusers" :key="user.user_id">
-                <td>{{ user.user_id }}</td>
+              <tr v-for="(user, index) in allusers" :key="user.user_id">
+                <td>{{index+1}}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.phone }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.join_date }}</td>
+                <td>{{ user.user_id }}</td>
                 <td>
                   <div
                     class="button is-danger"
@@ -116,90 +172,19 @@
               </tr>
             </tbody>
           </table>
+          </div>
         </div>
-      </div>
+      </div> -->
 
 
       <!-- panel 2 -->
-      <div class="column is-8" v-if="panel == 2">
-        <div class="columns">
-          <div class="column is-4 is-offset-2">
-            <input class="input" type="text" name="search" placeholder="ค้นหาผู้ใช้งาน" v-model="search">
-          </div>
-          <div class="column is-2">
-            <input class="button" type="submit" value="Search" @click="getbannedusers">
-          </div>
-        
-        </div>
-
-        <div
-          style="
-            height: 70%;
-            min-height: 800px;
-            overflow-y: auto;
-            overflow-x: hidden;
-          "
-        >
-          <table class="table">
-            <thead>
-              <tr>
-                <th>User_id</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Join date</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <th>User_id</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Join date</th>
-                <th></th>
-              </tr>
-            </tfoot>
-            <tbody>
-              <tr v-for="user in bannedusers" :key="user.user_id">
-                <td>{{ user.user_id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.join_date }}</td>
-                <td>
-                  <div
-                    class="button is-danger"
-                    @click="banuser(user.user_id)"
-                    v-if="user.isbanned == 0"
-                  >
-                    แบนผู้ใช้นี้
-                  </div>
-                  <div
-                    class="button is-link"
-                    @click="unbanuser(user.user_id)"
-                    v-else-if="user.isbanned == 1"
-                  >
-                    ปลดแบนผู้ใช้นี้
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+     
 
       <!-- panel 3 -->
       <div class="column is-8" v-if="panel == 3">
+        <div class="columns">
         <div
-        class="column is-paddingless is-3-desktop is-4-tablet is-2-mobile sidebar-user hero"
+        class="column is-paddingless is-4-desktop is-4-tablet is-2-mobile sidebar-user hero"
         style="height: 950px"
       >
         <div class="columns top-field">
@@ -228,6 +213,7 @@
             <div style="cursor:pointer;"
               class="list-item box mb-4"
               v-for="report in productreports" :key="report.report_id"
+              :class="{ active: selected_report.report_id == report.report_id}"
               @click="select_report(report)"
             >
               <div class="media">
@@ -251,6 +237,7 @@
           <div class="list" v-if="reportgroup == 'system'">
             <div style="cursor:pointer;"
               class="list-item box mb-4"
+              :class="{ active: selected_report.report_id == report.report_id}"
               v-for="report in systemreports" :key="report.report_id"
               @click="select_report(report)"
             >
@@ -275,6 +262,18 @@
          
         </div>
       </div>
+
+      <div class="column">
+        <div class="report-element" v-if="selected_report.report_id != null">
+          <div class="report-user">Reported by:  @{{selected_report.username}} </div>
+        <div class="report-title">{{selected_report.report_title}} </div>
+          <div class="report-detail"> {{selected_report.report_des}} </div>
+          <div class="report-date">Reported on:  {{selected_report.report_date}}</div>
+        </div>
+        
+      </div>
+
+      </div>
       </div>
     </div>
   </div>
@@ -286,10 +285,14 @@ export default {
   name: "AdminView",
   data() {
     return {
-      panel: 1,
       allusers: [],
+    search: '', 
+    currentPage: 1, 
+    pageSize: 10, 
+      panel: 1,
+      selected_report:{report_id:null},
       bannedusers: [],
-      search: "",
+
       systemreports:[],
       productreports:[],
       reportgroup:'product'
@@ -302,7 +305,31 @@ export default {
     this.getproductreports();
     this.getsystemreports()
   },
+  computed: {
+  filteredUsers() {
+    return this.allusers.filter(user => {
+      return ((user.username.toLowerCase().includes(this.search.toLowerCase())) ||
+      (user.email.toLowerCase().includes(this.search.toLowerCase()) )
+      ||(user.firstname.toLowerCase().includes(this.search.toLowerCase()))
+      ||(user.lastname.toLowerCase().includes(this.search.toLowerCase()))
+      ||(user.phone.toLowerCase().includes(this.search.toLowerCase()))
+      );
+    });
+  },
+  totalPages() {
+    return Math.ceil(this.filteredUsers.length / this.pageSize);
+  },
+  displayedUsers() {
+   
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.filteredUsers.slice(startIndex, endIndex);
+  },
+},
   methods: {
+    select_report(report){
+      this.selected_report = report
+    },
     getallusers() {
       console.log("test");
       axios
@@ -384,6 +411,10 @@ export default {
           alert("แบนผู้ใช้ไอดี : " + userid + " ไม่สำเร็จ");
         });
     },
+    setCurrentPage(pageNumber) {
+    // Set the current page number
+    this.currentPage = pageNumber;
+  },
   },
 };
 </script>

@@ -660,5 +660,42 @@ li :hover .tab{
   background:var(--grey)!important;
 } 
 
+.report-element {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  margin:auto;
+}
+
+.report-user {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.report-title {
+  font-size: 50px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 15px;
+}
+
+.report-detail {
+  font-size: 30px;
+  color: #666666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.report-date {
+  font-size: 20px;
+  color: #999999;
+  font-style: italic;
+}
+
+
 
 </style>

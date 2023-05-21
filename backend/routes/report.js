@@ -65,7 +65,7 @@ router.get('/report', async(req, res, next) => {
 }),
 router.get('/reports/:report_type', async(req,res,next)=>{
 try{
-  const [rows1, fields1] = await pool.query('select * from reports join users on(users.user_id = reports.report_by_id) where report_type = ?',[req.params.report_type])
+  const [rows1, fields1] = await pool.query('select *,DATE_FORMAT(report_date, "%d %M %Y") as report_date from reports join users on(users.user_id = reports.report_by_id) where report_type = ?',[req.params.report_type])
   res.status(200).json({reports:rows1})
 }
   catch(err){
