@@ -401,7 +401,6 @@ export default {
               .get(`http://localhost:3000/chat/${current_room_id}/messages`)
               .then((res) => {
                 this.messages = res.data.messages;
-                this.scrollToBottom();
                 console.log(res.data.messages);
                 resolve();
               })
@@ -410,6 +409,7 @@ export default {
                 reject(err);
               });
           });
+          this.scrollToBottom();
           console.log("this.current_room:", this.current_room);
         } else {
           console.log("current_room_id not found");

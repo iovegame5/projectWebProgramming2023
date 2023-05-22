@@ -105,6 +105,9 @@ export default {
           });
       }
     },
+    showlogin() {
+      document.querySelector(".popup").style.display = "flex";
+    },
     // next() {
 
     //   this.imageIndex += 1

@@ -200,7 +200,8 @@ export default {
     chatwith(seller_id) {
       if (!this.user) {
         this.showlogin();
-      } else {
+      } 
+      else {
         console.log(this.user.user_id);
         axios
           .post("http://localhost:3000/chat", {
