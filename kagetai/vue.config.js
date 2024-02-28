@@ -1,3 +1,4 @@
+import backendIP from 'backendIP';
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true
@@ -6,7 +7,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/socket.io': {
-        target: 'http://localhost:3000',
+        target: 'http://'+backendIP+':3000',
         ws: true,
         changeOrigin: true
       }

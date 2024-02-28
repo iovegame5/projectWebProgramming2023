@@ -1,2 +1,2 @@
-const backendIP = "54.204.67.234";
+const backendIP = "3.82.240.94";
 export default backendIP;
