@@ -43,7 +43,7 @@ socket.on('message', async (data) => {
   let  messages = rows1
       // Emit the message to the room
       io.to(roomId).emit('message', {
-          messages
+          messages 
       });
   }
   catch(err){

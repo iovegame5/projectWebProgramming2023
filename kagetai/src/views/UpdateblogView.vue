@@ -231,7 +231,6 @@ export default {
         },
     },
     created() {
-        this.ownercheck()
         this.getDetail()
 
     },
@@ -341,10 +340,17 @@ export default {
         },
 
         submitBlog() {
+            if(this.product.user_id != this.user.user_id){
+           alert("คุณไม่ได้เป็นเจ้าของสินค้านี้ ไม่สามารถแก้ไขได้")
+           this.$router.push({ path: "/" });
+           return;
+      }
       // Validate all fields
       this.$v.$touch();
 
       // เช็คว่าในฟอร์มไม่มี error
+    
+
       if (this.$v.$invalid) {
         alert("กรุณาใส่ข้อมูลให้ถูกต้อง")
         return;

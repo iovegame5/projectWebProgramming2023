@@ -1,9 +1,9 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '12347856',
+  host: 'cloudprojectdatabase.c3a44mycgtjj.us-east-1.rds.amazonaws.com',
+  user: 'admin',
+  password: 'db-password',
   database: 'wp_project',
 
 

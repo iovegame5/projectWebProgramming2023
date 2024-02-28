@@ -159,7 +159,30 @@ router.get('/user/:userid', async (req, res, next) => {
     }
 })
 
+
+const updateSchema = Joi.object({
+    email: Joi.string().required().email(),
+    phone: Joi.string().required().pattern(/0[0-9]{9}/),
+    firstname: Joi.string().required().max(150),
+    lastname: Joi.string().required().max(150),
+    
+   
+})
+
+
 router.put('/user/:userid', async (req, res, next) => {
+
+
+    try {
+        await updateSchema.validateAsync(req.body, { abortEarly: false })
+    } catch (err) {
+        console.log(err)
+        return res.status(400).send(err)
+    }
+
+
+
+
     const firstname = req.body.firstname
     const lastname = req.body.lastname
     const phone = req.body.phone
@@ -289,10 +312,23 @@ router.put('/unban/:userid', async (req, res, next) => {
 })
 
 
-
+const updatePass = Joi.object({
+    password: Joi.string().required().custom(passwordValidator),
+    confirm_password: Joi.string().required().valid(Joi.ref('password')),
+    username: Joi.string().required(),
+})
 
 
 router.put('/updatepassword', async (req, res, next) => {
+
+    try {
+        await updatePass.validateAsync(req.body, { abortEarly: false })
+    } catch (err) {
+        console.log(err)
+        return res.status(400).json(err.message)
+    }
+    
+
         const username = req.body.username
         const password = await bcrypt.hash(req.body.password, 5)
         console.log(username)
@@ -301,7 +337,7 @@ router.put('/updatepassword', async (req, res, next) => {
     const [sel] = await pool.query("Select password from users where username=?", [username])
     console.log(sel[0])
     if(sel.length == 0){
-        return res.status(400).send({'message': 'Username incorrect'})
+        return res.status(404).send({ message: 'Username incorrect'})
     }
 
     const start = await pool.getConnection()

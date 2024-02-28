@@ -62,7 +62,7 @@ const upload = multer({ storage: storage,
       const product_id = results[0].insertId;
     
       req.files.forEach((file, index) => {
-        let path = [product_id, file.path.substring(6), index == 0 ? 1 : 0, 2];
+        let path = [product_id, file.path.substring(6), index == 0 ? 1 : 0, user_id];
         pathArray.push(path);
       });
       console.log(pathArray)

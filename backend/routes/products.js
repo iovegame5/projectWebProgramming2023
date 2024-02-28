@@ -2,6 +2,7 @@
 
 const express = require("express");
 const pool = require("../config");
+const Joi = require('joi')
 const path = require("path")
 const fs = require("fs");
 
@@ -23,6 +24,9 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage,
     limits: { fileSize: 3 * 1024 * 1024 }});
+
+
+
 
 router.get("/products", async function (req, res, next) {
   try {
@@ -112,6 +116,14 @@ router.put('/products/setmain/:productid/:imageid', async(req, res, next) => {
    
   const imageId = Number(req.params.imageid)
 
+  const [sel] = await pool.query('Select * from product_image where product_image_id=?', [imageId])
+
+  if(sel.length == 0){
+    return res.status(400).send({'message': `Don't have product_image_id :${imageId}`})
+  }
+
+
+
 
   console.log(productId)
   console.log(imageId)
@@ -189,11 +201,21 @@ router.delete('/image/:imageId', async function (req, res, next) {
   }
 })
 
-
+// const update = Joi.object({
+//   pd_name: Joi.string().required().min(10).max(30),
+//   pd_price: Joi.string().required().custom(priceWrong),
+//   pd_detail: Joi.string().required().min(30).max(150)
+// })
 
 router.put("/update", upload.array("myImage", 5), async function (req, res, next) {
   // Your code here
-  
+     
+
+//   try {
+//     await update.validateAsync(req.body, { abortEarly: false })
+// } catch (err) {
+//     return res.status(400).send(err.message)
+// }
 
     const file = req.files;
     let pathArray = [];

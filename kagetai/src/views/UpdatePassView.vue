@@ -140,7 +140,8 @@ export default {
       if (!this.$v.$invalid) {
         var data = {
             username:this.username,
-            password:this.password
+            password:this.password,
+            confirm_password:this.confirm_password
         }
         
         axios.put("http://localhost:3000/updatepassword", data)

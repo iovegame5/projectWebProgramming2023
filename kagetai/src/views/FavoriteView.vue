@@ -125,7 +125,7 @@ export default {
         .delete(`http://localhost:3000/favorite/${proid}/${userid}`)
         .then((response) => {
           console.log(response);
-          location.reload();
+          this.getfav(this.user.user_id)
         })
         .catch((err) => {
           console.log(err);
