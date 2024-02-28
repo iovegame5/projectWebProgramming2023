@@ -138,7 +138,7 @@
 
 import axios from "@/plugins/axios";
 import { required, email, sameAs, minLength, maxLength } from 'vuelidate/lib/validators'
-
+import backendIP from "../../backendIP";
 
 function mobile(value) {
   return !!value.match(/0[0-9]{9}/)
@@ -221,7 +221,7 @@ export default {
         console.log(this.username)
         
 
-          axios.post("http://localhost:3000/signup", data)
+          axios.post("http://"+backendIP+":3000/signup", data)
           .then((res) => {
             alert("Sign up Success");
             console.log(res)

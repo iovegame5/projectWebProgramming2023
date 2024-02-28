@@ -94,7 +94,7 @@
 
 import axios from "@/plugins/axios";
 import { required, sameAs, minLength, maxLength} from 'vuelidate/lib/validators'
-
+import backendIP from "../../backendIP";
 function complexPassword(value) {
   if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
     return false
@@ -109,6 +109,7 @@ export default {
       username: "",
       password: '',
       confirm_password: '',
+      backendIP: backendIP
 
 
     }
@@ -144,7 +145,7 @@ export default {
             confirm_password:this.confirm_password
         }
         
-        axios.put("http://localhost:3000/updatepassword", data)
+        axios.put("http://"+backendIP+":3000/updatepassword", data)
           .then((res) => {
             alert("Change Password Success");
             console.log(res);

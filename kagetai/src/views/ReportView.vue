@@ -75,7 +75,7 @@
 <script>
 import axios from "@/plugins/axios";
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
-
+import backendIP from "../../backendIP";
 
 export default {
     props: ['user'],
@@ -129,7 +129,7 @@ export default {
                 console.log(this.user.user_id)
 
 
-                axios.post(`http://localhost:3000/report/?user_id=${this.user.user_id} `, data)
+                axios.post(`http://`+backendIP+`:3000/report/?user_id=${this.user.user_id} `, data)
                     .then((res) => {
                         alert("report success");
                         console.log(res)
@@ -147,7 +147,7 @@ export default {
         gettype(){
 
             axios
-        .get("http://localhost:3000/report", {})
+        .get("http://"+backendIP+":3000/report", {})
         .then((response) => {
           console.log(response.data);
           this.loop_type = response.data.report_type;

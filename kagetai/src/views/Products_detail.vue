@@ -6,11 +6,11 @@
       <div class="columns">
         <div class="column">
           <figure class="image is-1by1" style="background:white; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-            <img :src="'http://localhost:3000/' + images[imageIndex].path_image"  />
+            <img :src="'http://'+backendIP+':3000/' + images[imageIndex].path_image"  />
           </figure>
           <div class="preview-images">
             <div v-for="(image, index) in images" :key="index" class="preview-image"  :class="{ selected: imageIndex == index}">
-              <img :src="'http://localhost:3000/' + image.path_image" @click="selectImage(index)" />
+              <img :src="'http://'+ backendIP +':3000/' + image.path_image" @click="selectImage(index)" />
             </div>
           </div>
         </div>
@@ -69,6 +69,7 @@
 
 
 import axios from "axios";
+import backendIP from "../../backendIP";
 export default {
   name: "ProductDetail",
   props: ['user'],
@@ -77,7 +78,8 @@ export default {
     return {
       product: [],
       images: [],
-      imageIndex: 0
+      imageIndex: 0,
+      backendIP: backendIP
     };
   },
   
@@ -88,7 +90,7 @@ export default {
       } else {
         console.log(this.user.user_id);
         axios
-          .post("http://localhost:3000/chat", {
+          .post("http://"+backendIP+":3000/chat", {
             buyer_id: this.user.user_id,
             seller_id: seller_id,
           })
@@ -122,7 +124,7 @@ export default {
     // เอาสินค้าจาก database เข้ามา
     getDetail(productId) {
       axios
-        .get(`http://localhost:3000/products/detail/${productId}`)
+        .get(`http://`+backendIP+`:3000/products/detail/${productId}`)
         .then((response) => {
           this.product = response.data.product;
           this.images = response.data.images;

@@ -281,6 +281,7 @@
     
     <script>
 import axios from "axios";
+import backendIP from "../../backendIP";
 export default {
   name: "AdminView",
   props: ["user"],
@@ -338,7 +339,7 @@ export default {
     getallusers() {
       console.log("test");
       axios
-        .get(`http://localhost:3000/getuser/allusers`, {
+        .get(`http://`+backendIP+`:3000/getuser/allusers`, {
           params: {
             search: this.search,
           },
@@ -353,7 +354,7 @@ export default {
     },
     getbannedusers() {
       axios
-        .get(`http://localhost:3000/getuser/bannedusers`, {
+        .get(`http://`+backendIP+`:3000/getuser/bannedusers`, {
           params: {
             search: this.search,
           },
@@ -367,7 +368,7 @@ export default {
         });
     },
     getsystemreports(){
-      axios.get('http://localhost:3000/reports/1',{})
+      axios.get('http://'+backendIP+':3000/reports/1',{})
       .then((response)=>{
         this.systemreports = response.data.reports
         console.log("get system reports")
@@ -378,7 +379,7 @@ export default {
         });
     },
     getproductreports(){
-      axios.get('http://localhost:3000/reports/2',{})
+      axios.get('http://'+backendIP+':3000/reports/2',{})
       .then((response)=>{
         this.productreports = response.data.reports
 
@@ -390,7 +391,7 @@ export default {
     },
     banuser(userid) {
       axios
-        .put(`http://localhost:3000/ban/${userid}`)
+        .put(`http://`+backendIP+`:3000/ban/${userid}`)
         .then((res) => {
           console.log(res);
           this.getbannedusers();
@@ -404,7 +405,7 @@ export default {
     },
     unbanuser(userid) {
       axios
-        .put(`http://localhost:3000/unban/${userid}`)
+        .put(`http://`+backendIP+`:3000/unban/${userid}`)
         .then((res) => {
           console.log(res);
           this.getbannedusers();

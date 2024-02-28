@@ -206,6 +206,7 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
+import backendIP from "../../backendIP";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
 function priceWrong(value) {
   if (!value.match(/^[0-9]/) && value.length > 0) {
@@ -327,7 +328,7 @@ export default {
         });
 
         axios
-          .post("http://localhost:3000/add", formData)
+          .post("http://"+backendIP+":3000/add", formData)
           .then((res) => {
             this.$router.push({ name: "home" });
             console.log(res);

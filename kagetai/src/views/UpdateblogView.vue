@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img :src="'http://localhost:3000' + image.path_image" alt="Placeholder image" />
+                                <img :src="'http://'+backendIP+':3000' + image.path_image" alt="Placeholder image" />
                             </figure>
                         </div>
                         <footer class="card-footer">
@@ -162,7 +162,7 @@
 <script>
 import axios from "axios";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
-
+import backendIP from "../../backendIP";
 
 
 
@@ -204,7 +204,8 @@ export default {
             product_detail: "",
             imageSize: 0,
             selectMainId: null,
-            product:[]
+            product:[],
+            backendIP: backendIP
 
         };
     },
@@ -240,7 +241,7 @@ export default {
     methods: {
         getDetail(productId) {
             axios
-                .get(`http://localhost:3000/products/detail/${productId}`)
+                .get(`http://`+backendIP+`:3000/products/detail/${productId}`)
                 .then((response) => {
                     this.product = response.data.product
                     this.now_images = response.data.images;
@@ -287,7 +288,7 @@ export default {
 
             axios
                 .put(
-                    `http://localhost:3000/products/setmain/${this.$route.params.id}/${this.selectMainId}`
+                    `http://`+backendIP+`:3000/products/setmain/${this.$route.params.id}/${this.selectMainId}`
                 )
                 .then((response) => {
                     console.log(response);
@@ -302,7 +303,7 @@ export default {
             let comfirmDeleteImage = confirm("คุณต้องการลบรูปใช่ไหม");
             if (comfirmDeleteImage == true) {
                 axios
-                    .delete("http://localhost:3000/image/" + imageId)
+                    .delete("http://"+backendIP+":3000/image/" + imageId)
                     .then((response) => {
                         console.log("delete image ", response);
                         location.reload();
@@ -315,7 +316,7 @@ export default {
         ownercheck(){
             
             axios
-        .post(`http://localhost:3000/productcheck/${this.$route.params.id}/${this.user.user_id}`, {
+        .post(`http://`+backendIP+`:3000/productcheck/${this.$route.params.id}/${this.user.user_id}`, {
         })
         .then((response) => {
           console.log(response.data);
@@ -366,7 +367,7 @@ export default {
       });
       console.log(typeof this.images)        
         axios
-          .put("http://localhost:3000/update", formData)
+          .put("http://"+backendIP+":3000/update", formData)
           .then((res) => {
             this.$router.push({ name: "ProductsView" });
             console.log(res);

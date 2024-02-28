@@ -24,7 +24,7 @@
                 <figure class="image is-1by1">
                   <img
                     alt="Placeholder image"
-                    :src="'http://localhost:3000/' + fav.path_image"
+                    :src="'http://'+backendIP+':3000/' + fav.path_image"
                   />
                 </figure>
               </div>
@@ -74,7 +74,7 @@
 </template>
 <script>
 import axios from "@/plugins/axios";
-
+import backendIP from "../../backendIP";
 export default {
   name: "HomeView",
   props: ["user"],
@@ -91,7 +91,7 @@ export default {
       } else {
         console.log(this.user.user_id);
         axios
-          .post("http://localhost:3000/chat", {
+          .post("http://"+backendIP+":3000/chat", {
             buyer_id: this.user.user_id,
             seller_id: seller_id,
           })
@@ -110,7 +110,7 @@ export default {
     },
     getfav(id) {
       axios
-        .get(`http://localhost:3000/favorite/${id}`)
+        .get(`http://`+backendIP+`:3000/favorite/${id}`)
         .then((response) => {
           console.log(response.data.favorites);
           this.favorite = response.data.favorites;
@@ -122,7 +122,7 @@ export default {
     },
     deletefav(proid, userid) {
       axios
-        .delete(`http://localhost:3000/favorite/${proid}/${userid}`)
+        .delete(`http://`+backendIP+`:3000/favorite/${proid}/${userid}`)
         .then((response) => {
           console.log(response);
           this.getfav(this.user.user_id)

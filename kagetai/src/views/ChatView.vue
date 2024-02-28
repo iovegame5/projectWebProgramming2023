@@ -40,7 +40,7 @@
                 <div class="media-left">
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
-                      :src="'http://localhost:3000/' + room.target_avatar"
+                      :src="'http://'+backendIP+':3000/' + room.target_avatar"
                       alt="Image"
                       class="is-rounded"
                     />
@@ -73,7 +73,7 @@
                 <div class="media-left">
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
-                      :src="'http://localhost:3000/' + room.target_avatar"
+                      :src="'http://'+backendIP+':3000/' + room.target_avatar"
                       alt="Image"
                       class="is-rounded"
                     />
@@ -106,7 +106,7 @@
                 <figure class="image is-48x48">
                   <img
                     :src="
-                      'http://localhost:3000/' + this.current_room.target_avatar
+                    'http://'+backendIP+':3000/' + this.current_room.target_avatar
                     "
                     alt="Image"
                     class="is-rounded"
@@ -272,6 +272,7 @@
 
 import axios from "axios";
 import io from "socket.io-client";
+import backendIP from "../../backendIP";
 export default {
   name: "ChatView",
   props: ["user"],
@@ -305,7 +306,7 @@ export default {
     getRooms() {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://localhost:3000/${this.user.user_id}/chat`)
+          .get(`http://`+backendIP+`:3000/${this.user.user_id}/chat`)
           .then((response) => {
             this.seller_rooms = response.data.seller_rooms;
             this.buyer_rooms = response.data.buyer_rooms;
@@ -324,7 +325,7 @@ export default {
       this.socket.emit("joinRoom", room.room_id, this.user.user_id);
       await new Promise((resolve, reject) => {
         axios
-          .get(`http://localhost:3000/chat/${room.room_id}/messages`)
+          .get(`http://`+backendIP+`:3000/chat/${room.room_id}/messages`)
           .then((res) => {
             this.messages = res.data.messages;
             console.log(res.data.messages);
@@ -378,7 +379,7 @@ export default {
     
   },
   mounted() {
-    this.socket = io("http://localhost:3000");
+    this.socket = io("http://"+backendIP+":3000");
     this.socket.on("message", (data) => {
       // Handle the received message
       this.messages = data.messages;
@@ -398,7 +399,7 @@ export default {
           });
           await new Promise((resolve, reject) => {
             axios
-              .get(`http://localhost:3000/chat/${current_room_id}/messages`)
+              .get(`http://`+backendIP+`:3000/chat/${current_room_id}/messages`)
               .then((res) => {
                 this.messages = res.data.messages;
                 console.log(res.data.messages);

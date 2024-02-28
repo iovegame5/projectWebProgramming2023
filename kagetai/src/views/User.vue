@@ -124,7 +124,7 @@
                   <figure class="image is-1by1">
                     <img
                       alt="Placeholder image"
-                      :src="'http://localhost:3000/' + product.path_image"
+                      :src="'http://'+backendIP+':3000/' + product.path_image"
                     />
                   </figure>
                 </div>
@@ -200,7 +200,7 @@
             <div class="card is-fixed" style="position: fixed; width:20%; margin-left:2rem;">
                 <div class="card-image">
                   <figure class="image ">
-                    <img class="is-rounded"   :src="'http://localhost:3000/'+ userinfo.avatar" alt="Placeholder image">
+                    <img class="is-rounded"   :src="'http://'+backendIP+':3000/'+ userinfo.avatar" alt="Placeholder image">
                   </figure>
                 </div>
                 <div class="card-content">
@@ -247,7 +247,7 @@
                       <figure class="image is-1by1">
                         <img
                           alt="Placeholder image"
-                          :src="'http://localhost:3000/' + product.path_image"
+                          :src="'http://'+backendIP+':3000/'+ product.path_image"
                         />
                       </figure>
                     </div>
@@ -320,7 +320,7 @@
 
 <script>
 // @ is an alias to /src
-
+import backendIP from "../../backendIP";
 import axios from "axios";
 export default {
   name: "HomeView",
@@ -349,7 +349,7 @@ export default {
         console.log(proid);
         console.log(id);
         axios
-          .post(`http://localhost:3000/favorite/${proid}/${id}`)
+          .post(`http://`+backendIP+`:3000//favorite/${proid}/${id}`)
           .then((res) => {
             console.log(res);
             alert('เพิ่มสินค้านี่เข้าสิ่งที่ชื่นชอบแล้ว');
@@ -379,7 +379,7 @@ export default {
         
 
         axios
-          .put(`http://localhost:3000/user/${this.user.user_id}`, data)
+          .put(`http://`+backendIP+`:3000/user/${this.user.user_id}`, data)
           .then((res) => {
             console.log(res);
           })
@@ -394,7 +394,7 @@ export default {
       } else {
         console.log(this.user.user_id);
         axios
-          .post("http://localhost:3000/chat", {
+          .post('http://'+backendIP+':3000/chat', {
             buyer_id: this.user.user_id,
             seller_id: seller_id,
           })
@@ -419,7 +419,7 @@ export default {
     },
     getuserproducts(user_id) {
       axios
-        .get(`http://localhost:3000/${user_id}/products`, {})
+        .get(`http://`+backendIP+`:3000/${user_id}/products`, {})
         .then((response) => {
           console.log(response.data);
           this.products = response.data.products;
@@ -435,7 +435,7 @@ export default {
       if (window.confirm(`ต้องการที่จะลบสินค้านี้ใช่หรือไม่?`)) {
         // User clicked "OK"
         axios
-        .delete(`http://localhost:3000/products/${product_id}`)
+        .delete(`http://`+backendIP+`:3000/products/${product_id}`)
         .then((res) => {
           console.log(res);
           this.getProducts()
@@ -448,7 +448,7 @@ export default {
     },
     getuserinfo(user_id) {
       axios
-        .get(`http://localhost:3000/user/${user_id}`, {})
+        .get(`http://`+backendIP+`:3000/user/${user_id}`, {})
         .then((response) => {
             console.log(response.data.userinfo)
           

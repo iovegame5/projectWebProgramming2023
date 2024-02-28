@@ -51,7 +51,7 @@
                   <figure class="image is-1by1">
                     <img
                       alt="Placeholder image"
-                      :src="'http://localhost:3000/' + product.path_image"
+                      :src="'http://'+backendIP+':3000/' + product.path_image"
                     />
                   </figure>
                 </div>
@@ -122,6 +122,7 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
+import backendIP from "../../backendIP";
 export default {
   name: "HomeView",
   props: ["user", "token"],
@@ -133,6 +134,7 @@ export default {
       products_type: [],
       selected_pt: 0,
       tmp_producted: [],
+      backendIP: backendIP
     };
   },
   
@@ -162,7 +164,7 @@ export default {
     // เอาสินค้าจาก database เข้ามา
     getProducts() {
       axios
-        .get("http://localhost:3000/products", {})
+        .get("http://" + backendIP+":3000/products", {})
         .then((response) => {
           console.log(response.data);
           this.tmp_producted = response.data.products;
@@ -186,7 +188,7 @@ export default {
       if (window.confirm(`ต้องการที่จะลบสินค้านี้ใช่หรือไม่?`)) {
         // User clicked "OK"
         axios
-        .delete(`http://localhost:3000/products/${product_id}`)
+        .delete(`http://` + backendIP+`:3000/products/${product_id}`)
         .then((res) => {
           console.log(res);
           this.getProducts()
@@ -204,7 +206,7 @@ export default {
       else {
         console.log(this.user.user_id);
         axios
-          .post("http://localhost:3000/chat", {
+          .post("http://"+backendIP+":3000/chat", {
             buyer_id: this.user.user_id,
             seller_id: seller_id,
           })
@@ -229,7 +231,7 @@ export default {
         console.log(proid);
         console.log(id);
         axios
-          .post(`http://localhost:3000/favorite/${proid}/${id}`)
+          .post(`http://`+backendIP+`:3000/favorite/${proid}/${id}`)
           .then((res) => {
             console.log(res);
             alert('เพิ่มสินค้านี่เข้าสิ่งที่ชื่นชอบแล้ว');

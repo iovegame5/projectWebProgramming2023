@@ -1,7 +1,7 @@
 import axios from 'axios'
-
+import backendIP from '../../backendIP';
 const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://'+backendIP+':3000',
 })
 
 instance.interceptors.request.use(
