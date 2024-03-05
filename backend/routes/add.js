@@ -100,7 +100,7 @@ router.post(
       req.files.forEach((file, index) => {
         let path = [
           product_id,
-          file.key,
+          file.location,
           index == 0 ? 1 : 0,
           user_id,
         ];
