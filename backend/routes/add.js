@@ -1,5 +1,5 @@
 // หน้า Add Product
-
+require ('dotenv').config()
 const express = require("express");
 const pool = require("../config");
 const path = require("path");
@@ -12,6 +12,23 @@ router.get("/add", (req, res) => {
 });
 
 // Require multer for file upload
+// Set your AWS credentials
+const bucketName = process.env.AWS_BUCKET_NAME
+const region = process.env.AWS_BUCKET_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY
+const secretAccessKey = process.env.AWS_SECRET_KEY
+const sessionToken = process.env.AWS_SESSION_TOKEN
+
+const credentials = new aws.Credentials({
+  accessKeyId: accessKeyId,
+  secretAccessKey: secretAccessKey,
+  sessionToken:sessionToken,
+});
+
+// Set AWS.config with your credentials
+aws.config.update({
+  credentials: credentials
+});
 
 // SET STORAGE
 const s3 = new aws.S3();
@@ -30,13 +47,13 @@ const s3 = new aws.S3();
 //   },
 // });
 
-var storage = multerS3({
+const storage = multerS3({
   s3: s3,
   bucket: "cloud-project-storage", // Specify your bucket name
   contentType: multerS3.AUTO_CONTENT_TYPE,
-  acl: "public-read", // Access control: public-read or private
+  // acl: "public-read", // Access control: public-read or private
   key: function (req, file, cb) {
-    cb(null, "uploads/" + Date.now() + "-" + path.basename(file.originalname));
+    cb(null, "products/" + Date.now() + "-" + path.basename(file.originalname));
   },
 });
 
@@ -109,6 +126,7 @@ router.post(
 );
 
 router.post('/uploadfile', upload.single('myImage'), (req, res) => {
+  console.log(sessionToken)
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
@@ -116,6 +134,9 @@ router.post('/uploadfile', upload.single('myImage'), (req, res) => {
   console.log('File uploaded successfully:', req.file.location);
   res.status(200).send('File uploaded to S3: ' + req.file.location);
 });
+router.post('/test', (req,res)=>{
+  console.log(sessionToken)
+})
 
 
 exports.router = router;
