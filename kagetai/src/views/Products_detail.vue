@@ -6,11 +6,11 @@
       <div class="columns">
         <div class="column">
           <figure class="image is-1by1" style="background:white; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-            <img :src="'http://'+backendIP+':3000/' + images[imageIndex].path_image"  />
+            <img :src=" images[imageIndex].path_image"  />
           </figure>
           <div class="preview-images">
             <div v-for="(image, index) in images" :key="index" class="preview-image"  :class="{ selected: imageIndex == index}">
-              <img :src="'http://'+ backendIP +':3000/' + image.path_image" @click="selectImage(index)" />
+              <img :src="image.path_image" @click="selectImage(index)" />
             </div>
           </div>
         </div>

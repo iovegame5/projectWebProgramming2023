@@ -1,4 +1,4 @@
-import backendIP from 'backendIP';
+const backendIP = require('./backendIP');
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true

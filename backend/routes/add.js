@@ -33,20 +33,6 @@ aws.config.update({
 // SET STORAGE
 const s3 = new aws.S3();
 
-// old storage
-
-// var storage = multer.diskStorage({
-//   destination: function (req, file, callback) {
-//     callback(null, "./static/uploads/products_img");
-//   },
-//   filename: function (req, file, callback) {
-//     callback(
-//       null,
-//       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-//     );
-//   },
-// });
-
 const storage = multerS3({
   s3: s3,
   bucket: "cloud-project-storage", // Specify your bucket name

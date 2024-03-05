@@ -51,7 +51,7 @@
                   <figure class="image is-1by1">
                     <img
                       alt="Placeholder image"
-                      :src="'http://'+backendIP+':3000/' + product.path_image"
+                      :src="product.path_image"
                     />
                   </figure>
                 </div>

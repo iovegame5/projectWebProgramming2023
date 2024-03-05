@@ -1,32 +1,53 @@
 // หน้า Product page 
-
+require ('dotenv').config()
 const express = require("express");
 const pool = require("../config");
 const Joi = require('joi')
 const path = require("path")
 const fs = require("fs");
 
-router = express.Router();
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
 
 const multer = require("multer");
+router = express.Router();
+
+
 // SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "./static/uploads/products_img");
-  },
-  filename: function (req, file, callback) {
-    callback(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+const bucketName = process.env.AWS_BUCKET_NAME
+const region = process.env.AWS_BUCKET_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY
+const secretAccessKey = process.env.AWS_SECRET_KEY
+const sessionToken = process.env.AWS_SESSION_TOKEN
+
+const credentials = new aws.Credentials({
+  accessKeyId: accessKeyId,
+  secretAccessKey: secretAccessKey,
+  sessionToken:sessionToken,
+});
+
+// Set AWS.config with your credentials
+aws.config.update({
+  credentials: credentials
+});
+
+// SET STORAGE
+const s3 = new aws.S3();
+
+const storage = multerS3({
+  s3: s3,
+  bucket: "cloud-project-storage", // Specify your bucket name
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  // acl: "public-read", // Access control: public-read or private
+  key: function (req, file, cb) {
+    cb(null, "products/" + Date.now() + "-" + path.basename(file.originalname));
   },
 });
 
-const upload = multer({ storage: storage,
-    limits: { fileSize: 3 * 1024 * 1024 }});
-
-
-
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 3 * 1024 * 1024 },
+});
 
 router.get("/products", async function (req, res, next) {
   try {
@@ -256,7 +277,7 @@ router.put("/update", upload.array("myImage", 5), async function (req, res, next
 
     if (file.length > 0) {
       req.files.forEach((file, index) => {
-        let path = [product_id, file.path.substring(6), 0, user_id]
+        let path = [product_id, file.location, 0, user_id]
         pathArray.push(path)
       })
 

@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img :src="'http://'+backendIP+':3000' + image.path_image" alt="Placeholder image" />
+                                <img :src="image.path_image" alt="Placeholder image" />
                             </figure>
                         </div>
                         <footer class="card-footer">
