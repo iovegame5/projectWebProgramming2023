@@ -34,7 +34,7 @@ var storage = multerS3({
   s3: s3,
   bucket: "cloud-project-storage", // Specify your bucket name
   contentType: multerS3.AUTO_CONTENT_TYPE,
- 
+  acl: "public-read", // Access control: public-read or private
   key: function (req, file, cb) {
     cb(null, "uploads/" + Date.now() + "-" + path.basename(file.originalname));
   },
