@@ -100,7 +100,7 @@ router.post(
       req.files.forEach((file, index) => {
         let path = [
           product_id,
-          file.path.substring(6),
+          file.key,
           index == 0 ? 1 : 0,
           user_id,
         ];
@@ -126,11 +126,11 @@ router.post(
 );
 
 router.post('/uploadfile', upload.single('myImage'), (req, res) => {
-  console.log(sessionToken)
+
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
-
+  console.log(req.file.originalname)
   console.log('File uploaded successfully:', req.file.location);
   res.status(200).send('File uploaded to S3: ' + req.file.location);
 });
