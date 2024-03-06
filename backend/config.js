@@ -1,7 +1,7 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'cloudprojectdatabase.c3a44mycgtjj.us-east-1.rds.amazonaws.com',
+  host: 'kagetai-database.c3a44mycgtjj.us-east-1.rds.amazonaws.com',
   user: 'admin',
   password: 'db-password',
   database: 'wp_project',
@@ -20,7 +20,7 @@ const pool = mysql.createPool({
     console.log('Error connecting to MySQL:', err);
   } finally {
     // Close the connection pool when done
-    pool.end();
+
   }
 })();
 
