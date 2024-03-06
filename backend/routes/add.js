@@ -7,9 +7,7 @@ const aws = require("aws-sdk");
 const multerS3 = require("multer-s3");
 const router = express.Router();
 const multer = require("multer");
-router.get("/add", (req, res) => {
-  res.send("Hello World");
-});
+
 
 // Require multer for file upload
 // Set your AWS credentials
@@ -46,6 +44,10 @@ const storage = multerS3({
 const upload = multer({
   storage: storage,
   limits: { fileSize: 3 * 1024 * 1024 },
+});
+
+router.get("/add", (req, res) => {
+  res.send("Hello World");
 });
 
 // Submit New Product
