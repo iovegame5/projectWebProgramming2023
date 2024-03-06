@@ -4,8 +4,7 @@
     <footer class="footer">
     <div class="content has-text-centered">
         <p>
-            Web Programming Project <strong>Kageetai</strong> By <a href="">Thanakorn Amatrawet </a>
-            and <a href="#">Chotchda Aupayokin</a>
+             <strong>Kagetai Project</strong> For Learing AWS services
 
         </p>
     </div>
