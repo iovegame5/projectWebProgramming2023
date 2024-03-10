@@ -24,7 +24,7 @@
                 <figure class="image is-1by1">
                   <img
                     alt="Placeholder image"
-                    :src="'http://'+backendIP+':3000/' + fav.path_image"
+                    :src="fav.path_image"
                   />
                 </figure>
               </div>
