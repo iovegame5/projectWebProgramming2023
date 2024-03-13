@@ -124,7 +124,7 @@
                   <figure class="image is-1by1">
                     <img
                       alt="Placeholder image"
-                      :src="'http://'+backendIP+':3000/' + product.path_image"
+                      :src="product.path_image"
                     />
                   </figure>
                 </div>
@@ -200,7 +200,7 @@
             <div class="card is-fixed" style="position: fixed; width:20%; margin-left:2rem;">
                 <div class="card-image">
                   <figure class="image ">
-                    <img class="is-rounded"   :src="'http://'+backendIP+':3000/'+ userinfo.avatar" alt="Placeholder image">
+                    <img class="is-rounded"   :src="'http://'+this.backendIP+':3000/'+ userinfo.avatar" alt="Placeholder image">
                   </figure>
                 </div>
                 <div class="card-content">
@@ -247,7 +247,7 @@
                       <figure class="image is-1by1">
                         <img
                           alt="Placeholder image"
-                          :src="'http://'+backendIP+':3000/'+ product.path_image"
+                          :src="product.path_image"
                         />
                       </figure>
                     </div>
@@ -337,7 +337,8 @@ export default {
       f_lname: "",
       f_phone: "",
       products: [],
-      usertype:""
+      usertype:"",
+      backendIP:backendIP,
     };
   },
   methods: {
@@ -438,7 +439,7 @@ export default {
         .delete(`http://`+backendIP+`:3000/products/${product_id}`)
         .then((res) => {
           console.log(res);
-          this.getProducts()
+          this.getuserproducts(this.$route.params.user_id)
         })
         .catch((err) => console.log(err));
       } else {

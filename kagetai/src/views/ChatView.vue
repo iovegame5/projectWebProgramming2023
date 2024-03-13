@@ -9,7 +9,7 @@
         <div class="columns top-field">
           <div
             class="column is-half chatgroup"
-            style="color: white; cursor:pointer;"
+            style="color: white; cursor: pointer"
             @click="chatgroup = 'buyer'"
             :class="{ active: chatgroup == 'buyer' }"
           >
@@ -17,7 +17,7 @@
           </div>
           <div
             class="column is-half chatgroup"
-            style="color: white ;cursor:pointer;"
+            style="color: white; cursor: pointer"
             @click="chatgroup = 'seller'"
             :class="{ active: chatgroup == 'seller' }"
           >
@@ -26,12 +26,14 @@
         </div>
 
         <!-- chat list  -->
-        <div style="overflow: auto; max-height:90%">
+        <div style="overflow: auto; max-height: 90%">
           <!-- seller chat list -->
           <div class="list" v-if="chatgroup == 'seller'">
-            <div style="cursor:pointer;"
-              class="list-item box mb-4" id="chat-box"
-              :class="{ active: current_room.room_id == room.room_id}"
+            <div
+              style="cursor: pointer"
+              class="list-item box mb-4"
+              id="chat-box"
+              :class="{ active: current_room.room_id == room.room_id }"
               v-for="room in seller_rooms"
               :key="room.room_id"
               @click="select_room(room)"
@@ -40,7 +42,9 @@
                 <div class="media-left">
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
-                      :src="'http://'+backendIP+':3000/' + room.target_avatar"
+                      :src="
+                      'http://'+this.backendIP+':3000/' + room.target_avatar
+                      "
                       alt="Image"
                       class="is-rounded"
                     />
@@ -62,9 +66,11 @@
           <!-- buyer chat list -->
 
           <div class="list" v-if="chatgroup == 'buyer'">
-            <div  style="cursor:pointer;"
-              class="list-item box mb-4" id="chat-box"
-              :class="{ active: current_room.room_id == room.room_id}"
+            <div
+              style="cursor: pointer"
+              class="list-item box mb-4"
+              id="chat-box"
+              :class="{ active: current_room.room_id == room.room_id }"
               v-for="room in buyer_rooms"
               :key="room.room_id"
               @click="select_room(room)"
@@ -73,7 +79,8 @@
                 <div class="media-left">
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
-                      :src="'http://'+backendIP+':3000/' + room.target_avatar"
+                      :src="'http://' + backendIP + ':3000/' + room.target_avatar
+                      "
                       alt="Image"
                       class="is-rounded"
                     />
@@ -106,7 +113,10 @@
                 <figure class="image is-48x48">
                   <img
                     :src="
-                    'http://'+backendIP+':3000/' + this.current_room.target_avatar
+                      'http://' +
+                      backendIP +
+                      ':3000/' +
+                      this.current_room.target_avatar
                     "
                     alt="Image"
                     class="is-rounded"
@@ -114,17 +124,18 @@
                 </figure>
               </div>
               <div class="media-content">
-                <div class="content" style="cursor:pointer;" @click="gouserprofile(current_room.target_id)" >
-                  <p class="title"
-                    style="color: white; font-size:20px" >
-                    {{
-                      this.current_room.target_name
-                    }}
-                  
+                <div
+                  class="content"
+                  style="cursor: pointer"
+                  @click="gouserprofile(current_room.target_id)"
+                >
+                  <p class="title" style="color: white; font-size: 20px">
+                    {{ this.current_room.target_name }}
+
                     <br />
-                    <small style="color: rgb(123, 123, 123); font-size: 20px">@{{
-                      this.current_room.target_username
-                    }}</small>
+                    <small style="color: rgb(123, 123, 123); font-size: 20px"
+                      >@{{ this.current_room.target_username }}</small
+                    >
                   </p>
                 </div>
               </div>
@@ -279,34 +290,36 @@ export default {
 
   data() {
     return {
+      backendIP:backendIP,
       seller_rooms: null,
       buyer_rooms: [],
       messages: [],
       current_room: {
         room_id: null,
-    target_id: null,
-    seller_id: null,
-    buyer_id: null,
-    lastmsgtxt: null,
-    target_username: null,
-    target_name: null,
-    target_avatar: null
+        target_id: null,
+        seller_id: null,
+        buyer_id: null,
+        lastmsgtxt: null,
+        target_username: null,
+        target_name: null,
+        target_avatar: null,
       },
       messagetxt: "",
       socket: {},
       eiei: null,
       chatgroup: "buyer",
+ 
     };
   },
 
   methods: {
-    gouserprofile(user_id){
+    gouserprofile(user_id) {
       this.$router.push({ path: `/user/${user_id}` });
     },
     getRooms() {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://`+backendIP+`:3000/${this.user.user_id}/chat`)
+          .get(`http://` + backendIP + `:3000/${this.user.user_id}/chat`)
           .then((response) => {
             this.seller_rooms = response.data.seller_rooms;
             this.buyer_rooms = response.data.buyer_rooms;
@@ -325,7 +338,7 @@ export default {
       this.socket.emit("joinRoom", room.room_id, this.user.user_id);
       await new Promise((resolve, reject) => {
         axios
-          .get(`http://`+backendIP+`:3000/chat/${room.room_id}/messages`)
+          .get(`http://` + backendIP + `:3000/chat/${room.room_id}/messages`)
           .then((res) => {
             this.messages = res.data.messages;
             console.log(res.data.messages);
@@ -375,11 +388,9 @@ export default {
       console.log(container);
       container.scrollTop = container.scrollHeight;
     },
-
-    
   },
   mounted() {
-    this.socket = io("http://"+backendIP+":3000");
+    this.socket = io("http://" + backendIP + ":3000");
     this.socket.on("message", (data) => {
       // Handle the received message
       this.messages = data.messages;
@@ -399,7 +410,9 @@ export default {
           });
           await new Promise((resolve, reject) => {
             axios
-              .get(`http://`+backendIP+`:3000/chat/${current_room_id}/messages`)
+              .get(
+                `http://` + backendIP + `:3000/chat/${current_room_id}/messages`
+              )
               .then((res) => {
                 this.messages = res.data.messages;
                 console.log(res.data.messages);

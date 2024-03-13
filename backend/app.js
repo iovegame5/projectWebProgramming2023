@@ -84,7 +84,7 @@ app.use(chatRouter.router)
 app.use(userRoter.router)
 app.use(favRoter.router)
 app.use(reportRouter.router)
-
+app.use('/uploads', express.static('uploads'));
 server.listen(3000, () => {
   console.log('Start server at port 3000.')
 })
