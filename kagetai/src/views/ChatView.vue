@@ -43,7 +43,7 @@
                   <figure class="image is-48x48 is-32x32-mobile">
                     <img
                       :src="
-                      'http://'+this.backendIP+':3000/' + room.target_avatar
+                      'http://'+backendIP+':3000/' + room.target_avatar
                       "
                       alt="Image"
                       class="is-rounded"
